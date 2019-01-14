@@ -1,3 +1,3 @@
 # CS4347_ASC_BaselineModel
 
-This repo is dedicated to the Group Project of CS4347 course. We will be updating the repository with the baseline models very soon.
+This repo is dedicated to CS4347 Group Project. We will be updating the repository with the baseline models very soon.
