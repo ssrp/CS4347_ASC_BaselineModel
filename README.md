@@ -35,7 +35,7 @@ Students are strongly encouraged to build their own systems by extending the pro
 The baseline system implements a convolutional neural network (CNN) based approach, where log mel-band energies are first extracted for each 10-second signal, and a network consisting of two CNN layers and one fully connected layer is trained to assign scene labels to the audio signals. Given below is the model structure:
 
 <p align = "center">
-<img src=baseline.png" width="600">
+<img src=/baseline.png" width="600">
 </p>
 
 #### Parameters
