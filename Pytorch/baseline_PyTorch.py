@@ -327,7 +327,8 @@ def main():
     test_data_dir = '../Dataset/test/'
 
     if os.path.isfile('norm_mean.npy') and os.path.isfile('norm_std.npy'):
-        # get the mean and std. If Normalized already, just load the npy files and comment the NormalizeData() function above
+        # get the mean and std. If Normalized already, just load the npy files and comment
+        #  the NormalizeData() function above
         mean = np.load('norm_mean.npy')
         std = np.load('norm_std.npy')
     else:
