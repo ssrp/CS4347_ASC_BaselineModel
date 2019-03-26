@@ -1,0 +1,19 @@
+Templates of the Neural Network's parameters
+
+dn_parameters : {
+    spectrum : {
+        'k': 32     # The number of channel in the denseNet
+        'nb_blocks': 4      # The number of dense block in the NN = len(nb_conv)
+        'nb_conv': [4,4,4,4]        # The numbers of convolutional layers in a dense block
+        'size_fc': 100      # Size of the fully connected at the end
+    }
+}
+
+input_parameters : {
+    'spectrum' : {
+        'batch_size': None      # The size of each batch
+        'nb_channels': 2        # The number of channels
+        'h':        # The heigth of the input
+        'w':        # The width of the input
+    }
+}
