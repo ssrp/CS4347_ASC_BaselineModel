@@ -21,7 +21,8 @@ class DenseNetPerso_audio(nn.Module):
         ##### First layer : ######
         self.nn['audio']['first_layer'] = []
         self.nn['audio']['first_layer'].append(
-            nn.Conv1d(in_channels=2, out_channels=self.dn_parameters['audio']['k'], kernel_size=7, stride=1, padding=3)
+            nn.Conv1d(in_channels=self.input_parameters['audio']['nb_channels'],
+                      out_channels=self.dn_parameters['audio']['k'], kernel_size=7, stride=1, padding=3)
         )
         self.nn['audio']['first_layer'] .append(
             nn.MaxPool1d(2, stride=1)

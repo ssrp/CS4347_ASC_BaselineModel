@@ -21,7 +21,7 @@ class DenseNetPerso_spectrum(nn.Module):
         ##### First layer : ######
         self.nn['spectrum']['first_layer'] = []
         self.nn['spectrum']['first_layer'].append(
-            nn.Conv2d(in_channels=2, out_channels=self.dn_parameters['spectrum']['k'], kernel_size=7, stride=1,
+            nn.Conv2d(in_channels=self.input_parameters['spectrum']['nb_channels'], out_channels=self.dn_parameters['spectrum']['k'], kernel_size=7, stride=1,
                       padding=3)
         )
         self.nn['spectrum']['first_layer'] .append(
