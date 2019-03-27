@@ -82,6 +82,7 @@ class DenseNetPerso_spectrum(nn.Module):
                 self.dn_parameters['spectrum']['size_fc']
             )
         )
+        self.nn['spectrum']['last_layers'].append(nn.Dropout(0.2))
 
     def forward_spectrum(self, x):
         # feed-forward propagation of the model. Here we have the input x, which is propagated through the layers

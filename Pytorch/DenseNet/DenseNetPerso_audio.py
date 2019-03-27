@@ -81,6 +81,8 @@ class DenseNetPerso_audio(nn.Module):
                 self.dn_parameters['audio']['size_fc']
             )
         )
+        self.nn['audio']['last_layers'].append(nn.Dropout(0.2))
+
 
     def forward_audio(self, x):
         # feed-forward propagation of the model. Here we have the input x, which is propagated through the layers

@@ -83,6 +83,7 @@ class DenseNetPerso_features(nn.Module):
                 self.dn_parameters['features']['size_fc']
             )
         )
+        self.nn['features']['last_layers'].append(nn.Dropout(0.2))
 
     def forward_features(self, x):
         # feed-forward propagation of the model. Here we have the input x, which is propagated through the layers
