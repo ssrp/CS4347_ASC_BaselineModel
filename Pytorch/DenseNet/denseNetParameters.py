@@ -18,6 +18,10 @@ dn_parameters = {
         'nb_blocks': 4,  # The number of dense block in the NN = len(nb_conv)
         'nb_conv': [4, 4, 4, 4],  # The numbers of convolutional layers in a dense block
         'size_fc': 20,  # Size of the fully connected at the end
+    },
+    'fmstd': {
+        'nb_layers': 3,  # The number of fully connected layers in the NN = len(layers_size)
+        'layers_size': [100, 50, 10],  # The numbers of convolutional layers in a dense block
     }
 }
 
@@ -37,5 +41,8 @@ input_parameters = {
         'batch_size': 16,  # The size of each batch
         'nb_channels': 2 * 5,  # The number of channels
         'len': None  # The length of the input
+    },
+    'fmstd': {
+        'len': 2 * 2 * 5    # The size of the input
     }
 }

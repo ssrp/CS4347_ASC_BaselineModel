@@ -11,6 +11,7 @@ import torch.nn as nn
 import Pytorch.DenseNet.DenseNetPerso_spectrum as dnp_s
 import Pytorch.DenseNet.DenseNetPerso_audio as dnp_a
 import Pytorch.DenseNet.DenseNetPerso_features as dnp_f
+import Pytorch.DenseNet.DenseNetPerso_fmstd as dnp_fmstd
 
 # Ignore warnings
 import warnings
@@ -21,7 +22,8 @@ class DenseNetPerso(
     nn.Module,
     dnp_s.DenseNetPerso_spectrum,
     dnp_a.DenseNetPerso_audio,
-    dnp_f.DenseNetPerso_features
+    dnp_f.DenseNetPerso_features,
+    dnp_fmstd.DenseNetPerso_fmstd
 ):
     def __init__(self, dn_parameters, input_parameters):
         # the main CNN model -- this function initializes the layers. NOTE THAT we are not performing the conv/pooling
@@ -36,15 +38,17 @@ class DenseNetPerso(
         self.nn = {
             'spectrum': {},
             'audio': {},
-            'features': {}
+            'features': {},
+            'fmstd': {}
         }
 
         # Initialisation of the weights of the Neural Network
         self.init_spectrum()
         self.init_audio()
         self.init_features()
+        self.init_fmstd()
 
-    def forward(self, x_spectrum, x_audio, x_features):
+    def forward(self, x_spectrum, x_audio, x_features, x_fmstd):
         # feed-forward propagation of the model. Here we have the input x, which is propagated through the layers
         # x has dimension (batch_size, channels, mel_bins, time_indices) - for this model (16, 1, 40, 500)
 
@@ -56,5 +60,8 @@ class DenseNetPerso(
 
         x_features = self.forward_features(x_features)
         x = torch.cat((x, x_features), dim=1)
+
+        x_fmstd = self.forward_fmstd(x_fmstd)
+        x = torch.cat((x, x_fmstd), dim=1)
 
         return x
