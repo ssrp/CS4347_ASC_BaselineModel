@@ -21,7 +21,8 @@ class DenseNetPerso_spectrum(nn.Module):
         ##### First layer : ######
         self.nn['spectrum']['first_layer'] = []
         self.nn['spectrum']['first_layer'].append(
-            nn.Conv2d(in_channels=2, out_channels=self.parameters['k'], kernel_size=7, stride=1)
+            nn.Conv2d(in_channels=2, out_channels=self.dn_parameters['spectrum']['k'], kernel_size=7, stride=1,
+                      padding=3)
         )
         self.nn['spectrum']['first_layer'] .append(
             nn.MaxPool2d((2, 2), stride=1)
@@ -63,12 +64,12 @@ class DenseNetPerso_spectrum(nn.Module):
             )
             block.append(nn.Dropout(0.2))
             block.append(nn.MaxPool2d((2, 2)))
-            self.dense_transition_block.append(block)
+            self.nn['spectrum']['dense_transition_block'].append(block)
 
         ##### Definition of the last layer of the spectrum
         self.nn['spectrum']['last_layers'] = []
-        h_pooling = self.input_parameters['spectrum']['h'] / self.dn_parameters['spectrum']['nb_blocks']
-        w_pooling = self.input_parameters['spectrum']['w'] / self.dn_parameters['spectrum']['nb_blocks']
+        h_pooling = self.input_parameters['spectrum']['h'] / (self.dn_parameters['spectrum']['nb_blocks'] - 1)
+        w_pooling = self.input_parameters['spectrum']['w'] / (self.dn_parameters['spectrum']['nb_blocks'] - 1)
         self.nn['spectrum']['last_layers'].append(
             nn.AvgPool2d((h_pooling, w_pooling))
         )
@@ -77,7 +78,7 @@ class DenseNetPerso_spectrum(nn.Module):
 
         self.nn['spectrum']['last_layers'].append(
             nn.Linear(
-                2 * k * self.dn_parameters['spectrum']['nb_conv'][-1] ,
+                2 * k * self.dn_parameters['spectrum']['nb_conv'][-1],
                 self.dn_parameters['spectrum']['size_fc']
             )
         )
