@@ -21,7 +21,11 @@ dn_parameters = {
     },
     'fmstd': {
         'nb_layers': 3,  # The number of fully connected layers in the NN = len(layers_size)
-        'layers_size': [100, 50, 10],  # The numbers of convolutional layers in a dense block
+        'layers_size': [100, 50, 10],  # The size of the layers in fully connected layers
+    },
+    'final': {  # The parameters for the fully connected layers at the end of the neural network
+        'nb_layers': 3,  # The number of fully connected layers in the NN = len(layers_size)
+        'layers_size': [100, 50, 10],  # The size of the layers in the fully connected layers
     }
 }
 
@@ -44,5 +48,8 @@ input_parameters = {
     },
     'fmstd': {
         'len': 2 * 2 * 5    # The size of the input
+    },
+    'final': {
+        'len': 180  # The input size = spectrum size_fc + audio size_fc + features size_fc + fmstd layers_size[-1]
     }
 }
