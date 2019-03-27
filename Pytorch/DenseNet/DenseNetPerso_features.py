@@ -83,6 +83,7 @@ class DenseNetPerso_features(nn.Module):
                 self.dn_parameters['features']['size_fc']
             )
         )
+        self.nn['features']['last_layers'].append(F.relu)
         self.nn['features']['last_layers'].append(nn.Dropout(0.2))
 
     def forward_features(self, x):

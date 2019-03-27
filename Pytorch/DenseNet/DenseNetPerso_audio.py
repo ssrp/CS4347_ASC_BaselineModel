@@ -81,6 +81,7 @@ class DenseNetPerso_audio(nn.Module):
                 self.dn_parameters['audio']['size_fc']
             )
         )
+        self.nn['audio']['last_layers'].append(F.relu)
         self.nn['audio']['last_layers'].append(nn.Dropout(0.2))
 
 
