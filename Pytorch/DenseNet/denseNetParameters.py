@@ -32,22 +32,22 @@ dn_parameters = {
 input_parameters = {
     'spectrum': {
         'batch_size': 16,  # The size of each batch
-        'nb_channels': 2,  # The number of channels
-        'h': None,  # The heigth of the input
-        'w': None  # The width of the input
+        'nb_channels': 2,  # The number of channels (right and left)
+        'h': None,  # The heigth of the input (bufferLength/2 + 1)
+        'w': None  # The width of the input (nbBuffers)
     },
     'audio': {
         'batch_size': 16,  # The size of each batch
-        'nb_channels': 2,  # The number of channels
+        'nb_channels': 2,  # The number of channels (right and left)
         'len': None  # The length of the input
     },
     'features': {
         'batch_size': 16,  # The size of each batch
-        'nb_channels': 2 * 5,  # The number of channels
-        'len': None  # The length of the input
+        'nb_channels': 2 * 5,  # The number of channels (nbFeatures * 2) (because right and left)
+        'len': None  # The length of the input (nbBuffers)
     },
     'fmstd': {
-        'len': 2 * 2 * 5    # The size of the input
+        'len': 2 * 2 * 5  # The size of the input (nbFeatures * 2 * 2) (because (right and left) and (mean and variance)
     },
     'final': {
         'len': 180  # The input size = spectrum size_fc + audio size_fc + features size_fc + fmstd layers_size[-1]

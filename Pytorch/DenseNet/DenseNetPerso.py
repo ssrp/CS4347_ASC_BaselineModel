@@ -28,11 +28,10 @@ class DenseNetPerso(
     dnp_final.DenseNetPerso_final
 ):
     def __init__(self, dn_parameters, input_parameters):
-        # the main CNN model -- this function initializes the layers. NOTE THAT we are not performing the conv/pooling
-        # operations in this function (this is just the definition)
+        # the main DenseNet model -- this function initializes the layers.
         super(DenseNetPerso, self).__init__()
 
-        # Defintion of the parameters
+        # Definition of the parameters
         self.dn_parameters = dn_parameters
         self.input_parameters = input_parameters
 
@@ -46,6 +45,7 @@ class DenseNetPerso(
         }
 
         # Initialisation of the weights of the Neural Network
+        # It will fill self.nn
         self.init_spectrum()
         self.init_audio()
         self.init_features()
@@ -53,8 +53,15 @@ class DenseNetPerso(
         self.init_final()
 
     def forward(self, x_spectrum, x_audio, x_features, x_fmstd):
-        # feed-forward propagation of the model. Here we have the input x, which is propagated through the layers
-        # x has dimension (batch_size, channels, mel_bins, time_indices) - for this model (16, 1, 40, 500)
+        # feed-forward propagation of the model. Here we have the inputs, which is propagated through the layers
+        # x_spectrum has dimension (batch_size, channels, h = buffersSize/2 + 1, w=nbBuffers)
+        # - for this model (16, 2, ?, ?)
+        # x_audio has dimension (batch_size, channels, audio len)
+        # - for this model (16, 2, ?)
+        # x_features has dimension (batch_size, 2 * nbFeatures, w = nbBuffers)
+        # - for this model (16, 2 * 5, ?)
+        # x_fmstd has dimension (batch_size, 2 * 2 * nbFeatures)
+        # - for this model (16, 2 * 2 * 5)
 
         #Computation of the different NN and concatenation
         x_spectrum = self.forward_spectrum(x_spectrum)
