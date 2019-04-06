@@ -18,11 +18,11 @@ def getAllInputs(filename):
     right = audio[1]
 
     if os.path.isfile(os.path.splitext(filename)[0] + ".npy"):
-        print("Getting file from .npy!")
+        print("Generating input from .npy!")
         data = np.load(os.path.splitext(filename)[0] + ".npy")
         return data
     else:
-        print("Reading from audio file!")
+        print("Generating input from audio file!")
         # waveform - (2, 220500, 1)
         waveform = np.array([[[i] for i in left], [[i] for i in right]])
         # spectrogram - (2, 1025, 431)
@@ -41,4 +41,9 @@ def getAllInputs(filename):
         data = (waveform, spectrogram, rms, zcr, mel_spectrogram, stats)
         np.save(os.path.splitext(filename)[0] + ".npy", data)
         return data
-getAllInputs("../Dataset/train/audio/0.wav")
+
+def getFilesInput(n):
+    for i in range(n):
+        getAllInputs(f"../Dataset/train/audio/{i}.wav")
+
+getFilesInput(1)
