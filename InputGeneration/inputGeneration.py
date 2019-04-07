@@ -24,19 +24,32 @@ def getAllInputs(filename):
     else:
         print("Generating input from audio file!")
         # waveform - (2, 220500, 1)
-        waveform = np.array([[[i] for i in left], [[i] for i in right]])
+        waveform = np.array([[[i] for i in left], 
+                             [[i] for i in right]])
         # spectrogram - (2, 1025, 431)
-        spectrogram = np.array([librosa.core.stft(left), librosa.core.stft(right)])
-
+        spectrogram = np.array([librosa.core.stft(left), 
+                                librosa.core.stft(right)])
         #  rms - (2, 1, 431)
-        rms = np.array([librosa.feature.rms(left), librosa.feature.rms(right)])
+        rms = np.array([librosa.feature.rms(left), 
+                        librosa.feature.rms(right)])
         #  zcr - (2, 1, 431)
-        zcr = np.array([librosa.feature.zero_crossing_rate(left), librosa.feature.zero_crossing_rate(right)])
+        zcr = np.array([librosa.feature.zero_crossing_rate(left), 
+                        librosa.feature.zero_crossing_rate(right)])
+        #  sc - (2, 1, 431)
+        sc = np.array([librosa.feature.spectral_centroid(left),
+                        librosa.feature.spectral_centroid(right)])
+        #  sr - (2, 1, 431)
+        sr = np.array([librosa.feature.spectral_rolloff(left),
+                       librosa.feature.spectral_rolloff(right)])
+        #  sfm - (2, 1, 431)
+        sfm = np.array([librosa.feature.spectral_flatness(left),
+                        librosa.feature.spectral_flatness(right)])
         #  mel_spectrogram - (2, 128, 431)
-        mel_spectrogram = np.array([librosa.feature.melspectrogram(left), librosa.feature.melspectrogram(right)])
-        
+        mel_spectrogram = np.array([librosa.feature.melspectrogram(left), 
+                                    librosa.feature.melspectrogram(right)])
         # getStats - (4, 2, 1)
-        stats = np.concatenate([getStats(rms), getStats(zcr)])
+        stats = np.concatenate([getStats(rms), getStats(zcr), 
+                                getStats(sc), getStats(sr), getStats(sfm)])
 
         data = (waveform, spectrogram, rms, zcr, mel_spectrogram, stats)
         np.save(os.path.splitext(filename)[0] + ".npy", data)
