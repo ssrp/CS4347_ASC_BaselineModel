@@ -1,24 +1,25 @@
 from __future__ import print_function, division
 
 import argparse
-
 import os
-import torch
-import numpy as np
 # Ignore warnings
 import warnings
+
+import numpy as np
+import torch
 
 warnings.filterwarnings("ignore")
 
 # import PyTorch Functionalities
 import torch.nn.functional as F
 import torch.nn as nn
-import torch.optim as optim
-from torchvision import transforms, utils
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset
 
 # import Librosa, tool for extracting features from audio data
 import librosa
+
+# Personal imports
+import InputGeneration.inputGeneration as ig
 
 
 # Creates a Tensor from the Numpy dataset, which is used by the GPU for processing
@@ -45,7 +46,7 @@ class Normalize(object):
 
 
 class DCASEDataset(Dataset):
-    def __init__(self, csv_file, root_dir, transform=None):
+    def __init__(self, csv_file, root_dir, save_dir, transform=None, light_train=False):
         """
         Args:
             csv_file (string): Path to the csv file with annotations.
@@ -70,6 +71,7 @@ class DCASEDataset(Dataset):
                     flag = 1
                 else:
                     flag = 0
+        self.save_dir = save_dir
         self.root_dir = root_dir
         self.transform = transform
         self.datalist = data_list
@@ -77,15 +79,30 @@ class DCASEDataset(Dataset):
         self.default_labels = ['airport', 'bus', 'metro', 'metro_station', 'park', 'public_square', 'shopping_mall',
                                'street_pedestrian', 'street_traffic', 'tram']
 
+        # Test if light training
+        self.light_train = light_train
+        if self.light_train:
+            self.datalist = self.datalist[:20]
+            self.labels = self.labels[0:20]
+
     def __len__(self):
         return len(self.datalist)
 
     def __getitem__(self, idx):
-        wav_name = os.path.join(self.root_dir,
-                                self.datalist[idx])
+        wav_name = self.datalist[idx]
+        wav_path = os.path.join(self.root_dir, wav_name)
+        npy_name = os.path.splitext(wav_path)[0] + '.npy'
+        npy_path = os.path.join(
+            self.save_dir,
+            npy_name
+        )
 
         # load the wav file with 22.05 KHz Sampling rate and only one channel
-        audio, sr = librosa.core.load(wav_name, sr=22050, mono=True)
+        # audio, sr = librosa.core.load(wav_name, sr=22050, mono=True)
+        if os.path.exists(npy_path):
+            audio, spectrogram, features, fmst = np.load(save_path)
+        else:
+            audio, spectrogram, features, fmst = ig.getAllInputs(wav_path)
 
         # extract mel-spectrograms, number of mel-bins=40
         spec = librosa.feature.melspectrogram(y=audio,
@@ -255,9 +272,14 @@ def test(args, model, device, test_loader, data_type):
         100. * correct / len(test_loader.dataset)))
 
 
-def NormalizeData(train_labels_dir, root_dir):
+def NormalizeData(train_labels_dir, root_dir, g_train_data_dir, light_train=False):
     # load the dataset
-    dcase_dataset = DCASEDataset(csv_file=train_labels_dir, root_dir=root_dir)
+    dcase_dataset = DCASEDataset(
+        csv_file=train_labels_dir,
+        root_dir=root_dir,
+        save_dir=g_train_data_dir,
+        light_train=light_train
+    )
 
     # concatenate the mel spectrograms in time-dimension, this variable accumulates the spectrograms
     melConcat = np.asarray([])
@@ -272,7 +294,16 @@ def NormalizeData(train_labels_dir, root_dir):
     for i in range(len(dcase_dataset)):
 
         # extract the sample
-        sample = dcase_dataset[rand[i]]
+        if light_train:
+            sample = dcase_dataset[i]
+        else:
+            sample = dcase_dataset[rand[i]]
+
+        ###############################
+        ###############################
+        ###############################
+        ###############################
+
         data, label = sample
         # print because we like to see it working
         print('NORMALIZATION (FEATURE SCALING) : ' + str(i) + ' - data shape: ' + str(data.shape) + ', label: ' + str(
@@ -313,6 +344,10 @@ def main():
                         help='how many batches to wait before logging training status')
     parser.add_argument('--save-model', action='store_true', default=False,
                         help='For Saving the current Model')
+
+    parser.add_argument('--light-train', action='store_true', default=False,
+                        help='For training on a small number of data')
+
     args = parser.parse_args()
     use_cuda = not args.no_cuda and torch.cuda.is_available()
 
@@ -321,24 +356,49 @@ def main():
     device = torch.device("cuda" if use_cuda else "cpu")
 
     # init the train and test directories
-    train_labels_dir = '../Dataset/train/train_labels.csv'
-    test_labels_dir = '../Dataset/test/test_labels.csv'
-    train_data_dir = '../Dataset/train/'
-    test_data_dir = '../Dataset/test/'
+    train_labels_dir = './Dataset/train/train_labels.csv'
+    test_labels_dir = './Dataset/test/test_labels.csv'
+    train_data_dir = './Dataset/train/'
+    test_data_dir = './Dataset/test/'
 
-    if os.path.isfile('norm_mean.npy') and os.path.isfile('norm_std.npy'):
+    ##### Creation of the folders for the Generated Dataset #####
+
+    light_train = args.light_train
+    light_train = True
+    if light_train:
+        # If we want to test on CPU
+        ig.setLightEnviromnent()
+        g_train_data_dir = './GeneratedLightDataset/train/'
+        g_test_data_dit = './GeneratedLightDataset/test/'
+        g_data_dir = './GeneratedLightDataset/'
+    else:
+        ig.setEnviromnent()
+        g_train_data_dir = './GeneratedDataset/train/'
+        g_test_data_dit = './GeneratedDataset/test/'
+        g_data_dir = './GeneratedDatase/t'
+
+
+    if os.path.isfile(os.path.join(g_data_dir, 'norm_mean.py')) \
+            and os.path.isfile(os.path.join(g_data_dir, 'norm_std.npy')):
         # get the mean and std. If Normalized already, just load the npy files and comment
         #  the NormalizeData() function above
-        mean = np.load('norm_mean.npy')
-        std = np.load('norm_std.npy')
+        mean = np.load(os.path.join(g_data_dir, 'norm_mean.npy'))
+        std = np.load(os.path.join(g_data_dir, 'norm_std.npy'))
     else:
         # If not, run the normalization and save the mean/std
         print('DATA NORMALIZATION : ACCUMULATING THE DATA')
-        mean, std = NormalizeData(train_labels_dir, train_data_dir)
-        np.save('norm_mean.npy', std)
-        np.save('norm_std.npy', mean)
+        mean, std = NormalizeData(
+            train_labels_dir,
+            train_data_dir,
+            g_train_data_dir=g_train_data_dir,
+            light_train=light_train
+        )
+        np.save(os.path.join(g_data_dir, 'norm_mean.npy', std))
+        np.save(os.path.join(g_data_dir, 'norm_std.npy', mean))
         print('DATA NORMALIZATION COMPLETED')
 
+    """
+    
     # Convert to Torch Tensors
     mean = torch.from_numpy(mean)
     std = torch.from_numpy(std)
@@ -385,7 +445,7 @@ def main():
     # save the model
     if args.save_model:
         torch.save(model.state_dict(), "BaselineASC.pt")
-
+    """
 
 if __name__ == '__main__':
     # create a separate main function because original main function is too mainstream

@@ -39,8 +39,11 @@ def getAllInputs(filename):
     sfm = np.array([librosa.feature.spectral_flatness(left),
                     librosa.feature.spectral_flatness(right)])
     #  mel_spectrogram - (2, 128, 431)
+    """
+    Is not used
     mel_spectrogram = np.array([librosa.feature.melspectrogram(left),
                                 librosa.feature.melspectrogram(right)])
+    """
     # getStats - (5, 2, 1)
     stats = np.concatenate([getStats(rms), getStats(zcr),
                             getStats(sc), getStats(sr), getStats(sfm)])
@@ -78,7 +81,7 @@ def getAllInputs(filename):
 
     #data = (waveform, spectrogram, rms, zcr, mel_spectrogram, stats)
     np.save(os.path.splitext(filename)[0] + ".npy", data)
-        return data
+    return data
 
 def getFilesInput(n):
     for i in range(n):
