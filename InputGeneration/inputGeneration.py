@@ -51,10 +51,10 @@ def getAllInputs(filename):
 
     #### Reshape for the neural network #####
     # Waveform
-    waveform = np.reshape(waveform, (2, 220500))
+    waveform = np.reshape(waveform, (1, 2, 220500))
 
     # spectrogram
-    # Good
+    spectrogram = np.reshape(spectrogram, (1, 2, 1025, 431))
 
     # Features
     features = np.concatenate(
@@ -67,6 +67,7 @@ def getAllInputs(filename):
         ],
         axis=0
     )
+    features = np.reshape(features, (1, 10, 431))
 
     # Features mstd
     fmstd = np.reshape(stats, (1, 10))
