@@ -16,10 +16,9 @@ import torch.nn as nn
 from torch.utils.data import Dataset
 
 # import Librosa, tool for extracting features from audio data
-import librosa
 
 # Personal imports
-import InputGeneration.inputGeneration as ig
+from InputGeneration import inputGeneration as ig
 
 
 # Creates a Tensor from the Numpy dataset, which is used by the GPU for processing
@@ -103,8 +102,10 @@ class DCASEDataset(Dataset):
         if os.path.exists(npy_path):
             data_computed = np.load(npy_path)
         else:
-            data_computed = ig.getAllInputs(wav_path)
+            data_computed = ig.getAllInputs(os.path.abspath(wav_path))
+            print('data computed')
             np.save(npy_path, data_computed)
+        print('data computed done')
 
         # extract the label
         label = np.asarray(self.default_labels.index(self.labels[idx]))
@@ -269,11 +270,14 @@ def NormalizeData(train_labels_dir, root_dir, g_train_data_dir, light_train=Fals
         light_train=light_train
     )
 
-    # concatenate the mel spectrograms in time-dimension, this variable accumulates the spectrograms
-    melConcat = np.asarray([])
-
     # flag for the first element
     flag = 0
+
+    # concatenate the datas computed inputs
+    wavformConcat = np.asarray([])
+    spectrogramConcat = np.asarray([])
+    featuresConcat = np.asarray([])
+    fmstdConcat = np.asarray([])
 
     # generate a random permutation, because it's fun. there's no specific reason for that.
     rand = np.random.permutation(len(dcase_dataset))
@@ -287,25 +291,75 @@ def NormalizeData(train_labels_dir, root_dir, g_train_data_dir, light_train=Fals
         else:
             sample = dcase_dataset[rand[i]]
 
-        data, label = sample
+        data_computed, label = sample
+        wavform, spectrogram, features, fmstd = data_computed
         # print because we like to see it working
-        print('NORMALIZATION (FEATURE SCALING) : ' + str(i) + ' - data shape: ' + str(data.shape) + ', label: ' + str(
-            label) + ', current accumulation size: ' + str(melConcat.shape))
+        print(
+            'NORMALIZATION (FEATURE SCALING) : {0}'
+            ' - wavform shape : {1}'
+            ' - spectrogram shape : {2}'
+            ' - features : {3}'
+            ' - fmstd : {4}'.format(
+                i,
+                wavform.shape,
+                spectrogram.shape,
+                features.shape,
+                fmstd)
+        )
+        print(
+            'Current accumulation size :'
+            ' - wavformConcat shape : {0}'
+            ' - spectrogramConcat shape : {1}'
+            ' - featuresConcat : {2}'
+            ' - fmstdConcat : {3}'.format(
+                wavformConcat.shape,
+                spectrogramConcat.shape,
+                featuresConcat.shape,
+                featuresConcat.shape
+            )
+        )
         if flag == 0:
             # get the data and init melConcat for the first time
-            melConcat = data
+            wavformConcat = wavform
+            spectrogramConcat = spectrogram
+            featuresConcat = features
+            fmstdConcat = fmstd
             flag = 1
         else:
-            # concatenate spectrograms from second iteration
-            melConcat = np.concatenate((melConcat, data), axis=2)
+            # concatenate the features :
+            wavformConcat = np.concatenate((wavformConcat, wavform), axis=0)
+            spectrogramConcat = np.concatenate((spectrogramConcat, spectrogram), axis=0)
+            featuresConcat = np.concatenate((featuresConcat, features), axis=1)
+            fmstdConcat = np.concatenate((fmstdConcat, fmstd), axis=0)
+
+
     # extract std and mean
-    std = np.std(melConcat, axis=2)
-    mean = np.mean(melConcat, axis=2)
+    wavform_mean = np.mean(wavformConcat)
+    wavform_std = np.std(wavformConcat)
 
-    # save the files, so that you don't have to calculate this again. NOTE that we need to calculate again if we change
-    # the training data
+    spectrogramConcat = np.reshape(np.transpose(spectrogramConcat, (1, 0, 2), (1025, -1)))
+    spectrogram_mean = np.mean(spectrogramConcat, axis=1)
+    spectrogram_std = np.std(spectrogramConcat, axis=1)
 
-    return mean, std
+    featuresConcat = np.reshape(featuresConcat, (5, -1))
+    features_mean = np.mean(featuresConcat, axis=1)
+    features_std = np.std(featuresConcat, axis=1)
+
+    fmstdConcat = np.reshape(
+        np.transpose(fmstdConcat),
+        (5, -1)
+    )
+    fmstd_mean = np.mean(fmstdConcat, axis=1)
+    fmstd_std = np.std(fmstdConcat, axis=1)
+
+    normalization_values = {
+        'wavform': (wavform_mean, wavform_std),
+        'spectrogram': (spectrogram_mean, spectrogram_std),
+        'features': (features_mean, features_std),
+        'fmstd': (fmstd_mean, fmstd_std)
+    }
+
+    return normalization_values
 
 
 def main():
@@ -339,10 +393,10 @@ def main():
     device = torch.device("cuda" if use_cuda else "cpu")
 
     # init the train and test directories
-    train_labels_dir = './Dataset/train/train_labels.csv'
-    test_labels_dir = './Dataset/test/test_labels.csv'
-    train_data_dir = './Dataset/train/'
-    test_data_dir = './Dataset/test/'
+    train_labels_dir = 'Dataset/train/train_labels.csv'
+    test_labels_dir = 'Dataset/test/test_labels.csv'
+    train_data_dir = 'Dataset/train/'
+    test_data_dir = 'Dataset/test/'
 
     ##### Creation of the folders for the Generated Dataset #####
 
@@ -358,26 +412,25 @@ def main():
         ig.setEnviromnent()
         g_train_data_dir = './GeneratedDataset/train/'
         g_test_data_dit = './GeneratedDataset/test/'
-        g_data_dir = './GeneratedDatase/t'
+        g_data_dir = './GeneratedDatase/'
 
 
     if os.path.isfile(os.path.join(g_data_dir, 'norm_mean.py')) \
             and os.path.isfile(os.path.join(g_data_dir, 'norm_std.npy')):
         # get the mean and std. If Normalized already, just load the npy files and comment
         #  the NormalizeData() function above
-        mean = np.load(os.path.join(g_data_dir, 'norm_mean.npy'))
-        std = np.load(os.path.join(g_data_dir, 'norm_std.npy'))
+        normalization_values = np.load(os.path.join(g_data_dir, 'normalization_values.npy'))
+        normalization_values = normalization_values.item()      # We have to do this to access the dictionary
     else:
         # If not, run the normalization and save the mean/std
         print('DATA NORMALIZATION : ACCUMULATING THE DATA')
-        mean, std = NormalizeData(
+        normalization_values = NormalizeData(
             train_labels_dir,
             train_data_dir,
             g_train_data_dir=g_train_data_dir,
             light_train=light_train
         )
-        np.save(os.path.join(g_data_dir, 'norm_mean.npy', std))
-        np.save(os.path.join(g_data_dir, 'norm_std.npy', mean))
+        np.save(os.path.join(g_data_dir, 'normalization_values.npy'), normalization_values)
         print('DATA NORMALIZATION COMPLETED')
 
     """
