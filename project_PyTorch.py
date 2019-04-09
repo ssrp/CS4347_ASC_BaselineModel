@@ -25,11 +25,16 @@ from InputGeneration import inputGeneration as ig
 class ToTensor(object):
     def __call__(self, sample):
         data, label = sample
+        waveform, spectrogram, features, fmstd = data
 
-        # swap color axis if needed : This function is not doing anything for now.
-        data = data.transpose((0, 1, 2))
+        data_torch = (
+            torch.from_numpy(waveform),
+            torch.from_numpy(spectrogram),
+            torch.from_numpy(features),
+            torch.from_numpy(fmstd),
+        )
 
-        return torch.from_numpy(data), torch.from_numpy(label)
+        return data_torch, torch.from_numpy(label)
 
 
 # Code for Normalization of the data
@@ -429,11 +434,15 @@ def main():
         np.save(os.path.join(g_data_dir, 'normalization_values.npy'), normalization_values)
         print('DATA NORMALIZATION COMPLETED')
 
-    """
-    
-    # Convert to Torch Tensors
-    mean = torch.from_numpy(mean)
-    std = torch.from_numpy(std)
+    waveform_mean, waveform_std = normalization_values['waveform']
+    spectrogram_mean, spectrogram_std = normalization_values['spectrogram']
+    features_mean, features_std = normalization_values['features']
+    fmstd_mean, fmstd_std = normalization_values['fmstd']
+
+    waveform_mean, waveform_std = torch.from_numpy(waveform_mean), torch.from_numpy(waveform_std)
+    spectrogram_mean, spectrogram_std = torch.from_numpy(spectrogram_mean), torch.from_numpy(spectrogram_std)
+    features_mean, features_std = torch.from_numpy(features_mean), torch.from_numpy(features_std)
+    fmstd_mean, fmstd_std = torch.from_numpy(fmstd_mean), torch.from_numpy(fmstd_std)
 
     # convert to torch variables
     mean = torch.reshape(mean, [40, 1])
@@ -443,6 +452,8 @@ def main():
     data_transform = transforms.Compose([
         ToTensor(), Normalize(mean, std)
     ])
+
+    """
 
     # init the datasets
     dcase_dataset = DCASEDataset(csv_file=train_labels_dir,
