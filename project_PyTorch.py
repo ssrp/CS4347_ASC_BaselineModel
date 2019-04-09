@@ -14,6 +14,8 @@ warnings.filterwarnings("ignore")
 import torch.nn.functional as F
 import torch.nn as nn
 from torch.utils.data import Dataset
+import torch.optim as optim
+from torchvision import transforms, utils
 
 # import Librosa, tool for extracting features from audio data
 
@@ -61,7 +63,7 @@ class Normalize(object):
         fmstd = (fmstd - self.mean_fmstd) / self.std_fmstd
 
         data = waveform, spectrogram, features, fmstd
-        
+
         return data, label
 
 
@@ -356,8 +358,8 @@ def NormalizeData(train_labels_dir, root_dir, g_train_data_dir, light_train=Fals
         )
 
     # extract std and mean
-    wavform_mean = np.mean(wavformConcat)
-    wavform_std = np.std(wavformConcat)
+    wavform_mean = np.array([np.mean(wavformConcat)])
+    wavform_std = np.array([np.std(wavformConcat)])
 
     spectrogram_mean = np.mean(spectrogramConcat, axis=(0, 2))
     spectrogram_std = np.std(spectrogramConcat, axis=(0, 2))
@@ -370,7 +372,7 @@ def NormalizeData(train_labels_dir, root_dir, g_train_data_dir, light_train=Fals
     fmstd_std = np.std(fmstdConcat, axis=0)
 
     normalization_values = {
-        'wavform': (wavform_mean, wavform_std),
+        'waveform': (wavform_mean, wavform_std),
         'spectrogram': (spectrogram_mean, spectrogram_std),
         'features': (features_mean, features_std),
         'fmstd': (fmstd_mean, fmstd_std)
@@ -450,23 +452,59 @@ def main():
         np.save(os.path.join(g_data_dir, 'normalization_values.npy'), normalization_values)
         print('DATA NORMALIZATION COMPLETED')
 
-    waveform_mean, waveform_std = normalization_values['waveform']
-    spectrogram_mean, spectrogram_std = normalization_values['spectrogram']
-    features_mean, features_std = normalization_values['features']
-    fmstd_mean, fmstd_std = normalization_values['fmstd']
+    # Load of the values in the file
+    waveform_mean, waveform_std = normalization_values['waveform']  # (1,), (1,)
+    spectrogram_mean, spectrogram_std = normalization_values['spectrogram']  # (1025,), (1025,)
+    features_mean, features_std = normalization_values['features']  # (5,), (5,)
+    fmstd_mean, fmstd_std = normalization_values['fmstd']       # (10,), (10,)
 
+    # Create the good shape for applying operations to the tensor
+    waveform_mean = np.concatenate([waveform_mean, waveform_mean])  # (2,)
+    waveform_std = np.concatenate([waveform_std, waveform_std])  # (2,)
+    print(spectrogram_mean.shape)
+    spectrogram_mean = np.concatenate([spectrogram_mean[:, np.newaxis], spectrogram_mean[:, np.newaxis]],
+                                      axis=1)  # (1025, 2)
+    spectrogram_std = np.concatenate([spectrogram_std[:, np.newaxis], spectrogram_std[:, np.newaxis]],
+                                     axis=1)  # (1025, 2)
+    features_mean = np.reshape(  # (10,)
+        np.concatenate(
+            [
+                features_mean[:, np.newaxis],
+                features_mean[:, np.newaxis]
+            ]
+        ),
+        (10,)
+    )
+    features_std = np.reshape(  # (10,)
+        np.concatenate(
+            [
+                features_std[:, np.newaxis],
+                features_std[:, np.newaxis]
+            ]
+        ),
+        (10,)
+    )
+    # ok pour fmstd_mean and # fmstd_std        # (10,), (10,)
+
+    # convert to torch variables
     waveform_mean, waveform_std = torch.from_numpy(waveform_mean), torch.from_numpy(waveform_std)
     spectrogram_mean, spectrogram_std = torch.from_numpy(spectrogram_mean), torch.from_numpy(spectrogram_std)
     features_mean, features_std = torch.from_numpy(features_mean), torch.from_numpy(features_std)
     fmstd_mean, fmstd_std = torch.from_numpy(fmstd_mean), torch.from_numpy(fmstd_std)
 
-    # convert to torch variables
-    mean = torch.reshape(mean, [40, 1])
-    std = torch.reshape(std, [40, 1])
+    print('waveform --- mean : {0}, std : {1}'.format(waveform_mean.shape, waveform_std.shape))
+    print('spectrogram --- mean : {0}, std : {1}'.format(spectrogram_mean.shape, spectrogram_std.shape))
+    print('features --- mean : {0}, std : {1}'.format(features_mean.shape, features_std.shape))
+    print('fmstd --- mean : {0}, std : {1}'.format(fmstd_mean.shape, fmstd_std.shape))
 
     # init the data_transform
     data_transform = transforms.Compose([
-        ToTensor(), Normalize(mean, std)
+        ToTensor(), Normalize(
+            waveform_mean, waveform_std,
+            spectrogram_mean, spectrogram_std,
+            features_mean, features_std,
+            fmstd_mean, fmstd_std
+        )
     ])
 
     """
