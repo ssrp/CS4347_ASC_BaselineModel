@@ -90,7 +90,7 @@ class DCASEDataset(Dataset):
     def __getitem__(self, idx):
         wav_name = self.datalist[idx]
         wav_path = os.path.join(self.root_dir, wav_name)
-        npy_name = os.path.splitext(wav_path)[0] + '.npy'
+        npy_name = os.path.splitext(os.path.split(wav_name)[1])[0] + '.npy'
         npy_path = os.path.join(
             self.save_dir,
             npy_name
@@ -293,31 +293,6 @@ def NormalizeData(train_labels_dir, root_dir, g_train_data_dir, light_train=Fals
 
         data_computed, label = sample
         wavform, spectrogram, features, fmstd = data_computed
-        # print because we like to see it working
-        print(
-            'NORMALIZATION (FEATURE SCALING) : {0}'
-            ' - wavform shape : {1}'
-            ' - spectrogram shape : {2}'
-            ' - features : {3}'
-            ' - fmstd : {4}'.format(
-                i,
-                wavform.shape,
-                spectrogram.shape,
-                features.shape,
-                fmstd)
-        )
-        print(
-            'Current accumulation size :'
-            ' - wavformConcat shape : {0}'
-            ' - spectrogramConcat shape : {1}'
-            ' - featuresConcat : {2}'
-            ' - fmstdConcat : {3}'.format(
-                wavformConcat.shape,
-                spectrogramConcat.shape,
-                featuresConcat.shape,
-                featuresConcat.shape
-            )
-        )
         if flag == 0:
             # get the data and init melConcat for the first time
             wavformConcat = wavform
@@ -332,25 +307,46 @@ def NormalizeData(train_labels_dir, root_dir, g_train_data_dir, light_train=Fals
             featuresConcat = np.concatenate((featuresConcat, features), axis=1)
             fmstdConcat = np.concatenate((fmstdConcat, fmstd), axis=0)
 
+        # print because we like to see it working
+        print(
+            'NORMALIZATION (FEATURE SCALING) : {0}'
+            ' - wavform shape : {1}'
+            ' - spectrogram shape : {2}'
+            ' - features : {3}'
+            ' - fmstd : {4}'.format(
+                i,
+                wavform.shape,
+                spectrogram.shape,
+                features.shape,
+                fmstd.shape
+            )
+        )
+        print(
+            'Current accumulation size :'
+            ' - wavformConcat shape : {0}'
+            ' - spectrogramConcat shape : {1}'
+            ' - featuresConcat : {2}'
+            ' - fmstdConcat : {3}'.format(
+                wavformConcat.shape,
+                spectrogramConcat.shape,
+                featuresConcat.shape,
+                fmstdConcat.shape
+            )
+        )
 
     # extract std and mean
     wavform_mean = np.mean(wavformConcat)
     wavform_std = np.std(wavformConcat)
 
-    spectrogramConcat = np.reshape(np.transpose(spectrogramConcat, (1, 0, 2), (1025, -1)))
-    spectrogram_mean = np.mean(spectrogramConcat, axis=1)
-    spectrogram_std = np.std(spectrogramConcat, axis=1)
+    spectrogram_mean = np.mean(spectrogramConcat, axis=(0, 2))
+    spectrogram_std = np.std(spectrogramConcat, axis=(0, 2))
 
-    featuresConcat = np.reshape(featuresConcat, (5, -1))
-    features_mean = np.mean(featuresConcat, axis=1)
-    features_std = np.std(featuresConcat, axis=1)
+    featuresConcat = np.reshape(featuresConcat, (5, 2, -1))     # (5, 2, 8911)
+    features_mean = np.mean(featuresConcat, axis=(1, 2))
+    features_std = np.std(featuresConcat, axis=(1, 2))
 
-    fmstdConcat = np.reshape(
-        np.transpose(fmstdConcat),
-        (5, -1)
-    )
-    fmstd_mean = np.mean(fmstdConcat, axis=1)
-    fmstd_std = np.std(fmstdConcat, axis=1)
+    fmstd_mean = np.mean(fmstdConcat, axis=0)
+    fmstd_std = np.std(fmstdConcat, axis=0)
 
     normalization_values = {
         'wavform': (wavform_mean, wavform_std),
@@ -415,12 +411,12 @@ def main():
         g_data_dir = './GeneratedDatase/'
 
 
-    if os.path.isfile(os.path.join(g_data_dir, 'norm_mean.py')) \
-            and os.path.isfile(os.path.join(g_data_dir, 'norm_std.npy')):
+    if os.path.isfile(os.path.join(g_data_dir, 'normalization_values.npy')):
         # get the mean and std. If Normalized already, just load the npy files and comment
         #  the NormalizeData() function above
         normalization_values = np.load(os.path.join(g_data_dir, 'normalization_values.npy'))
         normalization_values = normalization_values.item()      # We have to do this to access the dictionary
+        print('LOAD OF THE FILE normalization_values.npy FOR NORMALIZATION')
     else:
         # If not, run the normalization and save the mean/std
         print('DATA NORMALIZATION : ACCUMULATING THE DATA')

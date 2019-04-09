@@ -10,7 +10,7 @@ import soundfile as sf
 # input_parameters = dn.input_parameters
 
 def getStats(feature):
-    return np.array([np.mean(feature), np.std(feature[0], axis=1)])
+    return np.array([np.mean(feature, axis=(1, 2)), np.std(feature, axis=(1, 2))])
 
 def getAllInputs(filename):
     audio, _ = sf.read(filename)    # sr=22050, mono=False
@@ -43,7 +43,7 @@ def getAllInputs(filename):
     mel_spectrogram = np.array([librosa.feature.melspectrogram(left),
                                 librosa.feature.melspectrogram(right)])
     """
-    # getStats - (10,)
+    # getStats - (20,)
     stats = np.concatenate([getStats(rms), getStats(zcr),
                             getStats(sc), getStats(sr), getStats(sfm)])
 
@@ -68,7 +68,7 @@ def getAllInputs(filename):
     features = np.reshape(features, (10, 469))
 
     # Features mstd
-    fmstd = np.reshape(stats, (1, 10))
+    fmstd = np.reshape(stats, (2, 10))
 
     ##### Create datas #####
     data = (
