@@ -39,13 +39,29 @@ class ToTensor(object):
 
 # Code for Normalization of the data
 class Normalize(object):
-    def __init__(self, mean, std):
-        self.mean, self.std = mean, std
+    def __init__(
+            self,
+            mean_waveform, std_waveform,
+            mean_spectrogram, std_spectrogram,
+            mean_features, std_features,
+            mean_fmstd, std_fmstd
+    ):
+        self.mean_waveform, self.std_waveform = mean_waveform, std_waveform
+        self.mean_spectrogram, self.std_spectrogram = mean_spectrogram, std_spectrogram
+        self.mean_features, self.std_features = mean_features, std_features
+        self.mean_fmstd, self.std_fmstd = mean_fmstd, std_fmstd
 
     def __call__(self, sample):
         data, label = sample
-        data = (data - self.mean) / self.std
+        waveform, spectrogram, features, fmstd = data
 
+        waveform = (waveform - self.mean_waveform) / self.std_waveform
+        spectrogram = (spectrogram - self.mean_spectrogram) / self.std_spectrogram
+        features = (features - self.mean_features) / self.std_features
+        fmstd = (fmstd - self.mean_fmstd) / self.std_fmstd
+
+        data = waveform, spectrogram, features, fmstd
+        
         return data, label
 
 
