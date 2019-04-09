@@ -68,7 +68,7 @@ class Normalize(object):
 
 
 class DCASEDataset(Dataset):
-    def __init__(self, csv_file, root_dir, save_dir, transform=None, light_train=False):
+    def __init__(self, csv_file, root_dir, save_dir, transform=None, light_data=False):
         """
         Args:
             csv_file (string): Path to the csv file with annotations.
@@ -102,7 +102,7 @@ class DCASEDataset(Dataset):
                                'street_pedestrian', 'street_traffic', 'tram']
 
         # Test if light training
-        self.light_train = light_train
+        self.light_train = light_data
         if self.light_train:
             self.datalist = self.datalist[:20]
             self.labels = self.labels[0:20]
@@ -126,9 +126,7 @@ class DCASEDataset(Dataset):
             data_computed = np.load(npy_path)
         else:
             data_computed = ig.getAllInputs(os.path.abspath(wav_path))
-            print('data computed')
             np.save(npy_path, data_computed)
-        print('data computed done')
 
         # extract the label
         label = np.asarray(self.default_labels.index(self.labels[idx]))
@@ -290,7 +288,7 @@ def NormalizeData(train_labels_dir, root_dir, g_train_data_dir, light_train=Fals
         csv_file=train_labels_dir,
         root_dir=root_dir,
         save_dir=g_train_data_dir,
-        light_train=light_train
+        light_data=light_train
     )
 
     # flag for the first element
@@ -403,6 +401,8 @@ def main():
 
     parser.add_argument('--light-train', action='store_true', default=False,
                         help='For training on a small number of data')
+    parser.add_argument('--light-test', action='store_true', default=False,
+                        help='For testing on a small number of data')
 
     args = parser.parse_args()
     use_cuda = not args.no_cuda and torch.cuda.is_available()
@@ -420,7 +420,9 @@ def main():
     ##### Creation of the folders for the Generated Dataset #####
 
     light_train = args.light_train
+    light_test = args.light_test
     light_train = True
+    light_test = True
     if light_train:
         # If we want to test on CPU
         ig.setLightEnviromnent()
@@ -461,7 +463,6 @@ def main():
     # Create the good shape for applying operations to the tensor
     waveform_mean = np.concatenate([waveform_mean, waveform_mean])  # (2,)
     waveform_std = np.concatenate([waveform_std, waveform_std])  # (2,)
-    print(spectrogram_mean.shape)
     spectrogram_mean = np.concatenate([spectrogram_mean[:, np.newaxis], spectrogram_mean[:, np.newaxis]],
                                       axis=1)  # (1025, 2)
     spectrogram_std = np.concatenate([spectrogram_std[:, np.newaxis], spectrogram_std[:, np.newaxis]],
@@ -492,11 +493,6 @@ def main():
     features_mean, features_std = torch.from_numpy(features_mean), torch.from_numpy(features_std)
     fmstd_mean, fmstd_std = torch.from_numpy(fmstd_mean), torch.from_numpy(fmstd_std)
 
-    print('waveform --- mean : {0}, std : {1}'.format(waveform_mean.shape, waveform_std.shape))
-    print('spectrogram --- mean : {0}, std : {1}'.format(spectrogram_mean.shape, spectrogram_std.shape))
-    print('features --- mean : {0}, std : {1}'.format(features_mean.shape, features_std.shape))
-    print('fmstd --- mean : {0}, std : {1}'.format(fmstd_mean.shape, fmstd_std.shape))
-
     # init the data_transform
     data_transform = transforms.Compose([
         ToTensor(), Normalize(
@@ -507,21 +503,31 @@ def main():
         )
     ])
 
-    """
 
     # init the datasets
-    dcase_dataset = DCASEDataset(csv_file=train_labels_dir,
-                                 root_dir=train_data_dir, transform=data_transform)
-    dcase_dataset_test = DCASEDataset(csv_file=test_labels_dir,
-                                      root_dir=test_data_dir, transform=data_transform)
+    dcase_dataset = DCASEDataset(
+        csv_file=train_labels_dir,
+        root_dir=train_data_dir,
+        save_dir=g_train_data_dir,
+        transform=data_transform,
+        light_data=light_train
+    )
+    dcase_dataset_test = DCASEDataset(
+        csv_file=test_labels_dir,
+        root_dir=test_data_dir,
+        save_dir=g_test_data_dit,
+        transform=data_transform,
+        light_data=light_test
+    )
 
     # set number of cpu workers in parallel
     kwargs = {'num_workers': 16, 'pin_memory': True} if use_cuda else {}
 
+    """
     # get the training and testing data loader
     train_loader = torch.utils.data.DataLoader(dcase_dataset,
                                                batch_size=args.batch_size, shuffle=True, **kwargs)
-
+    
     test_loader = torch.utils.data.DataLoader(dcase_dataset_test,
                                               batch_size=args.test_batch_size, shuffle=False, **kwargs)
 
