@@ -204,15 +204,25 @@ def test(args, model, device, test_loader, data_type):
     with torch.no_grad():
         # for every testing batch
         for i_batch, sample_batched in enumerate(test_loader):
-            # for every batch, extract data (16, 1, 40, 500) and label (16, 1)
+            # for every batch, extract data and label (16, 1)
             data, label = sample_batched
+            # (16, 2, 240000), (16, 2, 1025, 431), (16, 10, 431), (16, 1, 10)
+            waveform, spectrogram, features, fmstd = data
 
             # Map the variables to the current device (CPU or GPU)
-            data = data.to(device, dtype=torch.float)
+            waveform = waveform.to(device, dtype=torch.float)
+            spectrogram = spectrogram.to(device, dtype=torch.float)
+            features = features.to(device, dtype=torch.float)
+            fmstd = fmstd.to(device, dtype=torch.float)
             label = label.to(device, dtype=torch.long)
 
             # get the predictions
-            output = model(data)
+            output = model(
+                x_audio=waveform,
+                x_spectrum=spectrogram,
+                x_features=features,
+                x_fmstd=fmstd
+            )
 
             # accumulate the batchwise loss
             test_loss += F.nll_loss(output, label, reduction='sum').item()
