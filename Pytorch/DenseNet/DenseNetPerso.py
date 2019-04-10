@@ -7,13 +7,6 @@ import numpy as np
 import torch.nn.functional as F
 import torch.nn as nn
 
-# Importation of personal classes
-import Pytorch.DenseNet.DenseNetPerso_spectrum as dnp_s
-import Pytorch.DenseNet.DenseNetPerso_audio as dnp_a
-import Pytorch.DenseNet.DenseNetPerso_features as dnp_f
-import Pytorch.DenseNet.DenseNetPerso_fmstd as dnp_fmstd
-import Pytorch.DenseNet.DenseNetPerso_final as dnp_final
-
 # Ignore warnings
 import warnings
 warnings.filterwarnings("ignore")
@@ -369,6 +362,7 @@ class DenseNetPerso(nn.Module):
             nb_layers = self.dn_parameters['audio']['nb_conv'][b]
             # Dense Block
             for l in range(nb_layers):
+                print('step l={0}, x_audio : {1}'.format(l, x_audio.shape))
                 previous_state_audio = x_audio
                 x_audio = self.nn_audio_denseBlock[i_denseBlock](x_audio)  # Batch Normalization
                 i_denseBlock += 1
