@@ -403,7 +403,6 @@ def main():
         #  the NormalizeData() function above
         normalization_values = np.load(os.path.join(g_data_dir, 'normalization_values.npy'))
         normalization_values = normalization_values.item()      # We have to do this to access the dictionary
-        input_parameters = None
         with open(os.path.join(g_data_dir, 'input_parameters.p'), 'rb') as dump_file:
             input_parameters = pickle.load(dump_file)
         print(
@@ -421,7 +420,8 @@ def main():
         np.save(os.path.join(g_data_dir, 'normalization_values.npy'), normalization_values)
         ig.returnInputParameters(
             template=dnp.input_parameters,
-            fileName=os.path.abspath(os.path.join(g_data_dir, 'input_parameters.p'))
+            fileName=os.path.abspath(os.path.join(g_data_dir, 'input_parameters.p')),
+            dn_parameters=dnp.dn_parameters
         )
         with open(os.path.join(g_data_dir, 'input_parameters.p'), 'rb') as dump_file:
             input_parameters = pickle.load(dump_file)

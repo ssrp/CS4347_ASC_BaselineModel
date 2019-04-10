@@ -17,11 +17,10 @@ def getAllInputs(filename):
     audio, _ = sf.read(filename)    # sr=22050, mono=False  # (4800000, 2)
     left = audio[::2, 0]
     right = audio[::2, 1]
+
     # waveform - (2, 120000)
     waveform = audio.T[:, ::4]
 
-    waveform = np.array([[[i] for i in left],
-                         [[i] for i in right]])
     # spectrogram - (2, 1025, 469)
     spectrogram = np.abs(np.array([librosa.core.stft(left),
                                    librosa.core.stft(right)]))
@@ -76,10 +75,10 @@ def getAllInputs(filename):
 
     ##### Create datas #####
     data = (
-        waveform,   # (2, 120000)
-        spectrogram,    # (2, 1025, 431)
-        features,   # (10, 431)
-        fmstd       # (1, 10)
+        waveform,  # (2, 120000)
+        spectrogram,  # (2, 1025, 431)
+        features,  # (10, 431)
+        fmstd  # (2, 10)
     )
 
     #data = (waveform, spectrogram, rms, zcr, mel_spectrogram, stats)
@@ -110,12 +109,17 @@ def setLightEnviromnent():
     if not os.path.isdir('./GeneratedLightDataset/test'):
         os.mkdir('./GeneratedLightDataset/test')
 
-def returnInputParameters(template, fileName):
+
+def returnInputParameters(template, fileName, dn_parameters):
     waveform, spectrogram, features, fmstd = getAllInputs('./Dataset/train/audio/0.wav')
     template['spectrum']['nb_channels'], template['spectrum']['h'], template['spectrum']['w'] = spectrogram.shape
     template['audio']['nb_channels'], template['audio']['len'] = waveform.shape
     template['features']['nb_channels'], template['features']['len'] = features.shape
-    template['fmstd']['len'] = fmstd.shape[1]
+    template['fmstd']['len'] = fmstd.shape[0] * fmstd.shape[1]
+    template['final']['len'] = dn_parameters['spectrum']['size_fc'] + dn_parameters['audio']['size_fc'] + \
+                               dn_parameters['features']['size_fc'] + dn_parameters['fmstd']['layers_size'][-1]
+
+
 
     with open(fileName, 'wb') as dump_file:
         pickle.dump(template, dump_file)
