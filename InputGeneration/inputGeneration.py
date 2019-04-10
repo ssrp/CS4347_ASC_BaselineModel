@@ -73,7 +73,7 @@ def getAllInputs(filename):
 
     ##### Create datas #####
     data = (
-        waveform,   # (2, 220500)
+        waveform,   # (2, 240000)
         spectrogram,    # (2, 1025, 431)
         features,   # (10, 431)
         fmstd       # (1, 10)

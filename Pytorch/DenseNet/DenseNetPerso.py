@@ -46,13 +46,13 @@ class DenseNetPerso(
     def forward(self, x_spectrum, x_audio, x_features, x_fmstd):
         # feed-forward propagation of the model. Here we have the inputs, which is propagated through the layers
         # x_spectrum has dimension (batch_size, channels, h = buffersSize/2 + 1, w=nbBuffers)
-        # - for this model (16, 2, ?, ?)
+        # - for this model (16, 2, 1025, 431)
         # x_audio has dimension (batch_size, channels, audio len)
-        # - for this model (16, 2, ?)
+        # - for this model (16, 2, 240000)
         # x_features has dimension (batch_size, 2 * nbFeatures, w = nbBuffers)
-        # - for this model (16, 2 * 5, ?)
+        # - for this model (16, 2 * 5, 431)
         # x_fmstd has dimension (batch_size, 2 * 2 * nbFeatures)
-        # - for this model (16, 2 * 2 * 5)
+        # - for this model (16, 1, 2 * 2 * 5)
 
         #Computation of the different NN and concatenation
         x_spectrum = self.forward_spectrum(x_spectrum)
