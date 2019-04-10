@@ -382,8 +382,6 @@ def main():
 
     light_train = args.light_train
     light_test = args.light_test
-    light_train = True
-    light_test = True
     if light_train:
         # If we want to test on CPU
         ig.setLightEnviromnent()
@@ -525,7 +523,6 @@ def main():
     # init the optimizer
     optimizer = optim.Adam(model.parameters(), lr=args.lr)
 
-    args.epochs = 1
     print('MODEL TRAINING START')
     # train the model
     for epoch in range(1, args.epochs + 1):
