@@ -2,30 +2,30 @@
 
 dn_parameters = {
     'spectrum': {
-        'k': 32,  # The number of channel in the denseNet
-        'nb_blocks': 4,  # The number of dense block in the NN = len(nb_conv)
-        'nb_conv': [4, 4, 4, 4],  # The numbers of convolutional layers in a dense block
-        'size_fc': 100  # Size of the fully connected at the end
+        'k': 4, #32,  # The number of channel in the denseNet
+        'nb_blocks': 2, #4,  # The number of dense block in the NN = len(nb_conv)
+        'nb_conv': [2, 2], #, 4, 4],  # The numbers of convolutional layers in a dense block
+        'size_fc': 10 #100  # Size of the fully connected at the end
     },
     'audio': {
-        'k': 32,  # The number of channel in the denseNet
-        'nb_blocks': 4,  # The number of dense block in the NN = len(nb_conv)
-        'nb_conv': [4, 4, 4, 4],  # The numbers of convolutional layers in a dense block
-        'size_fc': 50  # Size of the fully connected at the end
+        'k': 4, #32,  # The number of channel in the denseNet
+        'nb_blocks': 2, #4,  # The number of dense block in the NN = len(nb_conv)
+        'nb_conv': [2, 2], #, 4, 4],  # The numbers of convolutional layers in a dense block
+        'size_fc': 10 #50  # Size of the fully connected at the end
     },
     'features': {
-        'k': 32,  # The number of channel in the denseNet
-        'nb_blocks': 4,  # The number of dense block in the NN = len(nb_conv)
-        'nb_conv': [4, 4, 4, 4],  # The numbers of convolutional layers in a dense block
+        'k': 4, #32,  # The number of channel in the denseNet
+        'nb_blocks': 2, #4,  # The number of dense block in the NN = len(nb_conv)
+        'nb_conv': [2, 2], #, 4, 4],  # The numbers of convolutional layers in a dense block
         'size_fc': 20,  # Size of the fully connected at the end
     },
     'fmstd': {
-        'nb_layers': 3,  # The number of fully connected layers in the NN = len(layers_size)
-        'layers_size': [100, 50, 10],  # The size of the layers in fully connected layers
+        'nb_layers': 2, #3,  # The number of fully connected layers in the NN = len(layers_size)
+        'layers_size': [100, 50] #, 10],  # The size of the layers in fully connected layers
     },
     'final': {  # The parameters for the fully connected layers at the end of the neural network
-        'nb_layers': 3,  # The number of fully connected layers in the NN = len(layers_size)
-        'layers_size': [100, 50, 10],  # The size of the layers in the fully connected layers
+        'nb_layers': 1, #3,  # The number of fully connected layers in the NN = len(layers_size)
+        'layers_size': [100] #, 50, 10],  # The size of the layers in the fully connected layers
     }
 }
 

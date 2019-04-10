@@ -108,7 +108,7 @@ class DCASEDataset(Dataset):
         # Test if light training
         self.light_train = light_data
         if self.light_train:
-            self.datalist = self.datalist[:5]
+            self.datalist = self.datalist[0:5]
             self.labels = self.labels[0:5]
 
     def __len__(self):
@@ -206,7 +206,7 @@ def test(args, model, device, test_loader, data_type):
         for i_batch, sample_batched in enumerate(test_loader):
             # for every batch, extract data and label (16, 1)
             data, label = sample_batched
-            # (16, 2, 240000), (16, 2, 1025, 431), (16, 10, 431), (16, 1, 10)
+            # (16, 2, 120000), (16, 2, 1025, 431), (16, 10, 431), (16, 2, 10)
             waveform, spectrogram, features, fmstd = data
 
             # Map the variables to the current device (CPU or GPU)
@@ -241,13 +241,13 @@ def test(args, model, device, test_loader, data_type):
         100. * correct / len(test_loader.dataset)))
 
 
-def NormalizeData(train_labels_dir, root_dir, g_train_data_dir, light_train=False):
+def NormalizeData(train_labels_dir, root_dir, g_train_data_dir, light_data=False):
     # load the dataset
     dcase_dataset = DCASEDataset(
         csv_file=train_labels_dir,
         root_dir=root_dir,
         save_dir=g_train_data_dir,
-        light_data=light_train
+        light_data=light_data
     )
 
     # flag for the first element
@@ -266,7 +266,7 @@ def NormalizeData(train_labels_dir, root_dir, g_train_data_dir, light_train=Fals
     for i in range(len(dcase_dataset)):
 
         # extract the sample
-        if light_train:
+        if light_data:
             sample = dcase_dataset[i]
         else:
             sample = dcase_dataset[rand[i]]
@@ -362,6 +362,8 @@ def main():
                         help='For training on a small number of data')
     parser.add_argument('--light-test', action='store_true', default=False,
                         help='For testing on a small number of data')
+    parser.add_argument('--name', default='project_Pytorch',
+                        help='The name of the model')
 
     args = parser.parse_args()
     use_cuda = not args.no_cuda and torch.cuda.is_available()
@@ -386,12 +388,12 @@ def main():
         # If we want to test on CPU
         ig.setLightEnviromnent()
         g_train_data_dir = './GeneratedLightDataset/train/'
-        g_test_data_dit = './GeneratedLightDataset/test/'
+        g_test_data_dir = './GeneratedLightDataset/test/'
         g_data_dir = './GeneratedLightDataset/'
     else:
         ig.setEnviromnent()
         g_train_data_dir = './GeneratedDataset/train/'
-        g_test_data_dit = './GeneratedDataset/test/'
+        g_test_data_dir = './GeneratedDataset/test/'
         g_data_dir = './GeneratedDatase/'
 
     if os.path.isfile(
@@ -415,7 +417,7 @@ def main():
             train_labels_dir,
             train_data_dir,
             g_train_data_dir=g_train_data_dir,
-            light_train=light_train
+            light_data=light_train
         )
         np.save(os.path.join(g_data_dir, 'normalization_values.npy'), normalization_values)
         ig.returnInputParameters(
@@ -490,7 +492,7 @@ def main():
     dcase_dataset_test = DCASEDataset(
         csv_file=test_labels_dir,
         root_dir=test_data_dir,
-        save_dir=g_test_data_dit,
+        save_dir=g_test_data_dir,
         transform=data_transform,
         light_data=light_test
     )
@@ -523,20 +525,25 @@ def main():
     # init the optimizer
     optimizer = optim.Adam(model.parameters(), lr=args.lr)
 
-
+    args.epochs = 1
     print('MODEL TRAINING START')
     # train the model
     for epoch in range(1, args.epochs + 1):
-        train(args, model, device, train_loader, optimizer, 2)
+        train(args, model, device, train_loader, optimizer, epoch)
         test(args, model, device, train_loader, 'Training Data')
         test(args, model, device, test_loader, 'Testing Data')
 
     print('MODEL TRAINING END')
-    """
+
+
+    if not os.path.isdir('./SavedModels'):
+        os.mkdir('./SavedModels')
+    savedModel_path = os.path.join('./SavedModels', args.name + '.pt')
     # save the model
+    args.save_model = True
     if args.save_model:
-        torch.save(model.state_dict(), "BaselineASC.pt")
-    """
+        torch.save(model.state_dict(), savedModel_path)
+
 
 if __name__ == '__main__':
     # create a separate main function because original main function is too mainstream
