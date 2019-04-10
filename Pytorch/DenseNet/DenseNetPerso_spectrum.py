@@ -102,7 +102,7 @@ class DenseNetPerso_spectrum(nn.Module):
         # - for this model (16, 2, ?, ?)
 
         # Computation of the first part of the NN
-        for f in self.nn['spectrum']['first_layer']:
+        for f in self.nn_spectrum_firstLayer:
             x = f(x)
 
         # Computation of the DenseNet part
