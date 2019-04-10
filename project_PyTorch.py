@@ -60,8 +60,6 @@ class Normalize(object):
     def __call__(self, sample):
         data, label = sample
         waveform, spectrogram, features, fmstd = data
-        print(waveform.shape)
-        print(self.mean_waveform.shape)
 
         waveform = (waveform - self.mean_waveform) / self.std_waveform
         spectrogram = (spectrogram - self.mean_spectrogram) / self.std_spectrogram
@@ -418,31 +416,32 @@ def main():
     fmstd_mean, fmstd_std = normalization_values['fmstd']       # (10,), (10,)
 
     # Create the good shape for applying operations to the tensor
-    waveform_mean = np.concatenate([waveform_mean, waveform_mean])  # (2,)
-    waveform_std = np.concatenate([waveform_std, waveform_std])  # (2,)
+    waveform_mean = np.concatenate([waveform_mean, waveform_mean])[:, np.newaxis]  # (2, 1)
+    waveform_std = np.concatenate([waveform_std, waveform_std])[:, np.newaxis]  # (2, 1)
     spectrogram_mean = np.concatenate([spectrogram_mean[:, np.newaxis], spectrogram_mean[:, np.newaxis]],
-                                      axis=1)  # (1025, 2)
+                                      axis=1).T[:, :, np.newaxis]  # (2, 1025, 1)
     spectrogram_std = np.concatenate([spectrogram_std[:, np.newaxis], spectrogram_std[:, np.newaxis]],
-                                     axis=1)  # (1025, 2)
-    features_mean = np.reshape(  # (10,)
+                                     axis=1).T[:, :, np.newaxis]  # (2, 1025, 1)
+    features_mean = np.reshape(  # (10, 1)
         np.concatenate(
             [
                 features_mean[:, np.newaxis],
                 features_mean[:, np.newaxis]
             ]
         ),
-        (10,)
+        (10, 1)
     )
-    features_std = np.reshape(  # (10,)
+    features_std = np.reshape(  # (10, 1)
         np.concatenate(
             [
                 features_std[:, np.newaxis],
                 features_std[:, np.newaxis]
             ]
         ),
-        (10,)
+        (10, 1)
     )
-    # ok pour fmstd_mean and # fmstd_std        # (10,), (10,)
+    fmstd_mean = fmstd_mean[np.newaxis, :]  # (1, 10)
+    fmstd_std = fmstd_std[np.newaxis, :]    # (1, 10)
 
     # convert to torch variables
     waveform_mean, waveform_std = torch.from_numpy(waveform_mean), torch.from_numpy(waveform_std)
