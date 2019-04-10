@@ -14,10 +14,12 @@ def getStats(feature):
     return np.array([np.mean(feature, axis=(1, 2)), np.std(feature, axis=(1, 2))])
 
 def getAllInputs(filename):
-    audio, _ = sf.read(filename)    # sr=22050, mono=False
+    audio, _ = sf.read(filename)    # sr=22050, mono=False  # (4800000, 2)
     left = audio[::2, 0]
     right = audio[::2, 1]
-    # waveform - (2, 240000, 1)
+    # waveform - (2, 120000)
+    waveform = audio.T[:, ::4]
+
     waveform = np.array([[[i] for i in left],
                          [[i] for i in right]])
     # spectrogram - (2, 1025, 469)
@@ -50,7 +52,8 @@ def getAllInputs(filename):
 
     #### Reshape for the neural network #####
     # Waveform
-    waveform = np.reshape(waveform, (2, 240000))
+    waveform = np.reshape(waveform, (2, 120000))
+
 
     # spectrogram
     spectrogram = np.reshape(spectrogram, (2, 1025, 469))
@@ -73,7 +76,7 @@ def getAllInputs(filename):
 
     ##### Create datas #####
     data = (
-        waveform,   # (2, 240000)
+        waveform,   # (2, 120000)
         spectrogram,    # (2, 1025, 431)
         features,   # (10, 431)
         fmstd       # (1, 10)
