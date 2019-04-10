@@ -68,14 +68,14 @@ class DenseNetPerso(nn.Module):
         for b in range(1, self.dn_parameters['audio']['nb_blocks']):
             # Batch Normalization
             self.nn_audio_denseTransitinoBlock.append(
-                nn.BatchNorm1d(k * (self.dn_parameters['audio']['nb_conv'][b-1]))
+                nn.BatchNorm1d(k * (self.dn_parameters['audio']['nb_conv'][b-1] + 1))
             )
             # Activation Function
             """ --> To do during forward computation"""
             # Conv
             self.nn_audio_denseTransitinoBlock.append(
                 nn.Conv1d(
-                    in_channels=self.dn_parameters['audio']['nb_conv'][b-1],
+                    in_channels=k * (self.dn_parameters['audio']['nb_conv'][b-1] + 1),
                     out_channels=self.dn_parameters['audio']['k'],
                     kernel_size=1,
                     padding=0
@@ -152,14 +152,14 @@ class DenseNetPerso(nn.Module):
         for b in range(1, self.dn_parameters['spectrum']['nb_blocks']):
             # Batch Normalization
             self.nn_spectrum_denseTransitionBlock.append(
-                nn.BatchNorm2d(k * (self.dn_parameters['spectrum']['nb_conv'][b-1]))
+                nn.BatchNorm2d(k * (self.dn_parameters['spectrum']['nb_conv'][b-1] + 1))
             )
             # Activation Function
             """--> To do during forward computation"""
             # Conv
             self.nn_spectrum_denseTransitionBlock.append(
                 nn.Conv2d(
-                    in_channels=self.dn_parameters['spectrum']['nb_conv'][b-1],
+                    in_channels=k * (self.dn_parameters['spectrum']['nb_conv'][b-1] + 1),
                     out_channels=self.dn_parameters['spectrum']['k'],
                     kernel_size=1,
                     padding=0
@@ -237,14 +237,14 @@ class DenseNetPerso(nn.Module):
         for b in range(1, self.dn_parameters['features']['nb_blocks']):
             # Batch Normalization
             self.nn_features_denseTransitionBlock.append(
-                nn.BatchNorm1d(k * (self.dn_parameters['features']['nb_conv'][b - 1]))
+                nn.BatchNorm1d(k * (self.dn_parameters['features']['nb_conv'][b - 1] + 1))
             )
             # Activation function
             """--> To do during forward computation"""
             # Conv
             self.nn_features_denseTransitionBlock.append(
                 nn.Conv1d(
-                    in_channels=self.dn_parameters['features']['nb_conv'][b - 1],
+                    in_channels=k * (self.dn_parameters['features']['nb_conv'][b - 1] + 1),
                     out_channels=self.dn_parameters['features']['k'],
                     kernel_size=1,
                     padding=0
@@ -362,7 +362,7 @@ class DenseNetPerso(nn.Module):
             nb_layers = self.dn_parameters['audio']['nb_conv'][b]
             # Dense Block
             for l in range(nb_layers):
-                print('step l={0}, x_audio : {1}'.format(l, x_audio.shape))
+                print('(denseBlock {2}) before step l={0}, x_audio : {1}'.format(l, x_audio.shape, b))
                 previous_state_audio = x_audio
                 x_audio = self.nn_audio_denseBlock[i_denseBlock](x_audio)  # Batch Normalization
                 i_denseBlock += 1
@@ -371,10 +371,12 @@ class DenseNetPerso(nn.Module):
                 i_denseBlock += 1
                 x_audio = self.nn_audio_denseBlock[i_denseBlock](x_audio)  # Dropout
                 i_denseBlock += 1
-                x_audio = torch.cat((x_audio, previous_state_audio), dim=2)
+                x_audio = torch.cat((x_audio, previous_state_audio), dim=1)
+                print('(denseBlock {2}) after step l={0}, x_audio : {1}'.format(l, x_audio.shape, b))
 
             # Dense Transition Block
             if b != self.dn_parameters['audio']['nb_blocks'] - 1:
+                print('(denseTransitionBlock {2}) before, x_audio : {1}'.format(l, x_audio.shape, b))
                 x_audio = self.nn_audio_denseTransitinoBlock[i_denseTransitionBlock](x_audio)  # Batch Normalization
                 i_denseTransitionBlock += 1
                 x_audio = F.relu(x_audio)
@@ -384,6 +386,7 @@ class DenseNetPerso(nn.Module):
                 i_denseTransitionBlock += 1
                 x_audio = self.nn_audio_denseTransitinoBlock[i_denseTransitionBlock](x_audio)  # Max_audio Pooling
                 i_denseTransitionBlock += 1
+                print('(denseTransitionBlock {2}) after, x_audio : {1}'.format(l, x_audio.shape, b))
 
         # Computation of the last layer
         x_audio = self.nn_audio_lastLayer[0](x_audio)   # Average Pooling
@@ -420,7 +423,7 @@ class DenseNetPerso(nn.Module):
                 i_denseBlock += 1
                 x_spectrum = self.nn_spectrum_denseBlock[i_denseBlock](x_spectrum)   # Dropout
                 i_denseBlock += 1
-                x_spectrum = torch.cat((x_spectrum, previous_state_spectrum), dim=3)
+                x_spectrum = torch.cat((x_spectrum, previous_state_spectrum), dim=1)
 
             # Dense Transition Block
             if b != self.dn_parameters['spectrum']['nb_blocks'] - 1:
@@ -468,7 +471,7 @@ class DenseNetPerso(nn.Module):
                 i_denseBlock += 1
                 x_features = self.nn_features_denseBlock[i_denseBlock](x_features)  # Dropout
                 i_denseBlock += 1
-                x_features = torch.cat((x_features, previous_state_features), dim=2)
+                x_features = torch.cat((x_features, previous_state_features), dim=1)
 
             # Dense Transition Block
             if b != self.dn_parameters['features']['nb_blocks'] - 1:

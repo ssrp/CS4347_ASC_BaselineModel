@@ -108,8 +108,8 @@ class DCASEDataset(Dataset):
         # Test if light training
         self.light_train = light_data
         if self.light_train:
-            self.datalist = self.datalist[:20]
-            self.labels = self.labels[0:20]
+            self.datalist = self.datalist[:5]
+            self.labels = self.labels[0:5]
 
     def __len__(self):
         return len(self.datalist)
