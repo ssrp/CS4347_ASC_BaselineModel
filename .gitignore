@@ -109,8 +109,10 @@ venv.bak/
 # Dataset
 Dataset/
 GeneratedDataset/
+GeneratedLightDataset/
 # Tests
 TestsPerso/
+Pytorch/DenseNet_old/
 
 # IDE
 .vscode

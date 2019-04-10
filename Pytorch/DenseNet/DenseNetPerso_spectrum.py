@@ -18,51 +18,47 @@ class DenseNetPerso_spectrum(nn.Module):
         super(DenseNetPerso_spectrum, self).__init__()
 
         ##### First layer : ######
-        self.nn['spectrum']['first_layer'] = []
+        self.nn_spectrum_firstLayer = nn.ModuleList([])
         # Conv 7
-        self.nn['spectrum']['first_layer'].append(
+        self.nn_spectrum_firstLayer.append(
             nn.Conv2d(in_channels=self.input_parameters['spectrum']['nb_channels'], out_channels=self.dn_parameters['spectrum']['k'], kernel_size=7, stride=1,
                       padding=3)
         )
         # Max Pooling
-        self.nn['spectrum']['first_layer'] .append(
+        self.nn_spectrum_firstLayer.append(
             nn.MaxPool2d((2, 2), stride=1)
         )
 
         ##### Definition of the dense blocks ######
-        self.nn['spectrum']['dense_block'] = []
+        self.nn_spectrum_denseBlock = nn.ModuleList([])
         k = self.dn_parameters['spectrum']['k']
         for b in range(self.dn_parameters['spectrum']['nb_blocks']):
-            block = []
             nb_layers = self.dn_parameters['spectrum']['nb_conv'][b]
             for conv in range(nb_layers):
-                layer = []
                 # Batch Normalization
-                layer.append(nn.BatchNorm2d(k * (conv+1)))
+                self.nn_spectrum_denseBlock.append(nn.BatchNorm2d(k * (conv+1)))
                 # Activation Function
-                layer.append(F.relu)
+                """ --> To do during forward computation"""
                 # Convolution
-                layer.append(
+                self.nn_spectrum_denseBlock.append(
                     nn.Conv2d(in_channels=(k * (conv + 1)), out_channels=k, kernel_size=3, padding=1)
                 )
                 # Dropout
-                layer.append(nn.Dropout(0.2))
-                # Then concatenation --> To do during forward computation
-                block.append(layer)
-            self.nn['spectrum']['dense_block'].append(block)
+                self.nn_spectrum_denseBlock.append(nn.Dropout(0.2))
+                # Then concatenation
+                """--> To do during forward computation"""
 
         ###### Definition of the dense transition block #####
-        self.nn['spectrum']['dense_transition_block'] = []
+        self.nn_spectrum_denseTransitionBlock = nn.ModuleList([])
         for b in range(1, self.dn_parameters['spectrum']['nb_blocks']):
-            block = []
             # Batch Normalization
-            block.append(
+            self.nn_spectrum_denseTransitionBlock.append(
                 nn.BatchNorm2d(k * (self.dn_parameters['spectrum']['nb_conv'][b-1]))
             )
             # Activation Function
-            block.append(F.relu)
+            """--> To do during forward computation"""
             # Conv
-            block.append(
+            self.nn_spectrum_denseTransitionBlock.append(
                 nn.Conv2d(
                     in_channels=self.dn_parameters['spectrum']['nb_conv'][b-1],
                     out_channels=self.dn_parameters['spectrum']['k'],
@@ -71,34 +67,34 @@ class DenseNetPerso_spectrum(nn.Module):
                 )
             )
             # Dropout
-            block.append(nn.Dropout(0.2))
+            self.nn_spectrum_denseTransitionBlock.append(nn.Dropout(0.2))
             # Max Pooling
-            block.append(nn.MaxPool2d((2, 2)))
-            self.nn['spectrum']['dense_transition_block'].append(block)
+            self.nn_spectrum_denseTransitionBlock.append(nn.MaxPool2d((2, 2)))
 
         ##### Definition of the last layer of the spectrum
-        self.nn['spectrum']['last_layers'] = []
+        self.nn_spectrum_lastLayer = []
         h_pooling = self.input_parameters['spectrum']['h'] / (self.dn_parameters['spectrum']['nb_blocks'] - 1)
         w_pooling = self.input_parameters['spectrum']['w'] / (self.dn_parameters['spectrum']['nb_blocks'] - 1)
         # Average Pooling
-        self.nn['spectrum']['last_layers'].append(
+        self.nn_spectrum_lastLayer.append(
             nn.AvgPool2d((h_pooling, w_pooling))
         )
 
         # x has to be flatten in ( -1, 2 * k * self.dn_parameters['spectrum']['nb_conv'][-1])
         # (still don't understand the '2')
+        """--> To do during forward computation"""
 
         # Fully Connected
-        self.nn['spectrum']['last_layers'].append(
+        self.nn_spectrum_lastLayer.append(
             nn.Linear(
                 2 * k * self.dn_parameters['spectrum']['nb_conv'][-1],
                 self.dn_parameters['spectrum']['size_fc']
             )
         )
         # Activation Function
-        self.nn['spectrum']['last_layers'].append(F.relu)
+        """--> To do during forward computation"""
         # Dropout
-        self.nn['spectrum']['last_layers'].append(nn.Dropout(0.2))
+        self.nn_spectrum_lastLayer.append(nn.Dropout(0.2))
 
     def forward_spectrum(self, x):
         # feed-forward propagation of the model.
@@ -110,27 +106,40 @@ class DenseNetPerso_spectrum(nn.Module):
             x = f(x)
 
         # Computation of the DenseNet part
+        i_denseBlock = 0
+        i_denseTransitionBlock = 0
         for b in range(self.dn_parameters['spectrum']['nb_blocks']):
             nb_layers = self.dn_parameters['spectrum']['nb_conv'][b]
             # Dense Block
             for l in range(nb_layers):
                 previous_state = x
-                for f in self.nn['spectrum']['dense_block'][b][l]:
-                    x = f(x)
+                x = self.nn_spectrum_denseBlock[i_denseBlock](x)   # Batch Normalization
+                i_denseBlock += 1
+                x = F.relu(x)
+                x = self.nn_spectrum_denseBlock[i_denseBlock](x)   # Convolution
+                i_denseBlock += 1
+                x = self.nn_spectrum_denseBlock[i_denseBlock](x)   # Dropout
+                i_denseBlock += 1
                 x = torch.cat((x, previous_state), dim=3)
 
             # Dense Transition Block
-            if b != self.dn_parameters['spectrum']['nb_blocks'] - 1 :
-                for f in self.nn['spectrum']['dense_transition_block'][b]:
-                    x = f(x)
-        # Computation of the last layer
-        i = 0
-        for f in self.nn['spectrum']['last_layer']:
-            x = f(x)
-            if i == 0:
-                x.view(
-                    -1,
-                    2 * self.dn_parameters['spectrum']['k'] * self.dn_parameters['spectrum']['nb_conv'][-1]
-                )
+            if b != self.dn_parameters['spectrum']['nb_blocks'] - 1:
+                x = self.nn_spectrum_denseTransitionBlock[i_denseTransitionBlock](x)    # Batch normalization
+                i_denseTransitionBlock += 1
+                x = F.relu(x)
+                x = self.nn_spectrum_denseTransitionBlock[i_denseTransitionBlock](x)    # Convolution
+                i_denseTransitionBlock += 1
+                x = self.nn_spectrum_denseTransitionBlock[i_denseTransitionBlock](x)    # Dropout
+                i_denseTransitionBlock += 1
+                x = self.nn_spectrum_denseTransitionBlock[i_denseTransitionBlock](x)    # Max pooling
+                i_denseTransitionBlock += 1
 
-        return x
+        # Computation of the last layer
+        x = self.nn_spectrum_lastLayer[0](x)    # Average pooling
+        x.view(
+            -1,
+            2 * self.dn_parameters['spectrum']['k'] * self.dn_parameters['spectrum']['nb_conv'][-1]
+        )
+        x = self.nn_spectrum_lastLayer[0](x)    # Fully Connected
+        x = F.relu(x)
+        x = self.nn_spectrum_lastLayer[0](x)    # Dropout

@@ -2,6 +2,7 @@ from __future__ import print_function, division
 
 import argparse
 import os
+import pickle
 # Ignore warnings
 import warnings
 
@@ -16,11 +17,14 @@ import torch.nn as nn
 from torch.utils.data import Dataset
 import torch.optim as optim
 from torchvision import transforms, utils
+import torch.utils.data
 
 # import Librosa, tool for extracting features from audio data
 
 # Personal imports
 from InputGeneration import inputGeneration as ig
+from Pytorch.DenseNet.DenseNetPerso import DenseNetPerso
+import Pytorch.DenseNet.denseNetParameters as dnp
 
 
 # Creates a Tensor from the Numpy dataset, which is used by the GPU for processing
@@ -56,6 +60,8 @@ class Normalize(object):
     def __call__(self, sample):
         data, label = sample
         waveform, spectrogram, features, fmstd = data
+        print(waveform.shape)
+        print(self.mean_waveform.shape)
 
         waveform = (waveform - self.mean_waveform) / self.std_waveform
         spectrogram = (spectrogram - self.mean_spectrogram) / self.std_spectrogram
@@ -139,70 +145,6 @@ class DCASEDataset(Dataset):
             sample = self.transform(sample)
 
         return sample
-
-
-class BaselineASC(nn.Module):
-    def __init__(self):
-        # the main CNN model -- this function initializes the layers. NOTE THAT we are not performing the conv/pooling
-        # operations in this function (this is just the definition)
-        super(BaselineASC, self).__init__()
-
-        # first conv layer, extracts 32 feature maps from 1 channel input
-        self.conv1 = nn.Conv2d(in_channels=1, out_channels=32, kernel_size=7, stride=1, padding=3)
-        # batch normalization layer
-        self.conv1_bn = nn.BatchNorm2d(32)
-        # max pooling of 5x5
-        self.mp1 = nn.MaxPool2d((5, 5))
-        # dropout layer, for regularization of the model (efficient learning)
-        self.drop1 = nn.Dropout(0.3)
-        self.conv2 = nn.Conv2d(in_channels=32, out_channels=64, kernel_size=7, stride=1, padding=3)
-        self.conv2_bn = nn.BatchNorm2d(64)
-        self.mp2 = nn.MaxPool2d((4, 100))
-        self.drop2 = nn.Dropout(0.3)
-        # a dense layer
-        self.fc1 = nn.Linear(1 * 2 * 64, 100)
-        self.drop3 = nn.Dropout(0.3)
-        self.fc2 = nn.Linear(100, 10)
-
-    def forward(self, x):
-        # feed-forward propagation of the model. Here we have the input x, which is propagated through the layers
-        # x has dimension (batch_size, channels, mel_bins, time_indices) - for this model (16, 1, 40, 500)
-
-        # perfrom first convolution
-        x = self.conv1(x)
-        # batch normalization
-        x = self.conv1_bn(x)
-        # ReLU activation
-        x = F.relu(x)
-
-        # Max pooling, results in 32 8x100 feature maps [output -> (16, 32, 8, 100)]
-        x = self.mp1(x)
-
-        # apply dropout
-        x = self.drop1(x)
-
-        # next convolution layer (results in 64 feature maps) output: (16, 64, 4, 100)
-        x = self.conv2(x)
-        x = self.conv2_bn(x)
-        x = F.relu(x)
-
-        # max pooling of 4, 100. Results in 64 2x1 feature maps (16, 64, 2, 1)
-        x = self.mp2(x)
-        x = self.drop2(x)
-
-        # Flatten the layer into 64x2x1 neurons, results in a 128D feature vector (16, 128)
-        x = x.view(-1, 1 * 2 * 64)
-
-        # add a dense layer, results in 100D feature vector (16, 100)
-        x = self.fc1(x)
-        x = F.relu(x)
-        x = self.drop3(x)
-
-        # add the final output layer, results in 10D feature vector (16, 10)
-        x = self.fc2(x)
-
-        # add log_softmax for the label
-        return F.log_softmax(x, dim=1)
 
 
 def train(args, model, device, train_loader, optimizer, epoch):
@@ -435,13 +377,21 @@ def main():
         g_test_data_dit = './GeneratedDataset/test/'
         g_data_dir = './GeneratedDatase/'
 
-
-    if os.path.isfile(os.path.join(g_data_dir, 'normalization_values.npy')):
+    if os.path.isfile(
+            os.path.join(g_data_dir, 'normalization_values.npy')
+    ) and os.path.isfile(
+        os.path.join(g_data_dir, 'input_parameters.p')
+    ):
         # get the mean and std. If Normalized already, just load the npy files and comment
         #  the NormalizeData() function above
         normalization_values = np.load(os.path.join(g_data_dir, 'normalization_values.npy'))
         normalization_values = normalization_values.item()      # We have to do this to access the dictionary
-        print('LOAD OF THE FILE normalization_values.npy FOR NORMALIZATION')
+        input_parameters = None
+        with open(os.path.join(g_data_dir, 'input_parameters.p'), 'rb') as dump_file:
+            input_parameters = pickle.load(dump_file)
+        print(
+            'LOAD OF THE FILE normalization_values.npy FOR NORMALIZATION AND input_parameters.p FOR THE NEURAL NETWORK'
+        )
     else:
         # If not, run the normalization and save the mean/std
         print('DATA NORMALIZATION : ACCUMULATING THE DATA')
@@ -452,6 +402,13 @@ def main():
             light_train=light_train
         )
         np.save(os.path.join(g_data_dir, 'normalization_values.npy'), normalization_values)
+        ig.returnInputParameters(
+            template=dnp.input_parameters,
+            fileName=os.path.abspath(os.path.join(g_data_dir, 'input_parameters.p'))
+        )
+        with open(os.path.join(g_data_dir, 'input_parameters.p'), 'rb') as dump_file:
+            input_parameters = pickle.load(dump_file)
+
         print('DATA NORMALIZATION COMPLETED')
 
     # Load of the values in the file
@@ -523,28 +480,41 @@ def main():
     # set number of cpu workers in parallel
     kwargs = {'num_workers': 16, 'pin_memory': True} if use_cuda else {}
 
-    """
+
     # get the training and testing data loader
-    train_loader = torch.utils.data.DataLoader(dcase_dataset,
-                                               batch_size=args.batch_size, shuffle=True, **kwargs)
-    
-    test_loader = torch.utils.data.DataLoader(dcase_dataset_test,
-                                              batch_size=args.test_batch_size, shuffle=False, **kwargs)
+    train_loader = torch.utils.data.DataLoader(
+        dcase_dataset,
+        batch_size=args.batch_size,
+        shuffle=True,
+        **kwargs
+    )
+
+    test_loader = torch.utils.data.DataLoader(
+        dcase_dataset_test,
+        batch_size=args.test_batch_size,
+        shuffle=False,
+        **kwargs
+    )
 
     # init the model
-    model = BaselineASC().to(device)
+    model = DenseNetPerso(
+        dn_parameters=dnp.dn_parameters,
+        input_parameters=input_parameters,
+    ).to(device)
 
     # init the optimizer
     optimizer = optim.Adam(model.parameters(), lr=args.lr)
 
+
     print('MODEL TRAINING START')
     # train the model
     for epoch in range(1, args.epochs + 1):
-        train(args, model, device, train_loader, optimizer, epoch)
+        train(args, model, device, train_loader, optimizer, 2)
         test(args, model, device, train_loader, 'Training Data')
         test(args, model, device, test_loader, 'Testing Data')
 
     print('MODEL TRAINING END')
+    """
     # save the model
     if args.save_model:
         torch.save(model.state_dict(), "BaselineASC.pt")

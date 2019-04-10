@@ -2,6 +2,7 @@ import numpy as np
 import librosa
 import os
 import soundfile as sf
+import pickle
 
 ##### Personal importation
 # import Pytorch.DenseNet.denseNetParameters as dn
@@ -79,7 +80,6 @@ def getAllInputs(filename):
     )
 
     #data = (waveform, spectrogram, rms, zcr, mel_spectrogram, stats)
-    np.save(os.path.splitext(filename)[0] + ".npy", data)
     return data
 
 def getFilesInput(n):
@@ -106,3 +106,14 @@ def setLightEnviromnent():
         os.mkdir('./GeneratedLightDataset/train')
     if not os.path.isdir('./GeneratedLightDataset/test'):
         os.mkdir('./GeneratedLightDataset/test')
+
+def returnInputParameters(template, fileName):
+    waveform, spectrogram, features, fmstd = getAllInputs('./Dataset/train/audio/0.wav')
+    template['spectrum']['nb_channels'], template['spectrum']['h'], template['spectrum']['w'] = spectrogram.shape
+    template['audio']['nb_channels'], template['audio']['len'] = waveform.shape
+    template['features']['nb_channels'], template['features']['len'] = features.shape
+    template['fmstd']['len'] = fmstd.shape[1]
+
+    with open(fileName, 'wb') as dump_file:
+        pickle.dump(template, dump_file)
+

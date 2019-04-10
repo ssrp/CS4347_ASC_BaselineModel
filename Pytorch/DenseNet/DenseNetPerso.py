@@ -20,12 +20,12 @@ warnings.filterwarnings("ignore")
 
 
 class DenseNetPerso(
-    nn.Module,
     dnp_s.DenseNetPerso_spectrum,
     dnp_a.DenseNetPerso_audio,
     dnp_f.DenseNetPerso_features,
     dnp_fmstd.DenseNetPerso_fmstd,
-    dnp_final.DenseNetPerso_final
+    dnp_final.DenseNetPerso_final,
+    nn.Module
 ):
     def __init__(self, dn_parameters, input_parameters):
         # the main DenseNet model -- this function initializes the layers.
@@ -35,17 +35,8 @@ class DenseNetPerso(
         self.dn_parameters = dn_parameters
         self.input_parameters = input_parameters
 
-        # Definition of the neural network
-        self.nn = {
-            'spectrum': {},
-            'audio': {},
-            'features': {},
-            'fmstd': {},
-            'final': {}
-        }
 
         # Initialisation of the weights of the Neural Network
-        # It will fill self.nn
         self.init_spectrum()
         self.init_audio()
         self.init_features()

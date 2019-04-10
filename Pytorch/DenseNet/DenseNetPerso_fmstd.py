@@ -18,11 +18,11 @@ class DenseNetPerso_fmstd(nn.Module):
         super(DenseNetPerso_fmstd, self).__init__()
 
         ##### Fully connected layers #####
-        self.nn['fmstd']['fc'] = []
+        self.nn_fmstd_fc = nn.ModuleList([])
         for i in range(self.dn_parameters['fmstd']['nb_layers']):
             if i == 0:
                 # Fully Connected
-                self.nn['fmstd']['fc'].append(
+                self.nn_fmstd_fc.append(
                     nn.Linear(
                         self.input_parameters['fmstd']['len'],
                         self.dn_parameters['fmstd']['layers_size'][i]
@@ -30,14 +30,14 @@ class DenseNetPerso_fmstd(nn.Module):
                 )
             else:
                 # Fully Connected
-                self.nn['fmstd']['fc'].append(
+                self.nn_fmstd_fc.append(
                     nn.Linear(
                         self.dn_parameters['fmstd']['layers_size'][i-1],
                         self.dn_parameters['fmstd']['layers_size'][i]
                     )
                 )
-            self.nn['fmstd']['fc'].append(F.relu)
-            self.nn['fmstd']['fc'].append(nn.Dropout(0.2))
+            """-- Append a relu in forward computation --"""
+            self.nn_fmstd_fc.append(nn.Dropout(0.2))
 
     def forward_fmstd(self, x):
         # feed-forward propagation of the model.
@@ -45,7 +45,12 @@ class DenseNetPerso_fmstd(nn.Module):
         # - for this model (16, 2 * 2 * 5)
 
         # Computation of the fully connected layers of the NN
-        for f in self.nn['fmstd']['fc']:
-            x = f(x)
+        ifc = 0
+        for i in range(self.dn_parameters['fmstd']['nb_layers']):
+            x = self.nn_fmstd_fc[ifc](x)    # Fully connected
+            ifc += 1
+            x = F.relu(x)
+            x = self.nn_fmstd_fc[ifc](x)
+            ifc += 1
 
         return x

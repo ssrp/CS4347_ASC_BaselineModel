@@ -18,11 +18,11 @@ class DenseNetPerso_final(nn.Module):
         super(DenseNetPerso_final, self).__init__()
 
         ##### Fully connected layers #####
-        self.nn['final']['fc'] = []
+        self.nn_final_fc = nn.ModuleList([])
         for i in range(self.dn_parameters['final']['nb_layers']):
             if i == 0:
                 # Fully Connected
-                self.nn['final']['fc'].append(
+                self.nn_final_fc.append(
                     nn.Linear(
                         self.input_parameters['final']['len'],
                         self.dn_parameters['final']['layers_size'][i]
@@ -30,7 +30,7 @@ class DenseNetPerso_final(nn.Module):
                 )
             else:
                 # Fully Connected
-                self.nn['final']['fc'].append(
+                self.nn_final_fc.append(
                     nn.Linear(
                         self.dn_parameters['final']['layers_size'][i-1],
                         self.dn_parameters['final']['layers_size'][i]
@@ -38,9 +38,9 @@ class DenseNetPerso_final(nn.Module):
                 )
             if i != self.dn_parameters['final']['nb_layers'] - 1:
                 # Relu
-                self.nn['final']['fc'].append(F.relu)
+                """ --> To do during forward computation"""
                 # Dropout
-                self.nn['final']['fc'].append(nn.Dropout(0.2))
+                self.nn_final_fc.append(nn.Dropout(0.2))
 
     def forward_final(self, x):
         # feed-forward propagation of the model.
@@ -48,7 +48,13 @@ class DenseNetPerso_final(nn.Module):
         # - for this model (16, ?)
 
         # Computation of the fully connected layers of the NN
-        for f in self.nn['final']['fc']:
-            x = f(x)
+        ifc = 0
+        for i in range(self.dn_parameters['final']['nb_layers']):
+            x = self.nn_final_fc[ifc](x)    # Fully connected
+            ifc += 1
+            if i != self.dn_parameters['final']['nb_layers'] - 1:
+                x = F.relu(x)
+                x = self.nn_final_fc[ifc](x)
+                ifc += 1
 
         return x
