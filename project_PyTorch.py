@@ -2,7 +2,6 @@ from __future__ import print_function, division
 
 import argparse
 import os
-import pickle
 # Ignore warnings
 import warnings
 
@@ -397,14 +396,13 @@ def main():
     if os.path.isfile(
             os.path.join(g_data_dir, 'normalization_values.npy')
     ) and os.path.isfile(
-        os.path.join(g_data_dir, 'input_parameters.p')
+        os.path.join(g_data_dir, 'input_parameters.npy')
     ):
         # get the mean and std. If Normalized already, just load the npy files and comment
         #  the NormalizeData() function above
         normalization_values = np.load(os.path.join(g_data_dir, 'normalization_values.npy'))
         normalization_values = normalization_values.item()      # We have to do this to access the dictionary
-        with open(os.path.join(g_data_dir, 'input_parameters.p'), 'rb') as dump_file:
-            input_parameters = pickle.load(dump_file)
+        input_parameters = np.load(os.path.join(g_data_dir, 'input_parameters.npy')).item()
         print(
             'LOAD OF THE FILE normalization_values.npy FOR NORMALIZATION AND input_parameters.p FOR THE NEURAL NETWORK'
         )
@@ -418,13 +416,12 @@ def main():
             light_data=light_train
         )
         np.save(os.path.join(g_data_dir, 'normalization_values.npy'), normalization_values)
-        ig.returnInputParameters(
+        ig.createInputParametersFile(
             template=dnp.input_parameters,
-            fileName=os.path.abspath(os.path.join(g_data_dir, 'input_parameters.p')),
+            fileName=os.path.abspath(os.path.join(g_data_dir, 'input_parameters.npy')),
             dn_parameters=dnp.dn_parameters
         )
-        with open(os.path.join(g_data_dir, 'input_parameters.p'), 'rb') as dump_file:
-            input_parameters = pickle.load(dump_file)
+        input_parameters = np.load(os.path.join(g_data_dir, 'input_parameters.npy')).item()
 
         print('DATA NORMALIZATION COMPLETED')
 
