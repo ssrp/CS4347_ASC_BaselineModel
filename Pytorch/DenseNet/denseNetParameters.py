@@ -24,7 +24,7 @@ dn_parameters = {
         'layers_size': [40, 20, 10],  # The size of the layers in fully connected layers
     },
     'final': {  # The parameters for the fully connected layers at the end of the neural network
-        'nb_layers': 3,  # The number of fully connected layers in the NN = len(layers_size)
+        'nb_layers': 2,  # The number of fully connected layers in the NN = len(layers_size)
         'layers_size': [40, 10],  # The size of the layers in the fully connected layers
     }
 }
