@@ -13,7 +13,7 @@ def getStats(feature):
     return np.array([np.mean(feature, axis=(1, 2)), np.std(feature, axis=(1, 2))])
 
 def getAllInputs(filename):
-    audio, _ = sf.read(filename)    # sr=22050, mono=False  # (4800000, 2)
+    audio, sr_ = sf.read(filename)    # sr=22050, mono=False  # (4800000, 2)
     left = audio[::2, 0]
     right = audio[::2, 1]
 
@@ -39,15 +39,13 @@ def getAllInputs(filename):
     sfm = np.array([librosa.feature.spectral_flatness(left),
                     librosa.feature.spectral_flatness(right)])
     #  mel_spectrogram - (2, 128, 431)
-    """
-    Is not used
-    mel_spectrogram = np.array([librosa.feature.melspectrogram(left),
-                                librosa.feature.melspectrogram(right)])
-    """
+    n_mels=50
+    mel_spectrogram = np.array([librosa.feature.melspectrogram(y=left, sr=sr_, n_mels=n_mels),      # (2, 50, 469)
+                                librosa.feature.melspectrogram(y=right, sr=sr_, n_mels=n_mels)])
+
     # getStats - (10,)
     stats = np.concatenate([getStats(rms), getStats(zcr),
                             getStats(sc), getStats(sr), getStats(sfm)])
-    print('stats : {0}'.format(stats.shape))
     #### Reshape for the neural network #####
     # Waveform
     waveform = np.reshape(waveform, (2, 120000))
@@ -75,7 +73,7 @@ def getAllInputs(filename):
     ##### Create datas #####
     data = (
         waveform,  # (2, 120000)
-        spectrogram,  # (2, 1025, 431)
+        mel_spectrogram,  # (2, 1025, 431)
         features,  # (10, 431)
         fmstd  # (2, 10)
     )
