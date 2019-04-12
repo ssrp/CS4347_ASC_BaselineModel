@@ -31,6 +31,7 @@ class ToTensor(object):
     def __call__(self, sample):
         data, label = sample
         waveform, spectrogram, features, fmstd = data
+        print('in To Tensor')
 
         data_torch = (
             torch.from_numpy(waveform),
@@ -274,10 +275,10 @@ def NormalizeData(train_labels_dir, root_dir, g_train_data_dir, light_data=False
         wavform, spectrogram, features, fmstd = data_computed
         if flag == 0:
             # get the data and init melConcat for the first time
-            wavformConcat = wavform
-            spectrogramConcat = spectrogram
-            featuresConcat = features
-            fmstdConcat = fmstd
+            wavformConcat = wavform        # (2, 120000)
+            spectrogramConcat = spectrogram     # (2, 1025, 431)
+            featuresConcat = features     # (10, 431)
+            fmstdConcat = fmstd     # (2, 10)
             flag = 1
         else:
             # concatenate the features :
@@ -314,18 +315,18 @@ def NormalizeData(train_labels_dir, root_dir, g_train_data_dir, light_data=False
         )
 
     # extract std and mean
-    wavform_mean = np.array([np.mean(wavformConcat)])
-    wavform_std = np.array([np.std(wavformConcat)])
+    wavform_mean = np.array([np.mean(wavformConcat)])       # (1,)
+    wavform_std = np.array([np.std(wavformConcat)])         # (1,)
 
-    spectrogram_mean = np.mean(spectrogramConcat, axis=(0, 2))
-    spectrogram_std = np.std(spectrogramConcat, axis=(0, 2))
+    spectrogram_mean = np.mean(spectrogramConcat, axis=(0, 2))      # (1025,)
+    spectrogram_std = np.std(spectrogramConcat, axis=(0, 2))        # (1025,)
 
     featuresConcat = np.reshape(featuresConcat, (5, 2, -1))     # (5, 2, 8911)
-    features_mean = np.mean(featuresConcat, axis=(1, 2))
-    features_std = np.std(featuresConcat, axis=(1, 2))
+    features_mean = np.mean(featuresConcat, axis=(1, 2))        # (5,)
+    features_std = np.std(featuresConcat, axis=(1, 2))          # (5,)
 
-    fmstd_mean = np.mean(fmstdConcat, axis=0)
-    fmstd_std = np.std(fmstdConcat, axis=0)
+    fmstd_mean = np.mean(fmstdConcat, axis=0)       # (10,)
+    fmstd_std = np.std(fmstdConcat, axis=0)         # (10,)
 
     normalization_values = {
         'waveform': (wavform_mean, wavform_std),
@@ -443,7 +444,8 @@ def main():
             [
                 features_mean[:, np.newaxis],
                 features_mean[:, np.newaxis]
-            ]
+            ],
+            axis=1
         ),
         (10, 1)
     )
@@ -452,7 +454,8 @@ def main():
             [
                 features_std[:, np.newaxis],
                 features_std[:, np.newaxis]
-            ]
+            ],
+            axis=1
         ),
         (10, 1)
     )
@@ -474,7 +477,6 @@ def main():
             fmstd_mean, fmstd_std
         )
     ])
-
 
     # init the datasets
     dcase_dataset = DCASEDataset(
@@ -537,7 +539,6 @@ def main():
     args.save_model = True
     if args.save_model:
         torch.save(model.state_dict(), savedModel_path)
-
 
 if __name__ == '__main__':
     # create a separate main function because original main function is too mainstream

@@ -44,10 +44,10 @@ def getAllInputs(filename):
     mel_spectrogram = np.array([librosa.feature.melspectrogram(left),
                                 librosa.feature.melspectrogram(right)])
     """
-    # getStats - (20,)
+    # getStats - (10,)
     stats = np.concatenate([getStats(rms), getStats(zcr),
                             getStats(sc), getStats(sr), getStats(sfm)])
-
+    print('stats : {0}'.format(stats.shape))
     #### Reshape for the neural network #####
     # Waveform
     waveform = np.reshape(waveform, (2, 120000))
@@ -70,7 +70,7 @@ def getAllInputs(filename):
     features = np.reshape(features, (10, 469))
 
     # Features mstd
-    fmstd = np.reshape(stats, (2, 10))
+    fmstd = np.reshape(stats.T, (2, 10))    # (right+left, 2 * nb_features)
 
     ##### Create datas #####
     data = (
