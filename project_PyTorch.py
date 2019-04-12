@@ -357,7 +357,7 @@ def main():
                         help='--light-data & small model')
     parser.add_argument('--name', default='project_Pytorch',
                         help='The name of the model')
-    parser.add_argument('--model-id', default=0,
+    parser.add_argument('--model-id', default='medium',
                         help='Model ID')
 
 
@@ -394,7 +394,7 @@ def main():
         ig.setEnviromnent()
         g_train_data_dir = './GeneratedDataset/train/'
         g_test_data_dir = './GeneratedDataset/test/'
-        g_data_dir = './GeneratedDatase/'
+        g_data_dir = './GeneratedDataset/'
 
     if os.path.isfile(
             os.path.join(g_data_dir, 'normalization_values.npy')
