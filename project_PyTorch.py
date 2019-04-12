@@ -376,8 +376,6 @@ def main():
 
     ##### Creation of the folders for the Generated Dataset #####
 
-    args.light_all = True
-
     if args.light_all:
         args.model_id = 'small'
 
