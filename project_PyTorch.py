@@ -318,7 +318,7 @@ def NormalizeData(train_labels_dir, root_dir, g_train_data_dir, light_data=False
     fmstd_std = fmstd_mean2 - np.square(fmstd_mean)
 
     normalization_values = {
-        'waveform': (wavform_mean, wavform_std),
+        'waveform': (np.array([wavform_mean]), np.array([wavform_std])),
         'spectrogram': (spectrogram_mean, spectrogram_std),
         'features': (features_mean, features_std),
         'fmstd': (fmstd_mean, fmstd_std)
