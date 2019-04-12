@@ -31,7 +31,6 @@ class ToTensor(object):
     def __call__(self, sample):
         data, label = sample
         waveform, spectrogram, features, fmstd = data
-        print('in To Tensor')
 
         data_torch = (
             torch.from_numpy(waveform),
