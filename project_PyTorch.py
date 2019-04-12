@@ -4,6 +4,7 @@ import argparse
 import os
 # Ignore warnings
 import warnings
+import progressbar
 
 import numpy as np
 import torch
@@ -262,7 +263,10 @@ def NormalizeData(train_labels_dir, root_dir, g_train_data_dir, light_data=False
     rand = np.random.permutation(len(dcase_dataset))
 
     # for all the training samples
-    for i in range(len(dcase_dataset)):
+    nb_files = len(dcase_dataset)
+    bar = progressbar.ProgressBar(maxval=nb_files, widgets=[progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage(), ' ', progressbar.ETA()])
+    bar.start()
+    for i in range(nb_files):
 
         # extract the sample
         if light_data:
@@ -274,58 +278,44 @@ def NormalizeData(train_labels_dir, root_dir, g_train_data_dir, light_data=False
         wavform, spectrogram, features, fmstd = data_computed
         if flag == 0:
             # get the data and init melConcat for the first time
-            wavformConcat = wavform        # (2, 120000)
-            spectrogramConcat = spectrogram     # (2, 1025, 431)
-            featuresConcat = features     # (10, 431)
-            fmstdConcat = fmstd     # (2, 10)
+            wavform_mean = np.mean(wavform)        # (2, 120000) -> (1,)
+            wavform_mean2 = np.mean(np.square(wavform))        # (2, 120000) -> (1,)
+            spectrogram_mean = np.mean(spectrogram, axis=(0, 2))     # (2, 1025, 431) -> (1025,)
+            spectrogram_mean2 = np.mean(np.square(spectrogram), axis=(0, 2))     # (2, 1025, 431) -> (1025,)
+            features_mean = np.mean(np.reshape(features, (5, 2, -1)), axis=(1, 2))     # (10, 431) -> (5,)
+            features_mean2 = np.mean(np.reshape(np.square(features), (5, 2, -1)), axis=(1, 2))     # (10, 431) -> (5,)
+            fmstd_mean = np.mean(fmstd, axis=1)     # (2, 10) -> (10,)
+            fmstd_mean2 = np.mean(np.square(fmstd), axis=1)     # (2, 10) -> (10,)
             flag = 1
         else:
             # concatenate the features :
-            wavformConcat = np.concatenate((wavformConcat, wavform), axis=0)
-            spectrogramConcat = np.concatenate((spectrogramConcat, spectrogram), axis=0)
-            featuresConcat = np.concatenate((featuresConcat, features), axis=1)
-            fmstdConcat = np.concatenate((fmstdConcat, fmstd), axis=0)
+            wavform_mean += np.mean(wavform)        # (2, 120000) -> (1,)
+            wavform_mean2 += np.mean(np.square(wavform))        # (2, 120000) -> (1,)
+            spectrogram_mean += np.mean(spectrogram, axis=(0, 2))     # (2, 1025, 431) -> (1025,)
+            spectrogram_mean2 += np.mean(np.square(spectrogram), axis=(0, 2))     # (2, 1025, 431) -> (1025,)
+            features_mean += np.mean(np.reshape(features, (5, 2, -1)), axis=(1, 2))     # (10, 431) -> (5,)
+            features_mean2 += np.mean(np.reshape(np.square(features), (5, 2, -1)), axis=(1, 2))     # (10, 431) -> (5,)
+            fmstd_mean += np.mean(fmstd, axis=1)     # (2, 10) -> (10,)
+            fmstd_mean2 += np.mean(np.square(fmstd), axis=1)     # (2, 10) -> (10,)
 
-        # print because we like to see it working
-        print(
-            'NORMALIZATION (FEATURE SCALING) : {0}'
-            ' - wavform shape : {1}'
-            ' - spectrogram shape : {2}'
-            ' - features : {3}'
-            ' - fmstd : {4}'.format(
-                i,
-                wavform.shape,
-                spectrogram.shape,
-                features.shape,
-                fmstd.shape
-            )
-        )
-        print(
-            'Current accumulation size :'
-            ' - wavformConcat shape : {0}'
-            ' - spectrogramConcat shape : {1}'
-            ' - featuresConcat : {2}'
-            ' - fmstdConcat : {3}'.format(
-                wavformConcat.shape,
-                spectrogramConcat.shape,
-                featuresConcat.shape,
-                fmstdConcat.shape
-            )
-        )
+        bar.update(i + 1)
+    bar.finish()
 
-    # extract std and mean
-    wavform_mean = np.array([np.mean(wavformConcat)])       # (1,)
-    wavform_std = np.array([np.std(wavformConcat)])         # (1,)
+    wavform_mean /= nb_files
+    wavform_mean2 /= nb_files
+    wavform_std = wavform_mean2 - np.square(wavform_mean)
 
-    spectrogram_mean = np.mean(spectrogramConcat, axis=(0, 2))      # (1025,)
-    spectrogram_std = np.std(spectrogramConcat, axis=(0, 2))        # (1025,)
+    spectrogram_mean /= nb_files
+    spectrogram_mean2 /= nb_files
+    spectrogram_std = spectrogram_mean2 - np.square(spectrogram_mean)
 
-    featuresConcat = np.reshape(featuresConcat, (5, 2, -1))     # (5, 2, 8911)
-    features_mean = np.mean(featuresConcat, axis=(1, 2))        # (5,)
-    features_std = np.std(featuresConcat, axis=(1, 2))          # (5,)
+    features_mean /= nb_files
+    features_mean2 /= nb_files
+    features_std = features_mean2 - np.square(features_mean)
 
-    fmstd_mean = np.mean(fmstdConcat, axis=0)       # (10,)
-    fmstd_std = np.std(fmstdConcat, axis=0)         # (10,)
+    fmstd_mean /= nb_files
+    features_mean2 /= nb_files
+    fmstd_std = fmstd_mean2 - np.square(fmstd_mean)
 
     normalization_values = {
         'waveform': (wavform_mean, wavform_std),
