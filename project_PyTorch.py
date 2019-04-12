@@ -284,8 +284,8 @@ def NormalizeData(train_labels_dir, root_dir, g_train_data_dir, light_data=False
             spectrogram_mean2 = np.mean(np.square(spectrogram), axis=(0, 2))     # (2, 1025, 431) -> (1025,)
             features_mean = np.mean(np.reshape(features, (5, 2, -1)), axis=(1, 2))     # (10, 431) -> (5,)
             features_mean2 = np.mean(np.reshape(np.square(features), (5, 2, -1)), axis=(1, 2))     # (10, 431) -> (5,)
-            fmstd_mean = np.mean(fmstd, axis=1)     # (2, 10) -> (10,)
-            fmstd_mean2 = np.mean(np.square(fmstd), axis=1)     # (2, 10) -> (10,)
+            fmstd_mean = np.mean(fmstd, axis=0)     # (2, 10) -> (10,)
+            fmstd_mean2 = np.mean(np.square(fmstd), axis=0)     # (2, 10) -> (10,)
             flag = 1
         else:
             # concatenate the features :
@@ -295,8 +295,8 @@ def NormalizeData(train_labels_dir, root_dir, g_train_data_dir, light_data=False
             spectrogram_mean2 += np.mean(np.square(spectrogram), axis=(0, 2))     # (2, 1025, 431) -> (1025,)
             features_mean += np.mean(np.reshape(features, (5, 2, -1)), axis=(1, 2))     # (10, 431) -> (5,)
             features_mean2 += np.mean(np.reshape(np.square(features), (5, 2, -1)), axis=(1, 2))     # (10, 431) -> (5,)
-            fmstd_mean += np.mean(fmstd, axis=1)     # (2, 10) -> (10,)
-            fmstd_mean2 += np.mean(np.square(fmstd), axis=1)     # (2, 10) -> (10,)
+            fmstd_mean += np.mean(fmstd, axis=0)     # (2, 10) -> (10,)
+            fmstd_mean2 += np.mean(np.square(fmstd), axis=0)     # (2, 10) -> (10,)
 
         bar.update(i + 1)
     bar.finish()
@@ -353,8 +353,12 @@ def main():
                         help='For testing on a small number of data')
     parser.add_argument('--light-data', action='store_true', default=False,
                         help='--light-train & --light-test')
+    parser.add_argument('--light-all', action='store_true', default=False,
+                        help='--light-data & small model')
     parser.add_argument('--name', default='project_Pytorch',
                         help='The name of the model')
+    parser.add_argument('--model-id', default=0,
+                        help='Model ID')
 
 
     args = parser.parse_args()
@@ -372,8 +376,15 @@ def main():
 
     ##### Creation of the folders for the Generated Dataset #####
 
-    light_train = args.light_data or args.light_train
-    light_test = args.light_data or args.light_test
+    args.light_all = True
+
+    if args.light_all:
+        args.model_id = 'small'
+
+    light_train = args.light_all or args.light_data or args.light_train
+    light_test = args.light_all or args.light_data or args.light_test
+
+    dn_parameters = dnp.return_model_parameters(args.model_id)
 
     if light_train:
         # If we want to test on CPU
@@ -413,7 +424,7 @@ def main():
         ig.createInputParametersFile(
             template=dnp.input_parameters,
             fileName=os.path.abspath(os.path.join(g_data_dir, 'input_parameters.npy')),
-            dn_parameters=dnp.dn_parameters
+            dn_parameters=dn_parameters
         )
         input_parameters = np.load(os.path.join(g_data_dir, 'input_parameters.npy')).item()
 
@@ -487,7 +498,6 @@ def main():
         light_data=light_test
     )
 
-    """
     # set number of cpu workers in parallel
     kwargs = {'num_workers': 16, 'pin_memory': True} if use_cuda else {}
 
@@ -509,7 +519,7 @@ def main():
 
     # init the model
     model = DenseNetPerso(
-        dn_parameters=dnp.dn_parameters,
+        dn_parameters=dn_parameters,
         input_parameters=input_parameters,
     ).to(device)
 
@@ -533,7 +543,7 @@ def main():
     args.save_model = True
     if args.save_model:
         torch.save(model.state_dict(), savedModel_path)
-    """
+
 if __name__ == '__main__':
     # create a separate main function because original main function is too mainstream
     main()
