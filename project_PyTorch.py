@@ -361,8 +361,11 @@ def main():
                         help='For training on a small number of data')
     parser.add_argument('--light-test', action='store_true', default=False,
                         help='For testing on a small number of data')
+    parser.add_argument('--light-data', action='store_true', default=False,
+                        help='--light-train & --light-test')
     parser.add_argument('--name', default='project_Pytorch',
                         help='The name of the model')
+
 
     args = parser.parse_args()
     use_cuda = not args.no_cuda and torch.cuda.is_available()
@@ -379,8 +382,9 @@ def main():
 
     ##### Creation of the folders for the Generated Dataset #####
 
-    light_train = args.light_train
-    light_test = args.light_test
+    light_train = args.light_data or args.light_train
+    light_test = args.light_data or args.light_test
+
     if light_train:
         # If we want to test on CPU
         ig.setLightEnviromnent()
@@ -493,6 +497,7 @@ def main():
         light_data=light_test
     )
 
+    """
     # set number of cpu workers in parallel
     kwargs = {'num_workers': 16, 'pin_memory': True} if use_cuda else {}
 
@@ -538,7 +543,7 @@ def main():
     args.save_model = True
     if args.save_model:
         torch.save(model.state_dict(), savedModel_path)
-
+    """
 if __name__ == '__main__':
     # create a separate main function because original main function is too mainstream
     main()
