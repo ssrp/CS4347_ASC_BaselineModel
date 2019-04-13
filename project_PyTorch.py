@@ -532,11 +532,10 @@ def main():
     print('MODEL TRAINING END')
 
 
-    if not os.path.isdir('./SavedModels'):
-        os.mkdir('./SavedModels')
-    savedModel_path = os.path.join('./SavedModels', args.name + '.pt')
     # save the model
     if args.save_model:
+        if not os.path.isdir('./SavedModels'):
+            os.mkdir('./SavedModels')
         model_name = dnp.id2name(args.model_id)
         model_folder = os.path.join('./SavedModels', model_name)
         if not os.path.isdir(model_folder):
