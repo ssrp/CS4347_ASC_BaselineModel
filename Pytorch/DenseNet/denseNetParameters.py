@@ -98,6 +98,19 @@ def name2indice(name):
     return None
 
 
+def id2name(id):
+    if isinstance(id, str):
+        name = id
+        return name
+    elif isinstance(id, int):
+        indice = id
+        if indice < len(dn_parameters):
+            return dn_parameters[indice]['name']
+        else:
+            return 'unknowName'
+    else:
+        return 'unkownName'
+
 def returnSmallModel():
     indice = name2indice('small')
     return dn_parameters[indice]

@@ -110,6 +110,8 @@ venv.bak/
 Dataset/
 GeneratedDataset/
 GeneratedLightDataset/
+# Saved Models
+SavedModels/
 # Tests
 TestsPerso/
 Pytorch/DenseNet_old/

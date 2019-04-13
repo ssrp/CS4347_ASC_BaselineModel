@@ -353,7 +353,7 @@ def main():
                         help='--light-train & --light-test')
     parser.add_argument('--light-all', action='store_true', default=False,
                         help='--light-data & small model')
-    parser.add_argument('--name', default='project_Pytorch',
+    parser.add_argument('--name', default='',
                         help='The name of the model')
     parser.add_argument('--model-id', default='medium',
                         help='Model ID')
@@ -536,9 +536,33 @@ def main():
         os.mkdir('./SavedModels')
     savedModel_path = os.path.join('./SavedModels', args.name + '.pt')
     # save the model
-    args.save_model = True
     if args.save_model:
-        torch.save(model.state_dict(), savedModel_path)
+        model_name = dnp.id2name(args.model_id)
+        model_folder = os.path.join('./SavedModels', model_name)
+        if not os.path.isdir(model_folder):
+            os.mkdir(model_folder)
+        # Find a name for the save
+        if args.name != '':
+            nom = '_Name({0})'.format(args.name)
+        else:
+            nom = ''
+
+        flag = True
+        i = 0
+        while flag:
+            all_name = 'Model({0}){1}_NbEpochs({2})_({3})'.format(
+                model_name,
+                nom,
+                args.epochs,
+                i
+            )
+            folder_path = os.path.join(model_folder, all_name)
+            if not os.path.isdir(folder_path):
+                flag = False
+            i+=1
+        os.mkdir(folder_path)
+        torch.save(model.state_dict(), os.path.join(folder_path, all_name + '.pt'))
+        print('Model saved in {0}'.format(folder_path))
 
 if __name__ == '__main__':
     # create a separate main function because original main function is too mainstream
