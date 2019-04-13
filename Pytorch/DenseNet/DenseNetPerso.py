@@ -171,7 +171,7 @@ class DenseNetPerso(nn.Module):
             self.nn_spectrum_denseTransitionBlock.append(nn.MaxPool2d((2, 2)))
 
         ##### Definition of the last layer of the spectrum
-        self.nn_spectrum_lastLayer = []
+        self.nn_spectrum_lastLayer = nn.ModuleList([])
         h_pooling = int(self.input_parameters['spectrum']['h'] / (self.dn_parameters['spectrum']['nb_blocks'] - 1))
         w_pooling = int(self.input_parameters['spectrum']['w'] / (self.dn_parameters['spectrum']['nb_blocks'] - 1))
         # Average Pooling
@@ -439,7 +439,6 @@ class DenseNetPerso(nn.Module):
             -1,
             self.dn_parameters['spectrum']['k'] * (self.dn_parameters['spectrum']['nb_conv'][-1] + 1)
         )
-        print(x_spectrum.shape)
         x_spectrum = self.nn_spectrum_lastLayer[1](x_spectrum)    # Fully Connected
         x_spectrum = F.relu(x_spectrum)
         x_spectrum = self.nn_spectrum_lastLayer[2](x_spectrum)    # Dropout
