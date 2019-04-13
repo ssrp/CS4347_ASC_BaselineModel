@@ -2,6 +2,7 @@ import numpy as np
 import librosa
 import os
 import soundfile as sf
+import matplotlib.pyplot as plt
 
 ##### Personal importation
 # import Pytorch.DenseNet.denseNetParameters as dn
@@ -118,3 +119,54 @@ def createInputParametersFile(template, fileName, dn_parameters):
 
     np.save(fileName, template)
 
+
+def saveFigures(folder, name, summaryDict):
+    loss_train = summaryDict['loss_train']
+    loss_test = summaryDict['loss_test']
+    acc_train = summaryDict['acc_train']
+    acc_test = summaryDict['acc_test']
+    nb_epochs = summaryDict['nb_epochs']
+
+    x = np.arange(1, nb_epochs + 1)
+    # Save of the loss
+    plt.figure()
+    plt.plot(x, loss_train, label='Training Loss')
+    plt.plot(x, loss_test, label='Testing Loss')
+    plt.title('Variation of the Loss through the buffers')
+    plt.xlabel('Epoch')
+    plt.ylabel('Loss value')
+    plt.legend()
+    plt.grid()
+    plt.savefig(os.path.join(folder, 'LossFigure_' + name + '.png'))
+
+    # Save the accuracy
+    plt.figure()
+    plt.plot(x, acc_train, label='Training Accuracy')
+    plt.plot(x, acc_test, label='Testing Accuracy')
+    plt.title('Variation of the Accuracy through the buffers')
+    plt.xlabel('Epoch')
+    plt.ylabel('Accuracy value (%)')
+    plt.legend()
+    plt.grid()
+    plt.savefig(os.path.join(folder, 'AccuracyFigure_' + name + '.png'))
+
+
+def saveText(folder, name, summaryDict):
+    loss_train = summaryDict['loss_train'][-1]
+    loss_test = summaryDict['loss_test'][-1]
+    acc_train = summaryDict['acc_train'][-1]
+    acc_test = summaryDict['acc_test'][-1]
+    nb_epochs = summaryDict['nb_epochs']
+
+    text = 'Summary of {5} :\n\n' \
+           'Training Loss : {0}\n' \
+           'Testing Loss : {1}\n' \
+           'Training Accuracy : {2}\n' \
+           'Testing Accuracy : {3}\n' \
+           'Epochs : {4}'\
+        .format(
+            loss_train, loss_test, acc_train, acc_test, nb_epochs, name
+        )
+
+    with open(os.path.join(folder, 'Summary_' + name + '.txt'), 'a') as f:
+        f.write(text)

@@ -233,10 +233,12 @@ def test(args, model, device, test_loader, data_type):
     # normalize the test loss with the number of test samples
     test_loss /= len(test_loader.dataset)
 
+    accuracy_percentage = 100. * correct / len(test_loader.dataset)
     # print the results
     print('Model prediction on ' + data_type + ': Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n'.format(
         test_loss, correct, len(test_loader.dataset),
-        100. * correct / len(test_loader.dataset)))
+        accuracy_percentage))
+    return test_loss, accuracy_percentage
 
 
 def NormalizeData(train_labels_dir, root_dir, g_train_data_dir, light_data=False):
@@ -323,7 +325,6 @@ def NormalizeData(train_labels_dir, root_dir, g_train_data_dir, light_data=False
     }
 
     return normalization_values
-
 
 def main():
     # Training settings
@@ -524,10 +525,17 @@ def main():
 
     print('MODEL TRAINING START')
     # train the model
+    loss_train, acc_train, loss_test, acc_test = [], [], [], []
+
     for epoch in range(1, args.epochs + 1):
         train(args, model, device, train_loader, optimizer, epoch)
-        test(args, model, device, train_loader, 'Training Data')
-        test(args, model, device, test_loader, 'Testing Data')
+        l_train, a_train = test(args, model, device, train_loader, 'Training Data')
+        l_test, a_test = test(args, model, device, test_loader, 'Testing Data')
+        loss_train.append(l_train)
+        acc_train.append(a_train)
+        loss_test.append(l_test)
+        acc_test.append(a_test)
+
 
     print('MODEL TRAINING END')
 
@@ -558,9 +566,27 @@ def main():
             folder_path = os.path.join(model_folder, all_name)
             if not os.path.isdir(folder_path):
                 flag = False
-            i+=1
+            i += 1
         os.mkdir(folder_path)
         torch.save(model.state_dict(), os.path.join(folder_path, all_name + '.pt'))
+        summaryDict = {
+            'loss_train': loss_train,
+            'acc_train': acc_train,
+            'loss_test': loss_test,
+            'acc_test': acc_test,
+            'nb_epochs': args.epochs
+        }
+        np.save(os.path.join(folder_path, all_name + '.npy'), summaryDict)
+        ig.saveFigures(
+            folder=os.path.abspath(folder_path),
+            name=all_name,
+            summaryDict=summaryDict
+        )
+        ig.saveText(
+            folder=os.path.abspath(folder_path),
+            name=all_name,
+            summaryDict=summaryDict
+        )
         print('Model saved in {0}'.format(folder_path))
 
 if __name__ == '__main__':
