@@ -343,7 +343,7 @@ def main():
                         help='random seed (default: 1)')
     parser.add_argument('--log-interval', type=int, default=10, metavar='N',
                         help='how many batches to wait before logging training status')
-    parser.add_argument('--save-model', action='store_true', default=False,
+    parser.add_argument('--no-save-model', action='store_true', default=False,
                         help='For Saving the current Model')
 
     parser.add_argument('--light-train', action='store_true', default=False,
@@ -541,7 +541,7 @@ def main():
 
 
     # save the model
-    if args.save_model:
+    if not args.no_save_model:
         if not os.path.isdir('./SavedModels'):
             os.mkdir('./SavedModels')
         model_name = dnp.id2name(args.model_id)
