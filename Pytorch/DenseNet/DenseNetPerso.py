@@ -439,7 +439,7 @@ class DenseNetPerso(nn.Module):
             -1,
             self.dn_parameters['spectrum']['k'] * (self.dn_parameters['spectrum']['nb_conv'][-1] + 1)
         )
-
+        print(x_spectrum.shape)
         x_spectrum = self.nn_spectrum_lastLayer[1](x_spectrum)    # Fully Connected
         x_spectrum = F.relu(x_spectrum)
         x_spectrum = self.nn_spectrum_lastLayer[2](x_spectrum)    # Dropout

@@ -13,11 +13,9 @@ warnings.filterwarnings("ignore")
 
 # import PyTorch Functionalities
 import torch.nn.functional as F
-import torch.nn as nn
-from torch.utils.data import Dataset
 import torch.optim as optim
 from torchvision import transforms, utils
-import torch.utils.data
+from torch.utils.data import Dataset, DataLoader
 
 # import Librosa, tool for extracting features from audio data
 
