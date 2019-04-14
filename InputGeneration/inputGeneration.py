@@ -43,6 +43,7 @@ def getAllInputs(filename):
     n_mels = 50
     mel_spectrogram = np.array([librosa.feature.melspectrogram(y=left, sr=sr_, n_mels=n_mels),      # (2, 50, 469)
                                 librosa.feature.melspectrogram(y=right, sr=sr_, n_mels=n_mels)])
+    logmel_spectrogram = librosa.core.amplitude_to_db(mel_spectrogram)
 
     # getStats - (10,)
     stats = np.concatenate([getStats(rms), getStats(zcr),
@@ -74,7 +75,7 @@ def getAllInputs(filename):
     ##### Create datas #####
     data = (
         waveform,  # (2, 120000)
-        mel_spectrogram,  # (2, 1025, 469), for mel : (2, 50, 469)
+        logmel_spectrogram,  # (2, 1025, 469), for mel : (2, 100, 469)
         features,  # (10, 469)
         fmstd  # (2, 10)
     )
