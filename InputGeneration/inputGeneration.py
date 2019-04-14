@@ -39,8 +39,8 @@ def getAllInputs(filename):
     #  sfm - (2, 1, 469)
     sfm = np.array([librosa.feature.spectral_flatness(left),
                     librosa.feature.spectral_flatness(right)])
-    #  mel_spectrogram - (2, 128, 431)
-    n_mels=50
+    #  mel_spectrogram - (2, 50, 469)
+    n_mels = 50
     mel_spectrogram = np.array([librosa.feature.melspectrogram(y=left, sr=sr_, n_mels=n_mels),      # (2, 50, 469)
                                 librosa.feature.melspectrogram(y=right, sr=sr_, n_mels=n_mels)])
 
@@ -74,12 +74,12 @@ def getAllInputs(filename):
     ##### Create datas #####
     data = (
         waveform,  # (2, 120000)
-        mel_spectrogram,  # (2, 1025, 431)
-        features,  # (10, 431)
+        mel_spectrogram,  # (2, 1025, 469), for mel : (2, 50, 469)
+        features,  # (10, 469)
         fmstd  # (2, 10)
     )
 
-    #data = (waveform, spectrogram, rms, zcr, mel_spectrogram, stats)
+    # data = (waveform, spectrogram, rms, zcr, mel_spectrogram, stats)
     return data
 
 def getFilesInput(n):

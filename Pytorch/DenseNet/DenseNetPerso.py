@@ -552,9 +552,9 @@ class DenseNetPerso(nn.Module):
         if self.inputs_used[2] == '1':
             if flag:
                 x_final = torch.cat((x_final, x_features), dim=1)
-                flag = True
             else:
                 x_final = x_features
+                flag = True
         if self.inputs_used[3] == '1':
             if flag:
                 x_final = torch.cat((x_final, x_fmstd), dim=1)
