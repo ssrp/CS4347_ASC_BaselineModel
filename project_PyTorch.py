@@ -358,6 +358,8 @@ def main():
                         help='The name of the model')
     parser.add_argument('--model-id', default='medium',
                         help='Model ID')
+    parser.add_argument('--inputs-used', default='1111',
+                        help='The inputs used (1=used, 0=not used) (waveform, spectrum, features, fmstd)')
 
 
     args = parser.parse_args()
@@ -518,6 +520,7 @@ def main():
     model = DenseNetPerso(
         dn_parameters=dn_parameters,
         input_parameters=input_parameters,
+        inputs_used=args.inputs_used
     ).to(device)
 
     # init the optimizer
@@ -557,11 +560,12 @@ def main():
         flag = True
         i = 0
         while flag:
-            all_name = 'Model({0}){1}_NbEpochs({2})_({3})'.format(
+            all_name = 'Model({0})_InputsUsed({4}){1}_NbEpochs({2})_({3})'.format(
                 model_name,
                 nom,
                 args.epochs,
-                i
+                i,
+                args.inputs_used
             )
             folder_path = os.path.join(model_folder, all_name)
             if not os.path.isdir(folder_path):
@@ -574,7 +578,8 @@ def main():
             'acc_train': acc_train,
             'loss_test': loss_test,
             'acc_test': acc_test,
-            'nb_epochs': args.epochs
+            'nb_epochs': args.epochs,
+            'input_used': args.inputs_used
         }
         np.save(os.path.join(folder_path, all_name + '.npy'), summaryDict)
         ig.saveFigures(

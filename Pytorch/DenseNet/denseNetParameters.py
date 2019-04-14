@@ -87,7 +87,36 @@ dn_parameters = [
             'nb_layers': 3,  # The number of fully connected layers in the NN = len(layers_size)
             'layers_size': [80, 40, 10],  # The size of the layers in the fully connected layers
         }
-    }       # Big
+    },      # Big
+    {
+        'name': 'mediumTest',
+        'spectrum': {
+            'k': 16,  # The number of channel in the denseNet
+            'nb_blocks': 3,  # The number of dense block in the NN = len(nb_conv)
+            'nb_conv': [4, 3, 2],  # The numbers of convolutional layers in a dense block
+            'size_fc': 50  # Size of the fully connected at the end
+        },
+        'audio': {
+            'k': 16,  # The number of channel in the denseNet
+            'nb_blocks': 3,  # The number of dense block in the NN = len(nb_conv)
+            'nb_conv': [4, 3, 2],  # The numbers of convolutional layers in a dense block
+            'size_fc': 50  # Size of the fully connected at the end
+        },
+        'features': {
+            'k': 16,  # The number of channel in the denseNet
+            'nb_blocks': 3,  # The number of dense block in the NN = len(nb_conv)
+            'nb_conv': [4, 3, 2],  # The numbers of convolutional layers in a dense block
+            'size_fc': 50,  # Size of the fully connected at the end
+        },
+        'fmstd': {
+            'nb_layers': 3,  # The number of fully connected layers in the NN = len(layers_size)
+            'layers_size': [100, 75, 50],  # The size of the layers in fully connected layers
+        },
+        'final': {  # The parameters for the fully connected layers at the end of the neural network
+            'nb_layers': 2,  # The number of fully connected layers in the NN = len(layers_size)
+            'layers_size': [50, 10],  # The size of the layers in the fully connected layers
+        }
+    },      # mediumTest - for test between features
 ]
 
 

@@ -132,7 +132,7 @@ def saveFigures(folder, name, summaryDict):
     plt.figure()
     plt.plot(x, loss_train, label='Training Loss')
     plt.plot(x, loss_test, label='Testing Loss')
-    plt.title('Variation of the Loss through the buffers')
+    plt.title('Variation of the Loss through the buffers\n' + name)
     plt.xlabel('Epoch')
     plt.ylabel('Loss value')
     plt.legend()
@@ -143,7 +143,7 @@ def saveFigures(folder, name, summaryDict):
     plt.figure()
     plt.plot(x, acc_train, label='Training Accuracy')
     plt.plot(x, acc_test, label='Testing Accuracy')
-    plt.title('Variation of the Accuracy through the buffers')
+    plt.title('Variation of the Accuracy through the buffers\n' + name)
     plt.xlabel('Epoch')
     plt.ylabel('Accuracy value (%)')
     plt.legend()
@@ -157,16 +157,46 @@ def saveText(folder, name, summaryDict):
     acc_train = summaryDict['acc_train'][-1]
     acc_test = summaryDict['acc_test'][-1]
     nb_epochs = summaryDict['nb_epochs']
+    input_used = summaryDict['input_used']
+
+    iu_txt = ''
+    flag = False
+    if input_used[0] == '1':
+        iu_txt += 'waveform'
+        flag = True
+    if input_used[1] == '1':
+        if flag:
+            iu_txt += ', spectrogram'
+        else:
+            iu_txt += 'spectrogram'
+            flag = True
+    if input_used[2] == '1':
+        if flag:
+            iu_txt += ', features'
+        else:
+            iu_txt += 'features'
+            flag = True
+    if input_used[3] == '1':
+        if flag:
+            iu_txt += ', fmstd'
+        else:
+            iu_txt += 'fmstd'
+            flag = True
+
+
 
     text = 'Summary of {5} :\n\n' \
            'Training Loss : {0}\n' \
            'Testing Loss : {1}\n' \
            'Training Accuracy : {2}\n' \
            'Testing Accuracy : {3}\n' \
-           'Epochs : {4}'\
+           'Epochs : {4}\n\n' \
+           'Inputs Used : {7}\t ({6})'\
         .format(
-            loss_train, loss_test, acc_train, acc_test, nb_epochs, name
+            loss_train, loss_test, acc_train, acc_test, nb_epochs, name, iu_txt, input_used
         )
 
     with open(os.path.join(folder, 'Summary_' + name + '.txt'), 'a') as f:
         f.write(text)
+
+
