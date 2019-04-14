@@ -153,7 +153,6 @@ def train(args, model, device, train_loader, optimizer, epoch):
         data, label = sample_batched
         waveform, spectrogram, features, fmstd = data  # (16, 2, 240000), (16, 2, 1025, 431), (16, 10, 431), (16, 1, 10)
 
-        print('spectrogram : {0}'.format(spectrogram.shape))
         # Map the variables to the current device (CPU or GPU)
         waveform = waveform.to(device, dtype=torch.float)
         spectrogram = spectrogram.to(device, dtype=torch.float)
