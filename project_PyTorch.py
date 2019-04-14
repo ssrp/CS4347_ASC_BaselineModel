@@ -346,6 +346,8 @@ def main():
     parser.add_argument('--no-save-model', action='store_true', default=False,
                         help='For Saving the current Model')
 
+    parser.add_argument('--optimizer', default='adam',
+                        help='Optimizer')
     parser.add_argument('--light-train', action='store_true', default=False,
                         help='For training on a small number of data')
     parser.add_argument('--light-test', action='store_true', default=False,
@@ -524,14 +526,23 @@ def main():
     ).to(device)
 
     # init the optimizer
-    optimizer = optim.Adam(model.parameters(), lr=args.lr)
+    optimizer_adam = optim.Adam(model.parameters(), lr=args.lr)
+    optimizer_sgd = optim.SGD(model.parameters(), lr=args.lr)
 
     print('MODEL TRAINING START')
     # train the model
     loss_train, acc_train, loss_test, acc_test = [], [], [], []
 
     for epoch in range(1, args.epochs + 1):
-        train(args, model, device, train_loader, optimizer, epoch)
+        if args.optimizer == 'adam':
+            train(args, model, device, train_loader, optimizer_adam, epoch)
+        elif args.optimizer == 'sgd':
+            train(args, model, device, train_loader, optimizer_sgd, epoch)
+        elif args.optimizer == 'both':
+            if epoch % 2 == 1 :
+                train(args, model, device, train_loader, optimizer_adam, epoch)
+            else:
+                train(args, model, device, train_loader, optimizer_sgd, epoch)
         l_train, a_train = test(args, model, device, train_loader, 'Training Data')
         l_test, a_test = test(args, model, device, test_loader, 'Testing Data')
         loss_train.append(l_train)
