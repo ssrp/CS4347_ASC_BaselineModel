@@ -153,6 +153,7 @@ def train(args, model, device, train_loader, optimizer, epoch):
         data, label = sample_batched
         waveform, spectrogram, features, fmstd = data  # (16, 2, 240000), (16, 2, 1025, 431), (16, 10, 431), (16, 1, 10)
 
+        print('waveform : {0}'.format(waveform.shape))
         # Map the variables to the current device (CPU or GPU)
         waveform = waveform.to(device, dtype=torch.float)
         spectrogram = spectrogram.to(device, dtype=torch.float)
@@ -254,7 +255,7 @@ def NormalizeData(train_labels_dir, root_dir, g_train_data_dir, light_data=False
     flag = 0
 
     # concatenate the datas computed inputs
-    wavformConcat = np.asarray([])
+    waveformConcat = np.asarray([])
     spectrogramConcat = np.asarray([])
     featuresConcat = np.asarray([])
     fmstdConcat = np.asarray([])
@@ -275,11 +276,11 @@ def NormalizeData(train_labels_dir, root_dir, g_train_data_dir, light_data=False
             sample = dcase_dataset[rand[i]]
 
         data_computed, label = sample
-        wavform, spectrogram, features, fmstd = data_computed
+        waveform, spectrogram, features, fmstd = data_computed
         if flag == 0:
             # get the data and init melConcat for the first time
-            wavform_mean = np.mean(wavform)        # (2, 120000) -> (1,)
-            wavform_mean2 = np.mean(np.square(wavform))        # (2, 120000) -> (1,)
+            waveform_mean = np.mean(waveform)        # (2, 120000) -> (1,)
+            waveform_mean2 = np.mean(np.square(waveform))        # (2, 120000) -> (1,)
             spectrogram_mean = np.mean(spectrogram, axis=(0, 2))     # (2, 1025, 431) -> (1025,)
             spectrogram_mean2 = np.mean(np.square(spectrogram), axis=(0, 2))     # (2, 1025, 431) -> (1025,)
             features_mean = np.mean(np.reshape(features, (5, 2, -1)), axis=(1, 2))     # (10, 431) -> (5,)
@@ -289,8 +290,8 @@ def NormalizeData(train_labels_dir, root_dir, g_train_data_dir, light_data=False
             flag = 1
         else:
             # concatenate the features :
-            wavform_mean += np.mean(wavform)        # (2, 120000) -> (1,)
-            wavform_mean2 += np.mean(np.square(wavform))        # (2, 120000) -> (1,)
+            waveform_mean += np.mean(waveform)        # (2, 120000) -> (1,)
+            waveform_mean2 += np.mean(np.square(waveform))        # (2, 120000) -> (1,)
             spectrogram_mean += np.mean(spectrogram, axis=(0, 2))     # (2, 1025, 431) -> (1025,)
             spectrogram_mean2 += np.mean(np.square(spectrogram), axis=(0, 2))     # (2, 1025, 431) -> (1025,)
             features_mean += np.mean(np.reshape(features, (5, 2, -1)), axis=(1, 2))     # (10, 431) -> (5,)
@@ -301,9 +302,9 @@ def NormalizeData(train_labels_dir, root_dir, g_train_data_dir, light_data=False
         bar.update(i + 1)
     bar.finish()
 
-    wavform_mean /= nb_files
-    wavform_mean2 /= nb_files
-    wavform_std = wavform_mean2 - np.square(wavform_mean)
+    waveform_mean /= nb_files
+    waveform_mean2 /= nb_files
+    wavform_std = waveform_mean2 - np.square(waveform_mean)
 
     spectrogram_mean /= nb_files
     spectrogram_mean2 /= nb_files
@@ -318,7 +319,7 @@ def NormalizeData(train_labels_dir, root_dir, g_train_data_dir, light_data=False
     fmstd_std = fmstd_mean2 - np.square(fmstd_mean)
 
     normalization_values = {
-        'waveform': (np.array([wavform_mean]), np.array([wavform_std])),
+        'waveform': (np.array([waveform_mean]), np.array([wavform_std])),
         'spectrogram': (spectrogram_mean, spectrogram_std),
         'features': (features_mean, features_std),
         'fmstd': (fmstd_mean, fmstd_std)
