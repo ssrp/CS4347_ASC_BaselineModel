@@ -40,7 +40,7 @@ def getAllInputs(filename):
     sfm = np.array([librosa.feature.spectral_flatness(left),
                     librosa.feature.spectral_flatness(right)])
     #  mel_spectrogram - (2, 50, 469)
-    n_mels = 50
+    n_mels = 100
     mel_spectrogram = np.array([librosa.feature.melspectrogram(y=left, sr=sr_, n_mels=n_mels),      # (2, 50, 469)
                                 librosa.feature.melspectrogram(y=right, sr=sr_, n_mels=n_mels)])
     logmel_spectrogram = librosa.core.amplitude_to_db(mel_spectrogram)
