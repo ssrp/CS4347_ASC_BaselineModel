@@ -585,22 +585,15 @@ class DenseNetPerso(nn.Module):
 
         return F.log_softmax(x_final, dim=1)
 
+
     def sizeLastLayer(self):
-        if self.inputs_used == '1111':
-            return self.input_parameters['final']['len']
-        else:
-            size = 0
-            if self.inputs_used[0] == '1':
-                size += self.dn_parameters['audio']['size_fc']
-            if self.inputs_used[1] == '1':
-                size += self.dn_parameters['spectrum']['size_fc']
-            if self.inputs_used[2] == '1':
-                size += self.dn_parameters['features']['size_fc']
-            if self.inputs_used[3] == '1':
-                size += self.dn_parameters['fmstd']['layers_size'][-1]
-            return size
-
-
-
-
-
+        size = 0
+        if self.inputs_used[0] == '1':
+            size += self.dn_parameters['audio']['size_fc']
+        if self.inputs_used[1] == '1':
+            size += self.dn_parameters['spectrum']['size_fc']
+        if self.inputs_used[2] == '1':
+            size += self.dn_parameters['features']['size_fc']
+        if self.inputs_used[3] == '1':
+            size += self.dn_parameters['fmstd']['layers_size'][-1]
+        return size
