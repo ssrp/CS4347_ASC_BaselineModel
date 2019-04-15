@@ -353,7 +353,7 @@ class DenseNetPerso(nn.Module):
         if self.inputs_used[2] == '1':
             text += ' features'
         if self.inputs_used[3] == '1':
-            text += ' features'
+            text += ' fmstd'
         text += ' ({0})'.format(self.inputs_used)
         print(text)
 
