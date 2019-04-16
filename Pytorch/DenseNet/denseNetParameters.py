@@ -33,19 +33,19 @@ dn_parameters = [
     {
         'name': 'medium',
         'spectrum': {
-            'k': 32,  # The number of channel in the denseNet
+            'k': 24,  # The number of channel in the denseNet
             'nb_blocks': 3,  # The number of dense block in the NN = len(nb_conv)
             'nb_conv': [4, 4, 4],  # The numbers of convolutional layers in a dense block
             'size_fc': 75  # Size of the fully connected at the end
         },
         'audio': {
-            'k': 32,  # The number of channel in the denseNet
+            'k': 24,  # The number of channel in the denseNet
             'nb_blocks': 3,  # The number of dense block in the NN = len(nb_conv)
             'nb_conv': [4, 4, 4],  # The numbers of convolutional layers in a dense block
             'size_fc': 75  # Size of the fully connected at the end
         },
         'features': {
-            'k': 16,  # The number of channel in the denseNet
+            'k': 12,  # The number of channel in the denseNet
             'nb_blocks': 3,  # The number of dense block in the NN = len(nb_conv)
             'nb_conv': [4, 4, 3],  # The numbers of convolutional layers in a dense block
             'size_fc': 40,  # Size of the fully connected at the end
