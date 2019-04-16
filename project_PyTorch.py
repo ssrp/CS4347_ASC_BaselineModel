@@ -235,7 +235,7 @@ def test(args, model, device, test_loader, data_type):
 
     accuracy_percentage = 100. * correct / len(test_loader.dataset)
     # print the results
-    print('Model prediction on ' + data_type + ': Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n'.format(
+    print('Model prediction on ' + data_type + ': Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)'.format(
         test_loss, correct, len(test_loader.dataset),
         accuracy_percentage))
     return test_loss, accuracy_percentage
@@ -346,8 +346,6 @@ def main():
     parser.add_argument('--no-save-model', action='store_true', default=False,
                         help='For Saving the current Model')
 
-    parser.add_argument('--optimizer', default='adam',
-                        help='Optimizer')
     parser.add_argument('--light-train', action='store_true', default=False,
                         help='For training on a small number of data')
     parser.add_argument('--light-test', action='store_true', default=False,
@@ -410,7 +408,7 @@ def main():
         normalization_values = normalization_values.item()      # We have to do this to access the dictionary
         input_parameters = np.load(os.path.join(g_data_dir, 'input_parameters.npy')).item()
         print(
-            'LOAD OF THE FILE normalization_values.npy FOR NORMALIZATION AND input_parameters.p FOR THE NEURAL NETWORK'
+            'LOAD OF THE FILE normalization_values.npy FOR NORMALIZATION AND input_parameters.npy FOR THE NEURAL NETWORK'
         )
     else:
         # If not, run the normalization and save the mean/std
@@ -527,34 +525,12 @@ def main():
 
     # init the optimizer
     optimizer_adam = optim.Adam(model.parameters(), lr=args.lr)
-    optimizer_sgd = optim.SGD(model.parameters(), lr=args.lr)
 
     print('MODEL TRAINING START')
-    # train the model
+
+    # Prepare the training
     loss_train, acc_train, loss_test, acc_test = [], [], [], []
 
-    for epoch in range(1, args.epochs + 1):
-        if args.optimizer == 'adam':
-            train(args, model, device, train_loader, optimizer_adam, epoch)
-        elif args.optimizer == 'sgd':
-            train(args, model, device, train_loader, optimizer_sgd, epoch)
-        elif args.optimizer == 'both':
-            if epoch % 2 == 1 :
-                train(args, model, device, train_loader, optimizer_adam, epoch)
-            else:
-                train(args, model, device, train_loader, optimizer_sgd, epoch)
-        l_train, a_train = test(args, model, device, train_loader, 'Training Data')
-        l_test, a_test = test(args, model, device, test_loader, 'Testing Data')
-        loss_train.append(l_train)
-        acc_train.append(a_train)
-        loss_test.append(l_test)
-        acc_test.append(a_test)
-
-
-    print('MODEL TRAINING END')
-
-
-    # save the model
     if not args.no_save_model:
         if not os.path.isdir('./SavedModels'):
             os.mkdir('./SavedModels')
@@ -583,27 +559,63 @@ def main():
                 flag = False
             i += 1
         os.mkdir(folder_path)
+
+    best_acc_test = 0
+    b_a_train = 0
+    b_l_test = 0
+    b_l_train = 0
+    best_epoch = 0
+    # train the model
+    for epoch in range(1, args.epochs + 1):
+        train(args, model, device, train_loader, optimizer_adam, epoch)
+        l_train, a_train = test(args, model, device, train_loader, 'Training Data')
+        l_test, a_test = test(args, model, device, test_loader, 'Testing Data')
+        loss_train.append(l_train)
+        acc_train.append(a_train)
+        loss_test.append(l_test)
+        acc_test.append(a_test)
         torch.save(model.state_dict(), os.path.join(folder_path, all_name + '.pt'))
-        summaryDict = {
-            'loss_train': loss_train,
-            'acc_train': acc_train,
-            'loss_test': loss_test,
-            'acc_test': acc_test,
-            'nb_epochs': args.epochs,
-            'input_used': args.inputs_used
+
+        if a_test > best_acc_test:
+            best_acc_test = a_test
+            best_epoch = epoch
+            b_a_train = a_train
+            b_l_test = l_test
+            b_l_train = l_train
+            print('Better test accuracy --> saving the model')
+    print('MODEL TRAINING END')
+
+    summaryDict = {
+        'loss_train': loss_train,
+        'acc_train': acc_train,
+        'loss_test': loss_test,
+        'acc_test': acc_test,
+        'nb_epochs': args.epochs,
+        'input_used': args.inputs_used,
+        'best_model': {
+            'epoch': best_epoch,
+            'loss_train': b_l_train,
+            'acc_train': b_a_train,
+            'loss_test': b_l_test,
+            'acc_test': best_acc_test
         }
-        np.save(os.path.join(folder_path, all_name + '.npy'), summaryDict)
-        ig.saveFigures(
-            folder=os.path.abspath(folder_path),
-            name=all_name,
-            summaryDict=summaryDict
-        )
-        ig.saveText(
-            folder=os.path.abspath(folder_path),
-            name=all_name,
-            summaryDict=summaryDict
-        )
-        print('Model saved in {0}'.format(folder_path))
+    }
+    np.save(os.path.join(folder_path, all_name + '.npy'), summaryDict)
+    ig.saveFigures(
+        folder=os.path.abspath(folder_path),
+        name=all_name,
+        summaryDict=summaryDict
+    )
+    ig.saveText(
+        folder=os.path.abspath(folder_path),
+        name=all_name,
+        summaryDict=summaryDict
+    )
+    print('Model saved in {0}'.format(folder_path))
+
+
+
+
 
 if __name__ == '__main__':
     # create a separate main function because original main function is too mainstream

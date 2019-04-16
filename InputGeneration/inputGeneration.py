@@ -127,37 +127,54 @@ def saveFigures(folder, name, summaryDict):
     acc_train = summaryDict['acc_train']
     acc_test = summaryDict['acc_test']
     nb_epochs = summaryDict['nb_epochs']
+    best_epoch = summaryDict['best_model']['epoch']
+    best_loss_train = summaryDict['best_model']['loss_train']
+    best_acc_train = summaryDict['best_model']['acc_train']
+    best_loss_test = summaryDict['best_model']['loss_test']
+    best_acc_test = summaryDict['best_model']['acc_test']
+
+    min_loss = min(min(loss_train), min(loss_test))
+    max_loss = max(max(loss_train), max(loss_test))
+    min_acc = min(min(acc_train), min(acc_test))
+    max_acc = max(max(acc_train), max(acc_test))
 
     x = np.arange(1, nb_epochs + 1)
     # Save of the loss
     plt.figure()
-    plt.plot(x, loss_train, label='Training Loss')
-    plt.plot(x, loss_test, label='Testing Loss')
+    plt.plot(x, loss_train, 'b', label='Training Loss')
+    plt.plot(x, loss_test, 'r', label='Testing Loss')
     plt.title('Variation of the Loss through the buffers\n' + name)
     plt.xlabel('Epoch')
     plt.ylabel('Loss value')
+    plt.plot([1, nb_epochs], [best_loss_train, best_loss_train], 'b--', label='Model training loss')
+    plt.plot([1, nb_epochs], [best_loss_test, best_loss_test], 'r--', label='Model testing loss')
+    plt.plot([best_epoch, best_epoch], [min_loss, max_loss], 'k--', label='Best Epoch')
     plt.legend()
     plt.grid()
     plt.savefig(os.path.join(folder, 'LossFigure_' + name + '.png'))
 
     # Save the accuracy
     plt.figure()
-    plt.plot(x, acc_train, label='Training Accuracy')
-    plt.plot(x, acc_test, label='Testing Accuracy')
+    plt.plot(x, acc_train, ' b', label='Training Accuracy')
+    plt.plot(x, acc_test, 'r', label='Testing Accuracy')
     plt.title('Variation of the Accuracy through the buffers\n' + name)
     plt.xlabel('Epoch')
     plt.ylabel('Accuracy value (%)')
+    plt.plot([1, nb_epochs], [best_acc_train, best_acc_train], 'b--', label='Model train accuracy')
+    plt.plot([1, nb_epochs], [best_acc_test, best_acc_test], 'r--', label='Model test accuracy')
+    plt.plot([best_epoch, best_epoch], [min_acc, max_acc], 'k--', label='Best epoch')
     plt.legend()
     plt.grid()
     plt.savefig(os.path.join(folder, 'AccuracyFigure_' + name + '.png'))
 
 
 def saveText(folder, name, summaryDict):
-    loss_train = summaryDict['loss_train'][-1]
-    loss_test = summaryDict['loss_test'][-1]
-    acc_train = summaryDict['acc_train'][-1]
-    acc_test = summaryDict['acc_test'][-1]
+    loss_train = summaryDict['best_model']['loss_train']
+    loss_test = summaryDict['best_model']['loss_test']
+    acc_train = summaryDict['best_model']['acc_train']
+    acc_test = summaryDict['best_model']['acc_test']
     nb_epochs = summaryDict['nb_epochs']
+    best_epoch = summaryDict['best_model']['epoch']
     input_used = summaryDict['input_used']
 
     iu_txt = ''
@@ -191,10 +208,11 @@ def saveText(folder, name, summaryDict):
            'Testing Loss : {1}\n' \
            'Training Accuracy : {2}\n' \
            'Testing Accuracy : {3}\n' \
-           'Epochs : {4}\n\n' \
+           'Train Epochs : {4}\n' \
+           'Best Epoch : {8}\n\n' \
            'Inputs Used : {7}\t ({6})'\
         .format(
-            loss_train, loss_test, acc_train, acc_test, nb_epochs, name, iu_txt, input_used
+            loss_train, loss_test, acc_train, acc_test, nb_epochs, name, iu_txt, input_used, best_epoch
         )
 
     with open(os.path.join(folder, 'Summary_' + name + '.txt'), 'a') as f:
