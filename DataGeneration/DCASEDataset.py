@@ -4,14 +4,23 @@ import DataGeneration.inputGeneration as ig
 import DataGeneration.outputGeneration as og
 from torch.utils.data import Dataset
 
+"""
+    This file takes care of the loader of the data in the differents files .wav or .npy
+"""
+
 class DCASEDataset(Dataset):
+    """
+    Made for the training/testing task
+    """
     def __init__(self, csv_file, root_dir, save_dir, transform=None, light_data=False):
         """
         Args:
             csv_file (string): Path to the csv file with annotations.
             root_dir (string): Directory with all the audio.
+            save_dir (string): The path where the computed inputs will be saved in .npy files
             transform (callable, optional): Optional transform to be applied
                 on a sample.
+            light_data (bool, optional): if we are working on a small number of data (test on cpu)
         """
 
         data_list = []
@@ -50,18 +59,17 @@ class DCASEDataset(Dataset):
     def __getitem__(self, idx):
         wav_name = self.datalist[idx]
         wav_path = os.path.join(self.root_dir, wav_name)
-        npy_name = os.path.splitext(os.path.split(wav_name)[1])[0] + '.npy'
+        npy_name = os.path.splitext(
+            os.path.split(wav_name)[1])[0] + '.npy'  # The name of the file with the computed inputs
         npy_path = os.path.join(
             self.save_dir,
             npy_name
         )
 
-        # load the wav file with 22.05 KHz Sampling rate and only one channel
-        # audio, sr = librosa.core.load(wav_name, sr=22050, mono=True)
         data_computed = None
-        if os.path.exists(npy_path):
+        if os.path.exists(npy_path):        # If it exists we load it
             data_computed = np.load(npy_path)
-        else:
+        else:                               # If not we create it
             data_computed = ig.getAllInputs(os.path.abspath(wav_path))
             np.save(npy_path, data_computed)
 
@@ -79,14 +87,18 @@ class DCASEDataset(Dataset):
 
 
 class DCASEDataset_evaluation(Dataset):
+    """
+    Made for the evaluation task
+    """
     def __init__(self, csv_file, root_dir, save_dir, transform=None, light_data=False):
         """
         Args:
-            csv_file (string): Path to the csv file with annotation.
+            csv_file (string): Path to the csv file with annotations.
             root_dir (string): Directory with all the audio.
-            save_dir (string): Directory where we want to save the computed datas
+            save_dir (string): The path where the computed inputs will be saved in .npy files
             transform (callable, optional): Optional transform to be applied
                 on a sample.
+            light_data (bool, optional): if we are working on a small number of data (test on cpu)
         """
 
         data_list = []
@@ -124,8 +136,6 @@ class DCASEDataset_evaluation(Dataset):
             npy_name
         )
 
-        # load the wav file with 22.05 KHz Sampling rate and only one channel
-        # audio, sr = librosa.core.load(wav_name, sr=22050, mono=True)
         if os.path.exists(npy_path):
             data_computed = np.load(npy_path)
         else:
@@ -136,4 +146,4 @@ class DCASEDataset_evaluation(Dataset):
         if self.transform:
             data_computed = self.transform(data_computed)
 
-        return data_computed, idx
+        return data_computed, idx       # idx will serve to keep the order of the data
