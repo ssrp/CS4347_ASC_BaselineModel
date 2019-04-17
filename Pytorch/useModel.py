@@ -2,7 +2,21 @@ import torch
 import torch.nn.functional as F
 import numpy as np
 
+"""
+    This file contains the function train, test and evaluate
+"""
+
 def train(args, model, device, train_loader, optimizer, epoch):
+    """
+
+    :param args: arguments parsed in through the terminal
+    :param model: the instance of the neural network model
+    :param device: to use the GPU if possible
+    :param train_loader: Give the dataset
+    :param optimizer: optimizer for the neural network
+    :param epoch: the number of epochs
+        Train the model
+    """
     model.train()
 
     # training module
@@ -49,6 +63,15 @@ def train(args, model, device, train_loader, optimizer, epoch):
 
 
 def test(args, model, device, test_loader, data_type):
+    """
+
+    :param args: arguments parsed in through the terminal
+    :param model: the instance of the neural network model
+    :param device: to use the GPU if possible
+    :param test_loader: Give the dataset
+    :param data_type: 'Train' or 'Test' (for the print)
+    :return: the accuracy and the loss of the model
+    """
     # evaluate the model
     model.eval()
 
@@ -63,7 +86,7 @@ def test(args, model, device, test_loader, data_type):
         for i_batch, sample_batched in enumerate(test_loader):
             # for every batch, extract data and label (16, 1)
             data, label = sample_batched
-            # (16, 2, 120000), (16, 2, 1025, 431), (16, 10, 431), (16, 2, 10)
+            # (16, 2, 120000), (16, 2, 100, 469), (16, 10, 469), (16, 2, 10)
             waveform, spectrogram, features, fmstd = data
 
             # Map the variables to the current device (CPU or GPU)
@@ -101,6 +124,14 @@ def test(args, model, device, test_loader, data_type):
 
 
 def evaluate(args, model, device, evaluate_loader):
+    """
+
+    :param args: arguments parsed in through the terminal
+    :param model: the instance of the neural network model
+    :param device: to use the GPU if possible
+    :param evaluate_loader: Give the dataset
+    :return: the prediction of the model
+    """
     # evaluate the model
     model.eval()
 
@@ -113,7 +144,7 @@ def evaluate(args, model, device, evaluate_loader):
         for i_batch, sample_batched in enumerate(evaluate_loader):
             # for every batch, extract data and label (16, 1)
             data, idx = sample_batched
-            # (16, 2, 120000), (16, 2, 1025, 431), (16, 10, 431), (16, 2, 10)
+            # (16, 2, 120000), (16, 2, 100, 469), (16, 10, 469), (16, 2, 10)
             waveform, spectrogram, features, fmstd = data
 
             # Map the variables to the current device (CPU or GPU)
@@ -133,9 +164,6 @@ def evaluate(args, model, device, evaluate_loader):
             # get the predictions
             predictions.extend(np.reshape(output.argmax(dim=1, keepdim=True).data.numpy(), (-1)).tolist())
             indexes.extend(idx.data.numpy().tolist())
-
-
-
 
             if i_batch % args.log_interval == 0:
                 print('Evaluation : [{}/{} ({:.0f}%)]'.format(
