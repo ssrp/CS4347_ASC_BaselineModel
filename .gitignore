@@ -110,6 +110,7 @@ venv.bak/
 Dataset/
 GeneratedDataset/
 GeneratedLightDataset/
+evaluation_data/
 # Saved Models
 SavedModels/
 # Tests
