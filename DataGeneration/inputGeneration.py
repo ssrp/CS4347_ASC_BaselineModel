@@ -4,17 +4,25 @@ import os
 import soundfile as sf
 import matplotlib.pyplot as plt
 
-##### Personal importation
-# import Pytorch.DenseNet.denseNetParameters as dn
-
-# dn_parameters = dn.dn_parameters
-# input_parameters = dn.input_parameters
+"""
+    This file takes care of the computation of the inputs and to the saving of the results in training/testing task
+"""
 
 def getStats(feature):
+    """
+
+    :param feature: np array in 3 dimensions
+    :return: the mean and the std of this array through the axis 1 and 2
+    """
     return np.array([np.mean(feature, axis=(1, 2)), np.std(feature, axis=(1, 2))])
 
 def getAllInputs(filename):
-    audio, sr_ = sf.read(filename)    # sr=22050, mono=False  # (4800000, 2)
+    """
+
+    :param filename: a .wav file
+    :return: the inputs (not normalized) for the neural network
+    """
+    audio, sr_ = sf.read(filename)      # (4800000, 2)
     left = audio[::2, 0]
     right = audio[::2, 1]
 
@@ -25,23 +33,23 @@ def getAllInputs(filename):
     spectrogram = np.abs(np.array([librosa.core.stft(left),
                                    librosa.core.stft(right)]))
     #  rms - (2, 1, 469)
-    rms = np.array([librosa.feature.rms(left),
+    rms = np.array([librosa.feature.rms(left),          # Root Mean Square
                     librosa.feature.rms(right)])
     #  zcr - (2, 1, 469)
-    zcr = np.array([librosa.feature.zero_crossing_rate(left),
+    zcr = np.array([librosa.feature.zero_crossing_rate(left),       # Zero Crossing Rate
                     librosa.feature.zero_crossing_rate(right)])
     #  sc - (2, 1, 469)
-    sc = np.array([librosa.feature.spectral_centroid(left),
+    sc = np.array([librosa.feature.spectral_centroid(left),         # Spectral Centroid
                    librosa.feature.spectral_centroid(right)])
     #  sr - (2, 1, 469)
-    sr = np.array([librosa.feature.spectral_rolloff(left),
+    sr = np.array([librosa.feature.spectral_rolloff(left),          # Spectral Roll-of
                    librosa.feature.spectral_rolloff(right)])
     #  sfm - (2, 1, 469)
-    sfm = np.array([librosa.feature.spectral_flatness(left),
+    sfm = np.array([librosa.feature.spectral_flatness(left),        # Spectral Flatness Mesure
                     librosa.feature.spectral_flatness(right)])
     #  mel_spectrogram - (2, 100, 469)
     n_mels = 100
-    mel_spectrogram = np.array([librosa.feature.melspectrogram(y=left, sr=sr_, n_mels=n_mels),      # (2, 50, 469)
+    mel_spectrogram = np.array([librosa.feature.melspectrogram(y=left, sr=sr_, n_mels=n_mels),      # (2, 100, 469)
                                 librosa.feature.melspectrogram(y=right, sr=sr_, n_mels=n_mels)])
     logmel_spectrogram = librosa.core.amplitude_to_db(mel_spectrogram)
 
@@ -54,7 +62,7 @@ def getAllInputs(filename):
 
 
     # spectrogram
-    spectrogram = np.reshape(spectrogram, (2, 1025, 469))
+    spectrogram = np.reshape(spectrogram, (2, 1025, 469))       # Not used
 
     # Features
     features = np.concatenate(
@@ -83,15 +91,13 @@ def getAllInputs(filename):
     # data = (waveform, spectrogram, rms, zcr, mel_spectrogram, stats)
     return data
 
-def getFilesInput(n):
-    for i in range(n):
-        getAllInputs(f"../Dataset/train/audio/{i}.wav")
-
-
 
 #### Function to set up the environment
 
 def setEnviromnent():
+    """
+        Creates the folders for the Generated Dataset
+    """
     if not os.path.isdir('./GeneratedDataset'):
         os.mkdir('./GeneratedDataset')
     if not os.path.isdir('./GeneratedDataset/train'):
@@ -101,6 +107,9 @@ def setEnviromnent():
 
 
 def setLightEnviromnent():
+    """
+        Creates the folders for the Generated Dataset with a snall number of Data (for test on CPU)
+    """
     if not os.path.isdir('./GeneratedLightDataset'):
         os.mkdir('./GeneratedLightDataset')
     if not os.path.isdir('./GeneratedLightDataset/train'):
@@ -110,6 +119,15 @@ def setLightEnviromnent():
 
 
 def createInputParametersFile(template, fileName, dn_parameters):
+    """
+
+    :param template: The template of the dictionnary input_parameters
+    :param fileName: The path where we want to save it
+    :param dn_parameters: the parameters of the neural network
+
+        Creates the file "fileName" with the dictionnary input_parameters filled knowing the architecture of the
+        Neural Network (known with dn_parameters)
+    """
     waveform, spectrogram, features, fmstd = getAllInputs('./Dataset/train/audio/0.wav')
     template['spectrum']['nb_channels'], template['spectrum']['h'], template['spectrum']['w'] = spectrogram.shape
     template['audio']['nb_channels'], template['audio']['len'] = waveform.shape
@@ -122,6 +140,15 @@ def createInputParametersFile(template, fileName, dn_parameters):
 
 
 def saveFigures(folder, name, summaryDict):
+    """
+
+    :param folder: the folder where we want to save it
+    :param name: the name of the figures
+    :param summaryDict: the data of the training we want to plot
+
+        Save the plot of the evolution of the training loss and the testing loss through the epochs
+        Save the plot of the evolution of the training accuracy and the testing loss accuracy the epochs
+    """
     loss_train = summaryDict['loss_train']
     loss_test = summaryDict['loss_test']
     acc_train = summaryDict['acc_train']
@@ -169,6 +196,14 @@ def saveFigures(folder, name, summaryDict):
 
 
 def saveText(folder, name, summaryDict):
+    """
+
+    :param folder: the folder where we want to save it
+    :param name: the name of the figures
+    :param summaryDict: the data of the training we want to plot
+
+        Save a text file which summarize the saved model
+    """
     loss_train = summaryDict['best_model']['loss_train']
     loss_test = summaryDict['best_model']['loss_test']
     acc_train = summaryDict['best_model']['acc_train']
@@ -200,8 +235,6 @@ def saveText(folder, name, summaryDict):
         else:
             iu_txt += 'fmstd'
             flag = True
-
-
 
     text = 'Summary of {5} :\n\n' \
            'Training Loss : {0}\n' \
