@@ -49,7 +49,8 @@ def main():
                         help='The name of the model')
     parser.add_argument('--folder-name', default='',
                         help='The name of the folder with the saved model')
-
+    parser.add_argument('--folder-id', default='',
+                        help='modelName-inputsUsed(-name)-nbEpochs-idx')
 
     args = parser.parse_args()
     use_cuda = not args.no_cuda and torch.cuda.is_available()
@@ -68,8 +69,24 @@ def main():
     light_train = args.light_all or args.light_data or args.light_train  # Only 5 files in the train dataset
     light_test = args.light_all or args.light_data or args.light_test  # Only 5 files in the test dataset
 
-    model_name = args.folder_name
-    model_folder = 'SavedModels/{0}/{1}'.format(model_name.split(')')[0][6:], model_name)
+    if args.folder_id != '':
+        folder_id = args.folder_id.split('-')
+        model_id = folder_id[0]
+        hasName = len(folder_id) == 5
+        nom = '_Name({0})'.format(folder_id[1]) if hasName else ''
+        b = 1 if hasName else 0
+        model_name = 'Model({0})_InputsUsed({1}){2}_NbEpochs({3})_({4})'.format(
+            model_id,           # small, big, medium
+            folder_id[1],       # inputs used
+            nom,                # name (optional)
+            folder_id[2+b],     # nb epochs
+            folder_id[3+b]      # index
+        )
+        model_folder = 'SavedModels/{0}/{1}'.format(folder_id[0], model_name)
+    else:
+        model_name = args.folder_name
+        model_id = model_name.split(')')[0][6:]
+        model_folder = 'SavedModels/{0}/{1}'.format(model_id, model_name)
 
     summaryDict = np.load(os.path.join(model_folder, model_name + '.npy')).item()
 
@@ -124,22 +141,20 @@ def main():
     # Create the architecture of the saved predictions
     if not os.path.isdir('./SavedEvaluations'):      # One big folder "SavedModels"
         os.mkdir('./SavedEvaluations')
-    if not os.path.isdir(os.path.join('./SavedEvaluations', model_name.split(')')[0][6:])):
+    if not os.path.isdir(os.path.join('./SavedEvaluations', model_id)):
         os.mkdir(os.path.join('./SavedEvaluations', model_name.split(')')[0][6:]))
 
-    saved_evaluations_folder = os.path.join('./SavedEvaluations', model_name.split(')')[0][6:], model_name)
+    saved_evaluations_folder = os.path.join('./SavedEvaluations', model_id, model_name)
     if not os.path.isdir(saved_evaluations_folder):
         os.mkdir(saved_evaluations_folder)
 
     predictions, indexes = useModel.evaluate(args, model, device, evaluate_loader)   # The predicted index
-    print('predictions : {0}'.format(predictions))
     predictions_label = og.return_predicted_labels(predictions)             # The predicted labels
     predictionsDict = {
         'index': predictions,
         'labels': predictions_label,
         'indexes': indexes
     }
-    print('indexes : {0}'.format(indexes))
     np.save(os.path.join(saved_evaluations_folder, 'predictionsDict.npy'), predictionsDict)      # Save the dict
 
     # Save the .csv file
@@ -150,6 +165,7 @@ def main():
         predictions=predictions,
         indexes=indexes
     )
+    print('Predictions saved in {0}'.format(saved_evaluations_folder))
 
 if __name__ == '__main__':
     # create a separate main function because original main function is too mainstream
