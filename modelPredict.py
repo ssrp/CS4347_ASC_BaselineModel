@@ -30,7 +30,7 @@ import Pytorch.useModel as useModel
 
 def main():
     # Training settings
-    parser = argparse.ArgumentParser(description='PyTorch Baseline code for ASC Group Project (CS4347)')
+    parser = argparse.ArgumentParser(description='Can be use to do a prediction for the ASC project (CS4347)')
     parser.add_argument('--batch-size', type=int, default=16, metavar='N',
                         help='input batch size for training (default: 16)')
     parser.add_argument('--test-batch-size', type=int, default=16, metavar='N',
