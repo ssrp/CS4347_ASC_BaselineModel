@@ -249,7 +249,8 @@ def main():
             'loss_test': b_l_test,
             'acc_test': best_acc_test
         },
-        'dn_parameters': dn_parameters
+        'dn_parameters': dn_parameters,
+        'input_parameters:': input_parameters
     }
     np.save(os.path.join(folder_path, all_name + '.npy'), summaryDict)  # Save the dictionnary
     ig.saveFigures(     # Save the plot of the evolution of the loss and accuracy for the test dans train
