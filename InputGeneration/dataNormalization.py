@@ -1,7 +1,10 @@
 import torch
 import progressbar
 import numpy as np
+from torchvision import transforms
+
 from InputGeneration.DCASEDataset import DCASEDataset
+
 
 # Creates a Tensor from the Numpy dataset, which is used by the GPU for processing
 class ToTensor(object):
@@ -131,3 +134,58 @@ def NormalizeData(train_labels_dir, root_dir, save_dir, light_data=False):
     }
 
     return normalization_values
+
+def return_data_transform(normalization_values):
+    # Load of the values in the file
+    waveform_mean, waveform_std = normalization_values['waveform']  # (1,), (1,)
+    spectrogram_mean, spectrogram_std = normalization_values['spectrogram']  # (1025,), (1025,)
+    features_mean, features_std = normalization_values['features']  # (5,), (5,)
+    fmstd_mean, fmstd_std = normalization_values['fmstd']       # (10,), (10,)
+
+    # Create the good shape for applying operations to the tensor
+    waveform_mean = np.concatenate([waveform_mean, waveform_mean])[:, np.newaxis]  # (2, 1)
+    waveform_std = np.concatenate([waveform_std, waveform_std])[:, np.newaxis]  # (2, 1)
+    spectrogram_mean = np.concatenate([spectrogram_mean[:, np.newaxis], spectrogram_mean[:, np.newaxis]],
+                                      axis=1).T[:, :, np.newaxis]  # (2, 1025, 1)
+    spectrogram_std = np.concatenate([spectrogram_std[:, np.newaxis], spectrogram_std[:, np.newaxis]],
+                                     axis=1).T[:, :, np.newaxis]  # (2, 1025, 1)
+    features_mean = np.reshape(  # (10, 1)
+        np.concatenate(
+            [
+                features_mean[:, np.newaxis],
+                features_mean[:, np.newaxis]
+            ],
+            axis=1
+        ),
+        (10, 1)
+    )
+    features_std = np.reshape(  # (10, 1)
+        np.concatenate(
+            [
+                features_std[:, np.newaxis],
+                features_std[:, np.newaxis]
+            ],
+            axis=1
+        ),
+        (10, 1)
+    )
+    fmstd_mean = fmstd_mean[np.newaxis, :]  # (1, 10)
+    fmstd_std = fmstd_std[np.newaxis, :]    # (1, 10)
+
+    # convert to torch variables
+    waveform_mean, waveform_std = torch.from_numpy(waveform_mean), torch.from_numpy(waveform_std)
+    spectrogram_mean, spectrogram_std = torch.from_numpy(spectrogram_mean), torch.from_numpy(spectrogram_std)
+    features_mean, features_std = torch.from_numpy(features_mean), torch.from_numpy(features_std)
+    fmstd_mean, fmstd_std = torch.from_numpy(fmstd_mean), torch.from_numpy(fmstd_std)
+
+    # init the data_transform
+    data_transform = transforms.Compose([
+        ToTensor(), Normalize(
+            waveform_mean, waveform_std,
+            spectrogram_mean, spectrogram_std,
+            features_mean, features_std,
+            fmstd_mean, fmstd_std
+        )
+    ])
+
+    return data_transform
