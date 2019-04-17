@@ -1,5 +1,7 @@
 ####### Template of te parameters of the NN ######
 
+# The dn_parameters has all the informations to construct the model
+# It is here a list of several models. All of them have a name to reconize them
 dn_parameters = [
     {
         'name': 'small',
@@ -121,6 +123,11 @@ dn_parameters = [
 
 
 def name2indice(name):
+    """
+
+    :param name: name of the model
+    :return: the indice in the list dn_parameters
+    """
     for i in range(len(dn_parameters)):
         if dn_parameters[i]['name'] == name:
             return i
@@ -128,6 +135,11 @@ def name2indice(name):
 
 
 def id2name(id):
+    """
+
+    :param id: an int or a string
+    :return: the string if it is one, dn_parameters[id] if it is an int
+    """
     if isinstance(id, str):
         name = id
         return name
@@ -141,11 +153,20 @@ def id2name(id):
         return 'unkownName'
 
 def returnSmallModel():
+    """
+
+    :return: the parameters of the small model
+    """
     indice = name2indice('small')
     return dn_parameters[indice]
 
 
 def return_model_parameters(arg):
+    """
+
+    :param arg: int or string
+    :return: the parameters of the model with the name arg if it is a string, or dn_parameters[arg] if it is an int
+    """
     if isinstance(arg, int):
         i = arg
         return dn_parameters[i]
@@ -159,6 +180,8 @@ def return_model_parameters(arg):
     else:
         return returnSmallModel()
 
+# input_parameters is a template of the size of the input of the Neural Network
+# It is filled and used when we create an instance of the DenseNet Model
 input_parameters = {
     'spectrum': {
         'batch_size': 16,  # The size of each batch
@@ -185,4 +208,8 @@ input_parameters = {
 }
 
 def return_input_parameters():
+    """
+
+    :return: input_parameters
+    """
     return input_parameters
