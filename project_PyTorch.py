@@ -23,7 +23,7 @@ from torch.utils.data import Dataset, DataLoader
 from InputGeneration import inputGeneration as ig
 from Pytorch.DenseNet.DenseNetPerso import DenseNetPerso
 import Pytorch.DenseNet.denseNetParameters as dnp
-
+from Pytorch.useModel import train, test
 
 # Creates a Tensor from the Numpy dataset, which is used by the GPU for processing
 class ToTensor(object):
@@ -142,7 +142,7 @@ class DCASEDataset(Dataset):
 
         return sample
 
-
+"""
 def train(args, model, device, train_loader, optimizer, epoch):
     model.train()
 
@@ -239,7 +239,7 @@ def test(args, model, device, test_loader, data_type):
         test_loss, correct, len(test_loader.dataset),
         accuracy_percentage))
     return test_loss, accuracy_percentage
-
+"""
 
 def NormalizeData(train_labels_dir, root_dir, g_train_data_dir, light_data=False):
     # load the dataset
@@ -379,6 +379,7 @@ def main():
 
     if args.light_all:
         args.model_id = 'small'
+        args.epochs = 2
 
     light_train = args.light_all or args.light_data or args.light_train
     light_test = args.light_all or args.light_data or args.light_test
