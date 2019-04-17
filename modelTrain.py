@@ -58,6 +58,8 @@ def main():
                         help='Model ID')
     parser.add_argument('--inputs-used', default='1111',
                         help='The inputs used (1=used, 0=not used) (waveform, spectrum, features, fmstd)')
+    parser.add_argument('--load-model', default='',
+                        help='Load the model modelName-inputsUsed(-name)-nbEpochs-idx')
 
 
     args = parser.parse_args()
@@ -97,36 +99,60 @@ def main():
         g_data_dir = './GeneratedDataset/'
 
     # Creation of the variables 'normalization_values' and 'input_parameters'
-    if os.path.isfile(os.path.join(g_data_dir, 'normalization_values.npy')) \
-            and os.path.isfile(os.path.join(g_data_dir, 'input_parameters.npy')):
-        # get the mean and std. If Normalized already, just load the npy files and comment
-        #  the NormalizeData() function above
-        normalization_values = np.load(os.path.join(g_data_dir, 'normalization_values.npy'))
-        normalization_values = normalization_values.item()      # We have to do this to access the dictionary
-        input_parameters = np.load(os.path.join(g_data_dir, 'input_parameters.npy')).item()
-        print(
-            'LOAD OF THE FILE normalization_values.npy FOR NORMALIZATION AND input_parameters.npy FOR THE NEURAL NETWORK')
-    else:
-        # If not, run the normalization and save the mean/std
-        print('DATA NORMALIZATION : ACCUMULATING THE DATA')
-        # Get the normalized values
-        normalization_values = dn.NormalizeData(
-            train_labels_dir=os.path.abspath(train_labels_dir),
-            root_dir=os.path.abspath(train_data_dir),
-            save_dir=os.path.abspath(g_train_data_dir),
-            light_data=light_train
+    if args.load_model == '':
+        if os.path.isfile(os.path.join(g_data_dir, 'normalization_values.npy')) \
+                and os.path.isfile(os.path.join(g_data_dir, 'input_parameters.npy')):
+                                                                                         # get the mean and std. If Normalized already, just load the npy files and comment
+                                                                                         #  the NormalizeData() function above
+                                                                                         normalization_values = np.load(os.path.join(g_data_dir, 'normalization_values.npy'))
+                                                                                         normalization_values = normalization_values.item()      # We have to do this to access the dictionary
+                                                                                         input_parameters = np.load(os.path.join(g_data_dir, 'input_parameters.npy')).item()
+                                                                                         print(
+                                                                                         'LOAD OF THE FILE normalization_values.npy FOR NORMALIZATION AND input_parameters.npy FOR THE NEURAL NETWORK')
+        else:
+            # If not, run the normalization and save the mean/std
+            print('DATA NORMALIZATION : ACCUMULATING THE DATA')
+            # Get the normalized values
+            normalization_values = dn.NormalizeData(
+                train_labels_dir=os.path.abspath(train_labels_dir),
+                root_dir=os.path.abspath(train_data_dir),
+                save_dir=os.path.abspath(g_train_data_dir),
+                light_data=light_train
+            )
+            # Save them
+            np.save(os.path.join(g_data_dir, 'normalization_values.npy'), normalization_values)
+            # Create the informations of the inputs
+            ig.createInputParametersFile(
+                template=DN_param.input_parameters,
+                fileName=os.path.abspath(os.path.join(g_data_dir, 'input_parameters.npy')),
+                dn_parameters=dn_parameters
+            )
+            # Save them
+            input_parameters = np.load(os.path.join(g_data_dir, 'input_parameters.npy')).item()
+            print('DATA NORMALIZATION COMPLETED')
+    else:       # We load the model
+        folder_id = args.load_model.split('-')
+        args.model_id = folder_id[0]
+        hasName = len(folder_id) == 5
+        nom = '_Name({0})'.format(folder_id[2]) if hasName else ''
+        b = 1 if hasName else 0
+        folder_name = 'Model({0})_InputsUsed({1}){2}_NbEpochs({3})_({4})'.format(
+            args.model_id,           # small, big, medium
+            folder_id[1],       # inputs used
+            nom,                # name (optional)
+            folder_id[2+b],     # nb epochs
+            folder_id[3+b]      # index
         )
-        # Save them
-        np.save(os.path.join(g_data_dir, 'normalization_values.npy'), normalization_values)
-        # Create the informations of the inputs
-        ig.createInputParametersFile(
-            template=DN_param.input_parameters,
-            fileName=os.path.abspath(os.path.join(g_data_dir, 'input_parameters.npy')),
-            dn_parameters=dn_parameters
-        )
-        # Save them
-        input_parameters = np.load(os.path.join(g_data_dir, 'input_parameters.npy')).item()
-        print('DATA NORMALIZATION COMPLETED')
+        model_folder = 'SavedModels/{0}/{1}'.format(folder_id[0], folder_name)
+        summaryDictLoaded = np.load(os.path.join(model_folder, folder_name + '.npy')).item()
+        dn_parameters = summaryDictLoaded['dn_parameters']
+        input_parameters = summaryDictLoaded['input_parameters']
+        normalization_values = summaryDictLoaded['normalization_values']
+
+        args.inputs_used = summaryDictLoaded['inputs_used']
+        if args.name == '' and hasName:
+            args.name = folder_id[2]
+
 
     # Transformers to normalize the inputs at the entrance of the neural network
     data_transform = dn.return_data_transform(normalization_values)
@@ -167,52 +193,65 @@ def main():
         inputs_used=args.inputs_used
     ).to(device)
 
+    # Load the model if it is asked
+    if args.load_model != '':
+        model.load_state_dict(torch.load(os.path.join(model_folder, folder_name + '.pt')))
+        print('Model {0} loaded'.format(args.load_model))
+
+
     # init the optimizer
     optimizer_adam = optim.Adam(model.parameters(),     # Documentation says it is better with SGD, but SGD optimizer
                                 lr=args.lr)             # didn't perform well when we tried
 
     print('MODEL TRAINING START')
     # Prepare the training
-    loss_train, acc_train, loss_test, acc_test = [], [], [], []     # Will be saved and use for plot and futur analysis
+    if args.load_model != '':
+        loss_train, acc_train, loss_test, acc_test = summaryDictLoaded['loss_train'], summaryDictLoaded['acc_train'], summaryDictLoaded['loss_test'], summaryDictLoaded['acc_test']     # Will be saved and use for plot and futur analysis
+    else:
+        loss_train, acc_train, loss_test, acc_test = [], [], [], []     # Will be saved and use for plot and futur analysis
 
     # Create the architecture of the saved models
-    if not args.no_save_model:
-        if not os.path.isdir('./SavedModels'):      # One big folder "SavedModels"
-            os.mkdir('./SavedModels')
-        model_name = DN_param.id2name(args.model_id)
-        model_folder = os.path.join('./SavedModels', model_name)
-        if not os.path.isdir(model_folder):         # One subfolder for each DenseNet architecture
-            os.mkdir(model_folder)
-        # Find a name for the save
-        if args.name != '':
-            nom = '_Name({0})'.format(args.name)
-        else:
-            nom = ''
+    if not os.path.isdir('./SavedModels'):      # One big folder "SavedModels"
+        os.mkdir('./SavedModels')
+    model_name = DN_param.id2name(args.model_id)
+    model_folder = os.path.join('./SavedModels', model_name)
+    if not os.path.isdir(model_folder):         # One subfolder for each DenseNet architecture
+        os.mkdir(model_folder)
+    # Find a name for the save
+    if args.name != '':
+        nom = '_Name({0})'.format(args.name)
+    else:
+        nom = ''
 
-        flag = True
-        i = 0
-        while flag:     # Look for a name that has't been choosen before to prevent conflic
-            all_name = 'Model({0})_InputsUsed({4}){1}_NbEpochs({2})_({3})'.format(
-                model_name,
-                nom,
-                args.epochs,
-                i,
-                args.inputs_used
-            )
-            folder_path = os.path.join(model_folder, all_name)
-            if not os.path.isdir(folder_path):
-                flag = False
-            i += 1
-        os.mkdir(folder_path)
+    flag = True
+    i = 0
+    bias_epoch = 0 if args.load_model == '' else summaryDictLoaded['nb_epochs']    # bias nb epochs
+    while flag:     # Look for a name that has't been choosen before to prevent conflic
+        all_name = 'Model({0})_InputsUsed({4}){1}_NbEpochs({2})_({3})'.format(
+            model_name,
+            nom,
+            args.epochs + bias_epoch,
+            i,
+            args.inputs_used
+        )
+        folder_path = os.path.join(model_folder, all_name)
+        if not os.path.isdir(folder_path):
+            flag = False
+        i += 1
+    os.mkdir(folder_path)
 
     # The result of the model with the best test accuracy
-    best_acc_test = 0
-    b_a_train = 0
-    b_l_test = 0
-    b_l_train = 0
-    best_epoch = 0
+    best_acc_test = 0 if args.load_model == '' else summaryDictLoaded['best_model']['acc_test']
+    b_a_train = 0 if args.load_model == '' else summaryDictLoaded['best_model']['acc_train']
+    b_l_test = 0 if args.load_model == '' else summaryDictLoaded['best_model']['loss_test']
+    b_l_train = 0 if args.load_model == '' else summaryDictLoaded['best_model']['loss_train']
+    best_epoch = 0 if args.load_model == '' else summaryDictLoaded['best_model']['epoch']
+
+    torch.save(model.state_dict(), os.path.join(folder_path, all_name + '.pt'))     # We save it a 1st time in case the
+                                                                                    # model won't get better
+
     # train the model
-    for epoch in range(1, args.epochs + 1):
+    for epoch in range(1 + bias_epoch, args.epochs + 1 + bias_epoch):
         useModel.train(args, model, device, train_loader, optimizer_adam, epoch)
         l_train, a_train = useModel.test(args, model, device, train_loader, 'Training Data')
         l_test, a_test = useModel.test(args, model, device, test_loader, 'Testing Data')
@@ -236,7 +275,7 @@ def main():
         'acc_train': acc_train,
         'loss_test': loss_test,
         'acc_test': acc_test,
-        'nb_epochs': args.epochs,
+        'nb_epochs': args.epochs + bias_epoch,
         'inputs_used': args.inputs_used,
         'best_model': {     # Caracteristics of the saved model (with the best test accuracy)
             'epoch': best_epoch,

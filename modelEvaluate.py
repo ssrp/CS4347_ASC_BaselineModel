@@ -73,7 +73,7 @@ def main():
         folder_id = args.folder_id.split('-')
         model_id = folder_id[0]
         hasName = len(folder_id) == 5
-        nom = '_Name({0})'.format(folder_id[1]) if hasName else ''
+        nom = '_Name({0})'.format(folder_id[2]) if hasName else ''
         b = 1 if hasName else 0
         model_name = 'Model({0})_InputsUsed({1}){2}_NbEpochs({3})_({4})'.format(
             model_id,           # small, big, medium

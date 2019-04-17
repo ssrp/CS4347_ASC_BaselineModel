@@ -345,7 +345,7 @@ class DenseNetPerso(nn.Module):
         self.printInit()
 
     def printInit(self):
-        text = 'Model initialized with the inputs :'
+        text = '{0} Model initialized with the inputs :'.format(self.dn_parameters['name'])
         if self.inputs_used[0] == '1':
             text += ' waveform'
         if self.inputs_used[1] == '1':
