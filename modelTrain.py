@@ -281,7 +281,9 @@ def main():
             b_l_test = l_test
             b_l_train = l_train
             torch.save(model.state_dict(), os.path.join(folder_path, all_name + '.pt'))
-            print('|----\tBest test accuracy for now --> saving the model\t----|')
+            print('|------\t New best test accuracy ({0}%) --> saving the model\t------|'.format(round(best_acc_test)))
+        else:
+            print('|-- Best accuracy for now : {0}% --|'.format(round(best_acc_test)))
 
     print('MODEL TRAINING END, best test accuray : {0}'.format(int(best_acc_test)))
 
