@@ -22,83 +22,10 @@ from torch.utils.data import Dataset, DataLoader
 # Personal imports
 from InputGeneration import inputGeneration as ig
 import InputGeneration.dataNormalization as dn
+from InputGeneration.DCASEDataset import DCASEDataset
 from Pytorch.DenseNet.DenseNetPerso import DenseNetPerso
 import Pytorch.DenseNet.denseNetParameters as DN_param
 import Pytorch.useModel as useModel
-
-
-class DCASEDataset(Dataset):
-    def __init__(self, csv_file, root_dir, save_dir, transform=None, light_data=False):
-        """
-        Args:
-            csv_file (string): Path to the csv file with annotations.
-            root_dir (string): Directory with all the audio.
-            transform (callable, optional): Optional transform to be applied
-                on a sample.
-        """
-
-        data_list = []
-        label_list = []
-        label_indices = []
-        with open(csv_file, 'r') as f:
-            content = f.readlines()
-            content = content[2:]
-            flag = 0
-            for x in content:
-                if flag == 0:
-                    row = x.split(',')
-                    data_list.append(row[0])  # first column in the csv, file names
-                    label_list.append(row[1])  # second column, the labels
-                    label_indices.append(row[2])  # third column, the label indices (not used in this code)
-                    flag = 1
-                else:
-                    flag = 0
-        self.save_dir = save_dir
-        self.root_dir = root_dir
-        self.transform = transform
-        self.datalist = data_list
-        self.labels = label_list
-        self.default_labels = ['airport', 'bus', 'metro', 'metro_station', 'park', 'public_square', 'shopping_mall',
-                               'street_pedestrian', 'street_traffic', 'tram']
-
-        # Test if light training
-        self.light_train = light_data
-        if self.light_train:
-            self.datalist = self.datalist[0:5]
-            self.labels = self.labels[0:5]
-
-    def __len__(self):
-        return len(self.datalist)
-
-    def __getitem__(self, idx):
-        wav_name = self.datalist[idx]
-        wav_path = os.path.join(self.root_dir, wav_name)
-        npy_name = os.path.splitext(os.path.split(wav_name)[1])[0] + '.npy'
-        npy_path = os.path.join(
-            self.save_dir,
-            npy_name
-        )
-
-        # load the wav file with 22.05 KHz Sampling rate and only one channel
-        # audio, sr = librosa.core.load(wav_name, sr=22050, mono=True)
-        data_computed = None
-        if os.path.exists(npy_path):
-            data_computed = np.load(npy_path)
-        else:
-            data_computed = ig.getAllInputs(os.path.abspath(wav_path))
-            np.save(npy_path, data_computed)
-
-        # extract the label
-        label = np.asarray(self.default_labels.index(self.labels[idx]))
-
-        # final sample
-        sample = (data_computed, label)
-
-        # perform the transformation (normalization etc.), if required
-        if self.transform:
-            sample = self.transform(sample)
-
-        return sample
 
 
 def main():
@@ -154,7 +81,6 @@ def main():
 
     if args.light_all:
         args.model_id = 'small'
-        args.epochs = 2
 
     light_train = args.light_all or args.light_data or args.light_train
     light_test = args.light_all or args.light_data or args.light_test
@@ -190,14 +116,12 @@ def main():
         # If not, run the normalization and save the mean/std
         print('DATA NORMALIZATION : ACCUMULATING THE DATA')
         # load the dataset
-
-        dcase_dataset = DCASEDataset(
-            csv_file=train_labels_dir,
-            root_dir=train_data_dir,
-            save_dir=g_train_data_dir,
+        normalization_values = dn.NormalizeData(
+            train_labels_dir=os.path.abspath(train_labels_dir),
+            root_dir=os.path.abspath(train_data_dir),
+            save_dir=os.path.abspath(g_train_data_dir),
             light_data=light_train
         )
-        normalization_values = dn.NormalizeData(dcase_dataset=dcase_dataset, light_data=light_train)
         np.save(os.path.join(g_data_dir, 'normalization_values.npy'), normalization_values)
         ig.createInputParametersFile(
             template=DN_param.input_parameters,
@@ -361,7 +285,7 @@ def main():
             b_a_train = a_train
             b_l_test = l_test
             b_l_train = l_train
-            print('Better test accuracy --> saving the model')
+            print('Best test accuracy for now --> saving the model')
     print('MODEL TRAINING END')
 
     summaryDict = {

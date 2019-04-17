@@ -1,6 +1,7 @@
 import torch
 import progressbar
 import numpy as np
+from InputGeneration.DCASEDataset import DCASEDataset
 
 # Creates a Tensor from the Numpy dataset, which is used by the GPU for processing
 class ToTensor(object):
@@ -46,7 +47,15 @@ class Normalize(object):
         return data, label
 
 
-def NormalizeData(dcase_dataset, light_data=False):
+def NormalizeData(train_labels_dir, root_dir, save_dir, light_data=False):
+    # Load the dataset
+    dcase_dataset = DCASEDataset(
+        csv_file=train_labels_dir,
+        root_dir=root_dir,
+        save_dir=save_dir,
+        light_data=light_data
+    )
+
     # flag for the first element
     flag = 0
 

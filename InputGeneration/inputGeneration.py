@@ -155,7 +155,8 @@ def saveFigures(folder, name, summaryDict):
 
     # Save the accuracy
     plt.figure()
-    plt.plot(x, acc_train, ' b', label='Training Accuracy')
+    plt.plot(x, acc_train, 'b', label='Training Accuracy')
+    print('acc_train : {0}'.format(acc_train))
     plt.plot(x, acc_test, 'r', label='Testing Accuracy')
     plt.title('Variation of the Accuracy through the buffers\n' + name)
     plt.xlabel('Epoch')
