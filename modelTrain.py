@@ -59,7 +59,7 @@ def main():
                         # If we want to work on a small number of training and testing data (for test on CPU)
                         help='--light-train & --light-test')
     parser.add_argument('--light-all', action='store_true', default=False,
-                        # If we want to work on a small number of training and testing data and a snall NN model
+                        # If we want to work on a small number of training and testing data and a small NN model
                         # (for test on CPU)
                         help='--light-data & small model')
     parser.add_argument('--name', default='',  # Optional, if we want ot name our model
