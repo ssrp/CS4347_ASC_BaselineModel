@@ -21,52 +21,10 @@ from torch.utils.data import Dataset, DataLoader
 
 # Personal imports
 from InputGeneration import inputGeneration as ig
+import InputGeneration.dataNormalization as dn
 from Pytorch.DenseNet.DenseNetPerso import DenseNetPerso
-import Pytorch.DenseNet.denseNetParameters as dnp
-from Pytorch.useModel import train, test
-
-# Creates a Tensor from the Numpy dataset, which is used by the GPU for processing
-class ToTensor(object):
-    def __call__(self, sample):
-        data, label = sample
-        waveform, spectrogram, features, fmstd = data
-
-        data_torch = (
-            torch.from_numpy(waveform),
-            torch.from_numpy(spectrogram),
-            torch.from_numpy(features),
-            torch.from_numpy(fmstd),
-        )
-
-        return data_torch, torch.from_numpy(label)
-
-
-# Code for Normalization of the data
-class Normalize(object):
-    def __init__(
-            self,
-            mean_waveform, std_waveform,
-            mean_spectrogram, std_spectrogram,
-            mean_features, std_features,
-            mean_fmstd, std_fmstd
-    ):
-        self.mean_waveform, self.std_waveform = mean_waveform, std_waveform
-        self.mean_spectrogram, self.std_spectrogram = mean_spectrogram, std_spectrogram
-        self.mean_features, self.std_features = mean_features, std_features
-        self.mean_fmstd, self.std_fmstd = mean_fmstd, std_fmstd
-
-    def __call__(self, sample):
-        data, label = sample
-        waveform, spectrogram, features, fmstd = data
-
-        waveform = (waveform - self.mean_waveform) / self.std_waveform
-        spectrogram = (spectrogram - self.mean_spectrogram) / self.std_spectrogram
-        features = (features - self.mean_features) / self.std_features
-        fmstd = (fmstd - self.mean_fmstd) / self.std_fmstd
-
-        data = waveform, spectrogram, features, fmstd
-
-        return data, label
+import Pytorch.DenseNet.denseNetParameters as DN_param
+import Pytorch.useModel as useModel
 
 
 class DCASEDataset(Dataset):
@@ -142,189 +100,6 @@ class DCASEDataset(Dataset):
 
         return sample
 
-"""
-def train(args, model, device, train_loader, optimizer, epoch):
-    model.train()
-
-    # training module
-    for batch_idx, sample_batched in enumerate(train_loader):
-
-        # for every batch, extract data and label (16, 1)
-        data, label = sample_batched
-        waveform, spectrogram, features, fmstd = data  # (16, 2, 240000), (16, 2, 1025, 431), (16, 10, 431), (16, 1, 10)
-
-        # Map the variables to the current device (CPU or GPU)
-        waveform = waveform.to(device, dtype=torch.float)
-        spectrogram = spectrogram.to(device, dtype=torch.float)
-        features = features.to(device, dtype=torch.float)
-        fmstd = fmstd.to(device, dtype=torch.float)
-        label = label.to(device, dtype=torch.long)
-
-        # set initial gradients to zero :
-        # https://discuss.pytorch.org/t/why-do-we-need-to-set-the-gradients-manually-to-zero-in-pytorch/4903/9
-        optimizer.zero_grad()
-
-        # pass the data into the model
-        output = model(
-            x_audio=waveform,
-            x_spectrum=spectrogram,
-            x_features=features,
-            x_fmstd=fmstd
-        )
-
-        # get the loss using the predictions and the label
-        loss = F.nll_loss(output, label)
-
-        # backpropagate the losses
-        loss.backward()
-
-        # update the model parameters :
-        # https://discuss.pytorch.org/t/how-are-optimizer-step-and-loss-backward-related/7350
-        optimizer.step()
-
-        # Printing the results
-        if batch_idx % args.log_interval == 0:
-            print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
-                epoch, batch_idx * len(data), len(train_loader.dataset),
-                       100. * batch_idx / len(train_loader), loss.item()))
-
-
-def test(args, model, device, test_loader, data_type):
-    # evaluate the model
-    model.eval()
-
-    # init test loss
-    test_loss = 0
-    correct = 0
-    print('Testing..')
-
-    # Use no gradient backpropagations (as we are just testing)
-    with torch.no_grad():
-        # for every testing batch
-        for i_batch, sample_batched in enumerate(test_loader):
-            # for every batch, extract data and label (16, 1)
-            data, label = sample_batched
-            # (16, 2, 120000), (16, 2, 1025, 431), (16, 10, 431), (16, 2, 10)
-            waveform, spectrogram, features, fmstd = data
-
-            # Map the variables to the current device (CPU or GPU)
-            waveform = waveform.to(device, dtype=torch.float)
-            spectrogram = spectrogram.to(device, dtype=torch.float)
-            features = features.to(device, dtype=torch.float)
-            fmstd = fmstd.to(device, dtype=torch.float)
-            label = label.to(device, dtype=torch.long)
-
-            # get the predictions
-            output = model(
-                x_audio=waveform,
-                x_spectrum=spectrogram,
-                x_features=features,
-                x_fmstd=fmstd
-            )
-
-            # accumulate the batchwise loss
-            test_loss += F.nll_loss(output, label, reduction='sum').item()
-
-            # get the predictions
-            pred = output.argmax(dim=1, keepdim=True)
-
-            # accumulate the correct predictions
-            correct += pred.eq(label.view_as(pred)).sum().item()
-    # normalize the test loss with the number of test samples
-    test_loss /= len(test_loader.dataset)
-
-    accuracy_percentage = 100. * correct / len(test_loader.dataset)
-    # print the results
-    print('Model prediction on ' + data_type + ': Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)'.format(
-        test_loss, correct, len(test_loader.dataset),
-        accuracy_percentage))
-    return test_loss, accuracy_percentage
-"""
-
-def NormalizeData(train_labels_dir, root_dir, g_train_data_dir, light_data=False):
-    # load the dataset
-    dcase_dataset = DCASEDataset(
-        csv_file=train_labels_dir,
-        root_dir=root_dir,
-        save_dir=g_train_data_dir,
-        light_data=light_data
-    )
-
-    # flag for the first element
-    flag = 0
-
-    # concatenate the datas computed inputs
-    waveformConcat = np.asarray([])
-    spectrogramConcat = np.asarray([])
-    featuresConcat = np.asarray([])
-    fmstdConcat = np.asarray([])
-
-    # generate a random permutation, because it's fun. there's no specific reason for that.
-    rand = np.random.permutation(len(dcase_dataset))
-
-    # for all the training samples
-    nb_files = len(dcase_dataset)
-    bar = progressbar.ProgressBar(maxval=nb_files, widgets=[progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage(), ' ', progressbar.ETA()])
-    bar.start()
-    for i in range(nb_files):
-
-        # extract the sample
-        if light_data:
-            sample = dcase_dataset[i]
-        else:
-            sample = dcase_dataset[rand[i]]
-
-        data_computed, label = sample
-        waveform, spectrogram, features, fmstd = data_computed
-        if flag == 0:
-            # get the data and init melConcat for the first time
-            waveform_mean = np.mean(waveform)        # (2, 120000) -> (1,)
-            waveform_mean2 = np.mean(np.square(waveform))        # (2, 120000) -> (1,)
-            spectrogram_mean = np.mean(spectrogram, axis=(0, 2))     # (2, 1025, 431) -> (1025,)
-            spectrogram_mean2 = np.mean(np.square(spectrogram), axis=(0, 2))     # (2, 1025, 431) -> (1025,)
-            features_mean = np.mean(np.reshape(features, (5, 2, -1)), axis=(1, 2))     # (10, 431) -> (5,)
-            features_mean2 = np.mean(np.reshape(np.square(features), (5, 2, -1)), axis=(1, 2))     # (10, 431) -> (5,)
-            fmstd_mean = np.mean(fmstd, axis=0)     # (2, 10) -> (10,)
-            fmstd_mean2 = np.mean(np.square(fmstd), axis=0)     # (2, 10) -> (10,)
-            flag = 1
-        else:
-            # concatenate the features :
-            waveform_mean += np.mean(waveform)        # (2, 120000) -> (1,)
-            waveform_mean2 += np.mean(np.square(waveform))        # (2, 120000) -> (1,)
-            spectrogram_mean += np.mean(spectrogram, axis=(0, 2))     # (2, 1025, 431) -> (1025,)
-            spectrogram_mean2 += np.mean(np.square(spectrogram), axis=(0, 2))     # (2, 1025, 431) -> (1025,)
-            features_mean += np.mean(np.reshape(features, (5, 2, -1)), axis=(1, 2))     # (10, 431) -> (5,)
-            features_mean2 += np.mean(np.reshape(np.square(features), (5, 2, -1)), axis=(1, 2))     # (10, 431) -> (5,)
-            fmstd_mean += np.mean(fmstd, axis=0)     # (2, 10) -> (10,)
-            fmstd_mean2 += np.mean(np.square(fmstd), axis=0)     # (2, 10) -> (10,)
-
-        bar.update(i + 1)
-    bar.finish()
-
-    waveform_mean /= nb_files
-    waveform_mean2 /= nb_files
-    wavform_std = waveform_mean2 - np.square(waveform_mean)
-
-    spectrogram_mean /= nb_files
-    spectrogram_mean2 /= nb_files
-    spectrogram_std = spectrogram_mean2 - np.square(spectrogram_mean)
-
-    features_mean /= nb_files
-    features_mean2 /= nb_files
-    features_std = features_mean2 - np.square(features_mean)
-
-    fmstd_mean /= nb_files
-    features_mean2 /= nb_files
-    fmstd_std = fmstd_mean2 - np.square(fmstd_mean)
-
-    normalization_values = {
-        'waveform': (np.array([waveform_mean]), np.array([wavform_std])),
-        'spectrogram': (spectrogram_mean, spectrogram_std),
-        'features': (features_mean, features_std),
-        'fmstd': (fmstd_mean, fmstd_std)
-    }
-
-    return normalization_values
 
 def main():
     # Training settings
@@ -384,7 +159,7 @@ def main():
     light_train = args.light_all or args.light_data or args.light_train
     light_test = args.light_all or args.light_data or args.light_test
 
-    dn_parameters = dnp.return_model_parameters(args.model_id)
+    dn_parameters = DN_param.return_model_parameters(args.model_id)
 
     if light_train:
         # If we want to test on CPU
@@ -414,15 +189,18 @@ def main():
     else:
         # If not, run the normalization and save the mean/std
         print('DATA NORMALIZATION : ACCUMULATING THE DATA')
-        normalization_values = NormalizeData(
-            train_labels_dir,
-            train_data_dir,
-            g_train_data_dir=g_train_data_dir,
+        # load the dataset
+
+        dcase_dataset = DCASEDataset(
+            csv_file=train_labels_dir,
+            root_dir=train_data_dir,
+            save_dir=g_train_data_dir,
             light_data=light_train
         )
+        normalization_values = dn.NormalizeData(dcase_dataset=dcase_dataset, light_data=light_train)
         np.save(os.path.join(g_data_dir, 'normalization_values.npy'), normalization_values)
         ig.createInputParametersFile(
-            template=dnp.input_parameters,
+            template=DN_param.input_parameters,
             fileName=os.path.abspath(os.path.join(g_data_dir, 'input_parameters.npy')),
             dn_parameters=dn_parameters
         )
@@ -474,7 +252,7 @@ def main():
 
     # init the data_transform
     data_transform = transforms.Compose([
-        ToTensor(), Normalize(
+        dn.ToTensor(), dn.Normalize(
             waveform_mean, waveform_std,
             spectrogram_mean, spectrogram_std,
             features_mean, features_std,
@@ -535,7 +313,7 @@ def main():
     if not args.no_save_model:
         if not os.path.isdir('./SavedModels'):
             os.mkdir('./SavedModels')
-        model_name = dnp.id2name(args.model_id)
+        model_name = DN_param.id2name(args.model_id)
         model_folder = os.path.join('./SavedModels', model_name)
         if not os.path.isdir(model_folder):
             os.mkdir(model_folder)
@@ -568,9 +346,9 @@ def main():
     best_epoch = 0
     # train the model
     for epoch in range(1, args.epochs + 1):
-        train(args, model, device, train_loader, optimizer_adam, epoch)
-        l_train, a_train = test(args, model, device, train_loader, 'Training Data')
-        l_test, a_test = test(args, model, device, test_loader, 'Testing Data')
+        useModel.train(args, model, device, train_loader, optimizer_adam, epoch)
+        l_train, a_train = useModel.test(args, model, device, train_loader, 'Training Data')
+        l_test, a_test = useModel.test(args, model, device, test_loader, 'Testing Data')
         loss_train.append(l_train)
         acc_train.append(a_train)
         loss_test.append(l_test)
