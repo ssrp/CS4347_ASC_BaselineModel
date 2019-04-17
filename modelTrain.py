@@ -4,7 +4,6 @@ import argparse
 import os
 # Ignore warnings
 import warnings
-import progressbar
 
 import numpy as np
 import torch
@@ -12,10 +11,7 @@ import torch
 warnings.filterwarnings("ignore")
 
 # import PyTorch Functionalities
-import torch.nn.functional as F
 import torch.optim as optim
-from torchvision import transforms, utils
-from torch.utils.data import Dataset, DataLoader
 
 # import Librosa, tool for extracting features from audio data
 
@@ -232,7 +228,7 @@ def main():
             b_l_test = l_test
             b_l_train = l_train
             torch.save(model.state_dict(), os.path.join(folder_path, all_name + '.pt'))
-            print('|-\t\tBest test accuracy for now --> saving the model\t\t-|')
+            print('|----\tBest test accuracy for now --> saving the model\t----|')
     print('MODEL TRAINING END, best test accuray : {0}'.format(int(best_acc_test)))
 
     summaryDict = {     # This dictionnary is the summary of the training
@@ -250,7 +246,8 @@ def main():
             'acc_test': best_acc_test
         },
         'dn_parameters': dn_parameters,
-        'input_parameters:': input_parameters
+        'input_parameters:': input_parameters,
+        'normalization_values': normalization_values
     }
     np.save(os.path.join(folder_path, all_name + '.npy'), summaryDict)  # Save the dictionnary
     ig.saveFigures(     # Save the plot of the evolution of the loss and accuracy for the test dans train
