@@ -173,9 +173,11 @@ def saveFigures(folder, name, summaryDict):
     plt.title('Variation of the Loss through the buffers\n' + name)
     plt.xlabel('Epoch')
     plt.ylabel('Loss value')
-    plt.plot([1, nb_epochs], [best_loss_train, best_loss_train], 'b--', label='Model training loss')
-    plt.plot([1, nb_epochs], [best_loss_test, best_loss_test], 'r--', label='Model testing loss')
-    plt.plot([best_epoch, best_epoch], [min_loss, max_loss], 'k--', label='Best Epoch')
+    plt.plot([1, nb_epochs], [best_loss_train, best_loss_train], 'b--',
+             label='Model training loss : {0}'.format(round(best_loss_train, 4)))
+    plt.plot([1, nb_epochs], [best_loss_test, best_loss_test], 'r--',
+             label='Model testing loss : {0}'.format(round(best_loss_test, 4)))
+    plt.plot([best_epoch, best_epoch], [min_loss, max_loss], 'k--', label='Best Epoch : {0}'.format(best_epoch))
     plt.legend()
     plt.grid()
     plt.savefig(os.path.join(folder, 'LossFigure_' + name + '.png'))
@@ -187,9 +189,11 @@ def saveFigures(folder, name, summaryDict):
     plt.title('Variation of the Accuracy through the buffers\n' + name)
     plt.xlabel('Epoch')
     plt.ylabel('Accuracy value (%)')
-    plt.plot([1, nb_epochs], [best_acc_train, best_acc_train], 'b--', label='Model train accuracy')
-    plt.plot([1, nb_epochs], [best_acc_test, best_acc_test], 'r--', label='Model test accuracy')
-    plt.plot([best_epoch, best_epoch], [min_acc, max_acc], 'k--', label='Best epoch')
+    plt.plot([1, nb_epochs], [best_acc_train, best_acc_train], 'b--',
+             label='Model train accuracy : {0}'.format(round(best_acc_train, 2)))
+    plt.plot([1, nb_epochs], [best_acc_test, best_acc_test], 'r--',
+             label='Model test accuracy : {0}'.format(round(best_acc_test, 2)))
+    plt.plot([best_epoch, best_epoch], [min_acc, max_acc], 'k--', label='Best Epoch : {0}'.format(best_epoch))
     plt.legend()
     plt.grid()
     plt.savefig(os.path.join(folder, 'AccuracyFigure_' + name + '.png'))

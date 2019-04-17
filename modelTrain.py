@@ -253,11 +253,11 @@ def main():
     os.mkdir(folder_path)
 
     # The result of the model with the best test accuracy
-    best_acc_test = 0 if model_loaded else summaryDictLoaded['best_model']['acc_test']
-    b_a_train = 0 if model_loaded else summaryDictLoaded['best_model']['acc_train']
-    b_l_test = 0 if model_loaded else summaryDictLoaded['best_model']['loss_test']
-    b_l_train = 0 if model_loaded else summaryDictLoaded['best_model']['loss_train']
-    best_epoch = 0 if model_loaded else summaryDictLoaded['best_model']['epoch']
+    best_acc_test = 0 if not model_loaded else summaryDictLoaded['best_model']['acc_test']
+    b_a_train = 0 if not model_loaded else summaryDictLoaded['best_model']['acc_train']
+    b_l_test = 0 if not model_loaded else summaryDictLoaded['best_model']['loss_test']
+    b_l_train = 0 if not model_loaded else summaryDictLoaded['best_model']['loss_train']
+    best_epoch = 0 if not model_loaded else summaryDictLoaded['best_model']['epoch']
 
     # We save it a 1st time in case the model won't get better after because it is saved only when the test accuracy is
     #  the highest reashed (could never be the case if the network has been loaded
