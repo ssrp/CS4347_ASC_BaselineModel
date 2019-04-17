@@ -233,7 +233,7 @@ def main():
             b_l_train = l_train
             torch.save(model.state_dict(), os.path.join(folder_path, all_name + '.pt'))
             print('\t\tBest test accuracy for now --> saving the model')
-    print('MODEL TRAINING END')
+    print('MODEL TRAINING END, best test accuray : {0}'.format(int(best_acc_test)))
 
     summaryDict = {     # This dictionnary is the summary of the training
         'loss_train': loss_train,
