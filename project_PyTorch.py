@@ -47,7 +47,7 @@ def main():
                         help='how many batches to wait before logging training status')
     parser.add_argument('--no-save-model', action='store_true', default=False,
                         help='For Saving the current Model')
-
+    # Personal arguments
     parser.add_argument('--light-train', action='store_true', default=False,
                         help='For training on a small number of data')
     parser.add_argument('--light-test', action='store_true', default=False,
@@ -79,59 +79,60 @@ def main():
 
     ##### Creation of the folders for the Generated Dataset #####
 
+    # The arguments 'light' are made to test the network on my poor little computer and its poor little CPU
     if args.light_all:
         args.model_id = 'small'
+    light_train = args.light_all or args.light_data or args.light_train  # Only 5 files in the train dataset
+    light_test = args.light_all or args.light_data or args.light_test  # Only 5 files in the test dataset
 
-    light_train = args.light_all or args.light_data or args.light_train
-    light_test = args.light_all or args.light_data or args.light_test
-
-    dn_parameters = DN_param.return_model_parameters(args.model_id)
+    dn_parameters = DN_param.return_model_parameters(args.model_id)  # The parameters of the DenseNet Model
 
     if light_train:
-        # If we want to test on CPU
+        # If we want to test on a little CPU
         ig.setLightEnviromnent()
         g_train_data_dir = './GeneratedLightDataset/train/'
         g_test_data_dir = './GeneratedLightDataset/test/'
         g_data_dir = './GeneratedLightDataset/'
     else:
+        # Made for training on GPU (big dataset size)
         ig.setEnviromnent()
         g_train_data_dir = './GeneratedDataset/train/'
         g_test_data_dir = './GeneratedDataset/test/'
         g_data_dir = './GeneratedDataset/'
 
-    if os.path.isfile(
-            os.path.join(g_data_dir, 'normalization_values.npy')
-    ) and os.path.isfile(
-        os.path.join(g_data_dir, 'input_parameters.npy')
-    ):
+    # Creation of the variables 'normalization_values' and 'input_parameters'
+    if os.path.isfile(os.path.join(g_data_dir, 'normalization_values.npy')) \
+            and os.path.isfile(os.path.join(g_data_dir, 'input_parameters.npy')):
         # get the mean and std. If Normalized already, just load the npy files and comment
         #  the NormalizeData() function above
         normalization_values = np.load(os.path.join(g_data_dir, 'normalization_values.npy'))
         normalization_values = normalization_values.item()      # We have to do this to access the dictionary
         input_parameters = np.load(os.path.join(g_data_dir, 'input_parameters.npy')).item()
         print(
-            'LOAD OF THE FILE normalization_values.npy FOR NORMALIZATION AND input_parameters.npy FOR THE NEURAL NETWORK'
-        )
+            'LOAD OF THE FILE normalization_values.npy FOR NORMALIZATION AND input_parameters.npy FOR THE NEURAL NETWORK')
     else:
         # If not, run the normalization and save the mean/std
         print('DATA NORMALIZATION : ACCUMULATING THE DATA')
-        # load the dataset
+        # Get the normalized values
         normalization_values = dn.NormalizeData(
             train_labels_dir=os.path.abspath(train_labels_dir),
             root_dir=os.path.abspath(train_data_dir),
             save_dir=os.path.abspath(g_train_data_dir),
             light_data=light_train
         )
+        # Save them
         np.save(os.path.join(g_data_dir, 'normalization_values.npy'), normalization_values)
+        # Create the informations of the inputs
         ig.createInputParametersFile(
             template=DN_param.input_parameters,
             fileName=os.path.abspath(os.path.join(g_data_dir, 'input_parameters.npy')),
             dn_parameters=dn_parameters
         )
+        # Save them
         input_parameters = np.load(os.path.join(g_data_dir, 'input_parameters.npy')).item()
-
         print('DATA NORMALIZATION COMPLETED')
 
+    # Transformers to normalize the inputs at the entrance of the neural network
     data_transform = dn.return_data_transform(normalization_values)
 
     # init the datasets
@@ -140,34 +141,28 @@ def main():
         root_dir=train_data_dir,
         save_dir=g_train_data_dir,
         transform=data_transform,
-        light_data=light_train
-    )
+        light_data=light_train)
     dcase_dataset_test = DCASEDataset(
         csv_file=test_labels_dir,
         root_dir=test_data_dir,
         save_dir=g_test_data_dir,
         transform=data_transform,
-        light_data=light_test
-    )
+        light_data=light_test)
 
     # set number of cpu workers in parallel
     kwargs = {'num_workers': 16, 'pin_memory': True} if use_cuda else {}
 
-
-    # get the training and testing data loader
+    # Get the training and testing data loader
     train_loader = torch.utils.data.DataLoader(
         dcase_dataset,
         batch_size=args.batch_size,
         shuffle=True,
-        **kwargs
-    )
-
+        **kwargs)
     test_loader = torch.utils.data.DataLoader(
         dcase_dataset_test,
         batch_size=args.test_batch_size,
         shuffle=False,
-        **kwargs
-    )
+        **kwargs)
 
     # init the model
     model = DenseNetPerso(
@@ -177,19 +172,20 @@ def main():
     ).to(device)
 
     # init the optimizer
-    optimizer_adam = optim.Adam(model.parameters(), lr=args.lr)
+    optimizer_adam = optim.Adam(model.parameters(),     # Documentation says it is better with SGD, but SGD optimizer
+                                lr=args.lr)             # didn't perform well when we tried
 
     print('MODEL TRAINING START')
-
     # Prepare the training
-    loss_train, acc_train, loss_test, acc_test = [], [], [], []
+    loss_train, acc_train, loss_test, acc_test = [], [], [], []     # Will be saved and use for plot and futur analysis
 
+    # Create the architecture of the saved models
     if not args.no_save_model:
-        if not os.path.isdir('./SavedModels'):
+        if not os.path.isdir('./SavedModels'):      # One big folder "SavedModels"
             os.mkdir('./SavedModels')
         model_name = DN_param.id2name(args.model_id)
         model_folder = os.path.join('./SavedModels', model_name)
-        if not os.path.isdir(model_folder):
+        if not os.path.isdir(model_folder):         # One subfolder for each DenseNet architecture
             os.mkdir(model_folder)
         # Find a name for the save
         if args.name != '':
@@ -199,7 +195,7 @@ def main():
 
         flag = True
         i = 0
-        while flag:
+        while flag:     # Look for a name that has't been choosen before to prevent conflic
             all_name = 'Model({0})_InputsUsed({4}){1}_NbEpochs({2})_({3})'.format(
                 model_name,
                 nom,
@@ -213,6 +209,7 @@ def main():
             i += 1
         os.mkdir(folder_path)
 
+    # The result of the model with the best test accuracy
     best_acc_test = 0
     b_a_train = 0
     b_l_test = 0
@@ -227,44 +224,43 @@ def main():
         acc_train.append(a_train)
         loss_test.append(l_test)
         acc_test.append(a_test)
-        torch.save(model.state_dict(), os.path.join(folder_path, all_name + '.pt'))
-
+        # If the test accuracy is the best for now, we save the model and its caracteristics
         if a_test > best_acc_test:
             best_acc_test = a_test
             best_epoch = epoch
             b_a_train = a_train
             b_l_test = l_test
             b_l_train = l_train
+            torch.save(model.state_dict(), os.path.join(folder_path, all_name + '.pt'))
             print('\t\tBest test accuracy for now --> saving the model')
     print('MODEL TRAINING END')
 
-    summaryDict = {
+    summaryDict = {     # This dictionnary is the summary of the training
         'loss_train': loss_train,
         'acc_train': acc_train,
         'loss_test': loss_test,
         'acc_test': acc_test,
         'nb_epochs': args.epochs,
         'input_used': args.inputs_used,
-        'best_model': {
+        'best_model': {     # Caracteristics of the saved model (with the best test accuracy)
             'epoch': best_epoch,
             'loss_train': b_l_train,
             'acc_train': b_a_train,
             'loss_test': b_l_test,
             'acc_test': best_acc_test
-        }
+        },
+        'dn_parameters': dn_parameters
     }
-    np.save(os.path.join(folder_path, all_name + '.npy'), summaryDict)
-    ig.saveFigures(
+    np.save(os.path.join(folder_path, all_name + '.npy'), summaryDict)  # Save the dictionnary
+    ig.saveFigures(     # Save the plot of the evolution of the loss and accuracy for the test dans train
         folder=os.path.abspath(folder_path),
         name=all_name,
-        summaryDict=summaryDict
-    )
-    ig.saveText(
+        summaryDict=summaryDict)
+    ig.saveText(        # Save a text file which summarise breifly the model saved and the training
         folder=os.path.abspath(folder_path),
         name=all_name,
-        summaryDict=summaryDict
-    )
-    print('Model saved in {0}'.format(folder_path))
+        summaryDict=summaryDict)
+    print('Model saved in {0}'.format(folder_path))     # Show to the user where the model is saved
 
 
 
