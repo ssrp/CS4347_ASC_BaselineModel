@@ -116,6 +116,7 @@ SavedModels/
 TestsPerso/
 Pytorch/DenseNet_old/
 Pytorch/DenseNet_old2/
+Pytorch/baseline_PyTorch.py
 
 # IDE
 .vscode
