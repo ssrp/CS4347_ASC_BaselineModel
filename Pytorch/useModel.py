@@ -106,12 +106,13 @@ def evaluate(args, model, device, evaluate_loader):
 
     print('Testing..')
     predictions = []
+    indexes = []        # It will help to reconstruct the order
     # Use no gradient backpropagations (as we are just testing)
     with torch.no_grad():
         # for every testing batch
         for i_batch, sample_batched in enumerate(evaluate_loader):
             # for every batch, extract data and label (16, 1)
-            data = sample_batched
+            data, idx = sample_batched
             # (16, 2, 120000), (16, 2, 1025, 431), (16, 10, 431), (16, 2, 10)
             waveform, spectrogram, features, fmstd = data
 
@@ -130,11 +131,15 @@ def evaluate(args, model, device, evaluate_loader):
             )
 
             # get the predictions
-            predictions.append(np.reshape(output.argmax(dim=1, keepdim=True).data.numpy(), (-1)).tolist())
+            predictions.extend(np.reshape(output.argmax(dim=1, keepdim=True).data.numpy(), (-1)).tolist())
+            indexes.extend(idx.data.numpy().tolist())
+
+
+
 
             if i_batch % args.log_interval == 0:
                 print('Evaluation : [{}/{} ({:.0f}%)]'.format(
                     i_batch * len(data), len(evaluate_loader.dataset),
                            100. * i_batch / len(evaluate_loader)))
 
-    return predictions
+    return predictions, indexes

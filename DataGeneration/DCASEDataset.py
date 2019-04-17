@@ -136,4 +136,4 @@ class DCASEDataset_evaluation(Dataset):
         if self.transform:
             data_computed = self.transform(data_computed)
 
-        return data_computed
+        return data_computed, idx

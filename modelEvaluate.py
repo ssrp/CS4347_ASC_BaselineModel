@@ -22,6 +22,7 @@ from torch.utils.data import Dataset, DataLoader
 # Personal imports
 from DataGeneration import inputGeneration as ig
 import DataGeneration.dataNormalization as dn
+import DataGeneration.outputGeneration as og
 from DataGeneration.DCASEDataset import DCASEDataset_evaluation
 from Pytorch.DenseNet.DenseNetPerso import DenseNetPerso
 import Pytorch.DenseNet.denseNetParameters as DN_param
@@ -119,8 +120,6 @@ def main():
     # Load the trained model
     model.load_state_dict(torch.load(os.path.join(model_folder, model_name + '.pt')))
 
-    # Prepare the training
-    loss_train, acc_train, loss_test, acc_test = [], [], [], []     # Will be saved and use for plot and futur analysis
 
     # Create the architecture of the saved predictions
     if not os.path.isdir('./SavedEvaluations'):      # One big folder "SavedModels"
@@ -132,68 +131,25 @@ def main():
     if not os.path.isdir(saved_evaluations_folder):
         os.mkdir(saved_evaluations_folder)
 
-    predictions = useModel.evaluate(args, model, device, evaluate_loader)
-
-
-    """
-
-
-    # The result of the model with the best test accuracy
-    best_acc_test = 0
-    b_a_train = 0
-    b_l_test = 0
-    b_l_train = 0
-    best_epoch = 0
-    # train the model
-    for epoch in range(1, args.epochs + 1):
-        useModel.train(args, model, device, train_loader, optimizer_adam, epoch)
-        l_train, a_train = useModel.test(args, model, device, train_loader, 'Training Data')
-        l_test, a_test = useModel.test(args, model, device, test_loader, 'Testing Data')
-        loss_train.append(l_train)
-        acc_train.append(a_train)
-        loss_test.append(l_test)
-        acc_test.append(a_test)
-        # If the test accuracy is the best for now, we save the model and its caracteristics
-        if a_test > best_acc_test:
-            best_acc_test = a_test
-            best_epoch = epoch
-            b_a_train = a_train
-            b_l_test = l_test
-            b_l_train = l_train
-            torch.save(model.state_dict(), os.path.join(folder_path, all_name + '.pt'))
-            print('\t\tBest test accuracy for now --> saving the model')
-    print('MODEL TRAINING END')
-
-    summaryDict = {     # This dictionnary is the summary of the training
-        'loss_train': loss_train,
-        'acc_train': acc_train,
-        'loss_test': loss_test,
-        'acc_test': acc_test,
-        'nb_epochs': args.epochs,
-        'input_used': args.inputs_used,
-        'best_model': {     # Caracteristics of the saved model (with the best test accuracy)
-            'epoch': best_epoch,
-            'loss_train': b_l_train,
-            'acc_train': b_a_train,
-            'loss_test': b_l_test,
-            'acc_test': best_acc_test
-        },
-        'dn_parameters': dn_parameters
+    predictions, indexes = useModel.evaluate(args, model, device, evaluate_loader)   # The predicted index
+    print('predictions : {0}'.format(predictions))
+    predictions_label = og.return_predicted_labels(predictions)             # The predicted labels
+    predictionsDict = {
+        'index': predictions,
+        'labels': predictions_label,
+        'indexes': indexes
     }
-    np.save(os.path.join(folder_path, all_name + '.npy'), summaryDict)  # Save the dictionnary
-    ig.saveFigures(     # Save the plot of the evolution of the loss and accuracy for the test dans train
-        folder=os.path.abspath(folder_path),
-        name=all_name,
-        summaryDict=summaryDict)
-    ig.saveText(        # Save a text file which summarise breifly the model saved and the training
-        folder=os.path.abspath(folder_path),
-        name=all_name,
-        summaryDict=summaryDict)
-    print('Model saved in {0}'.format(folder_path))     # Show to the user where the model is saved
+    print('indexes : {0}'.format(indexes))
+    np.save(os.path.join(saved_evaluations_folder, 'predictionsDict.npy'), predictionsDict)      # Save the dict
 
-    """
-
-
+    # Save the .csv file
+    og.create_csv(
+        template_path=labels_dir,
+        save_path=os.path.abspath(os.path.join(saved_evaluations_folder, 'predicted_labels.csv')),
+        predictions_label=predictions_label,
+        predictions=predictions,
+        indexes=indexes
+    )
 
 if __name__ == '__main__':
     # create a separate main function because original main function is too mainstream
