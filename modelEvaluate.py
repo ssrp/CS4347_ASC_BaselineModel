@@ -4,32 +4,28 @@ import argparse
 import os
 # Ignore warnings
 import warnings
-import progressbar
 
 import numpy as np
 import torch
 
 warnings.filterwarnings("ignore")
 
-# import PyTorch Functionalities
-import torch.nn.functional as F
-import torch.optim as optim
-from torchvision import transforms, utils
-from torch.utils.data import Dataset, DataLoader
-
-# import Librosa, tool for extracting features from audio data
-
 # Personal imports
-from DataGeneration import inputGeneration as ig
 import DataGeneration.dataNormalization as dn
 import DataGeneration.outputGeneration as og
 from DataGeneration.DCASEDataset import DCASEDataset_evaluation
 from Pytorch.DenseNet.DenseNetPerso import DenseNetPerso
-import Pytorch.DenseNet.denseNetParameters as DN_param
 import Pytorch.useModel as useModel
+
+"""
+    This file is use to make predictions with a model
+"""
 
 
 def main():
+    """
+        main function which will do everything to create predictions
+    """
     # Training settings
     parser = argparse.ArgumentParser(description='Can be use to do a evaluation for the ASC project (CS4347)')
     parser.add_argument('--batch-size', type=int, default=16, metavar='N',
@@ -42,14 +38,18 @@ def main():
                         help='how many batches to wait before logging training status')
     # Personal arguments
     parser.add_argument('--light-test', action='store_true', default=False,
+                        # If we want to work on a small number of testing data (for test on CPU)
                         help='For testing on a small number of data')
     parser.add_argument('--light-all', action='store_true', default=False,
+                        # If we want to work on a small number of testing data and a small NN model
+                        # (for test on CPU)
                         help='--light-test & small model')
-    parser.add_argument('--name', default='',
+    parser.add_argument('--name', default='',  # Optional, if we want ot name our model
                         help='The name of the model')
-    parser.add_argument('--folder-name', default='',
+    parser.add_argument('--folder-name', default='',  # If we want to load a model in a folder
                         help='The name of the folder with the saved model')
     parser.add_argument('--folder-id', default='',
+                        # if we want to load a model without writting all the long folder name
                         help='modelName-inputsUsed(-name)-nbEpochs-idx')
 
     args = parser.parse_args()
@@ -60,7 +60,6 @@ def main():
     data_dir = 'evaluation_data'
     labels_dir = 'evaluation_data/evaluate_labels.csv'
 
-
     ##### Creation of the folders for the Generated Dataset #####
 
     # The arguments 'light' are made to test the network on my poor little computer and its poor little CPU
@@ -69,13 +68,13 @@ def main():
     light_train = args.light_all or args.light_data or args.light_train  # Only 5 files in the train dataset
     light_test = args.light_all or args.light_data or args.light_test  # Only 5 files in the test dataset
 
-    if args.folder_id != '':
+    if args.folder_id != '':  # folder-id win on the name of the model
         folder_id = args.folder_id.split('-')
         model_id = folder_id[0]
         hasName = len(folder_id) == 5
         nom = '_Name({0})'.format(folder_id[2]) if hasName else ''
         b = 1 if hasName else 0
-        model_name = 'Model({0})_InputsUsed({1}){2}_NbEpochs({3})_({4})'.format(
+        model_name = 'Model({0})_InputsUsed({1}){2}_NbEpochs({3})_({4})'.format(  # Reconstruction of the folder name
             model_id,           # small, big, medium
             folder_id[1],       # inputs used
             nom,                # name (optional)
@@ -88,12 +87,14 @@ def main():
         model_id = model_name.split(')')[0][6:]
         model_folder = 'SavedModels/{0}/{1}'.format(model_id, model_name)
 
-    summaryDict = np.load(os.path.join(model_folder, model_name + '.npy')).item()
+    summaryDict = np.load(
+        os.path.join(model_folder, model_name + '.npy')
+    ).item()        # The dictionnary with qll the informations of the model
 
-    dn_parameters = summaryDict['dn_parameters']
-    input_parameters = summaryDict['input_parameters']
-    normalization_values = summaryDict['normalization_values']
-    inputs_used = summaryDict['inputs_used']
+    dn_parameters = summaryDict['dn_parameters']        # Parameters of the DenseNet Model
+    input_parameters = summaryDict['input_parameters']      # Informations on the shape of the inputs
+    normalization_values = summaryDict['normalization_values']      # The values used to normalize the inputs
+    inputs_used = summaryDict['inputs_used']        # The inputs used by our model
 
     if light_train:
         # If we want to test on a little CPU
@@ -137,25 +138,25 @@ def main():
     # Load the trained model
     model.load_state_dict(torch.load(os.path.join(model_folder, model_name + '.pt')))
 
-
     # Create the architecture of the saved predictions
     if not os.path.isdir('./SavedEvaluations'):      # One big folder "SavedModels"
         os.mkdir('./SavedEvaluations')
     if not os.path.isdir(os.path.join('./SavedEvaluations', model_id)):
-        os.mkdir(os.path.join('./SavedEvaluations', model_name.split(')')[0][6:]))
+        os.mkdir(os.path.join('./SavedEvaluations', model_id))
 
     saved_evaluations_folder = os.path.join('./SavedEvaluations', model_id, model_name)
-    if not os.path.isdir(saved_evaluations_folder):
+    if not os.path.isdir(saved_evaluations_folder):     # The folder where we will save everything
         os.mkdir(saved_evaluations_folder)
 
     predictions, indexes = useModel.evaluate(args, model, device, evaluate_loader)   # The predicted index
     predictions_label = og.return_predicted_labels(predictions)             # The predicted labels
-    predictionsDict = {
+    predictions_dict = {
         'index': predictions,
         'labels': predictions_label,
         'indexes': indexes
     }
-    np.save(os.path.join(saved_evaluations_folder, 'predictionsDict.npy'), predictionsDict)      # Save the dict
+    # Save the prediction_dict dictionary
+    np.save(os.path.join(saved_evaluations_folder, 'predictionsDict.npy'), predictions_dict)      # Save the dict
 
     # Save the .csv file
     og.create_csv(
@@ -166,6 +167,7 @@ def main():
         indexes=indexes
     )
     print('Predictions saved in {0}'.format(saved_evaluations_folder))
+
 
 if __name__ == '__main__':
     # create a separate main function because original main function is too mainstream
