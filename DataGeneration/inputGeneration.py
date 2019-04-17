@@ -176,7 +176,7 @@ def saveText(folder, name, summaryDict):
     acc_test = summaryDict['best_model']['acc_test']
     nb_epochs = summaryDict['nb_epochs']
     best_epoch = summaryDict['best_model']['epoch']
-    input_used = summaryDict['input_used']
+    input_used = summaryDict['inputs_used']
 
     iu_txt = ''
     flag = False

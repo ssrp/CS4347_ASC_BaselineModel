@@ -1,5 +1,6 @@
 import torch
 import torch.nn.functional as F
+import numpy as np
 
 def train(args, model, device, train_loader, optimizer, epoch):
     model.train()
@@ -97,3 +98,43 @@ def test(args, model, device, test_loader, data_type):
         test_loss, correct, len(test_loader.dataset),
         accuracy_percentage))
     return test_loss, accuracy_percentage
+
+
+def evaluate(args, model, device, evaluate_loader):
+    # evaluate the model
+    model.eval()
+
+    print('Testing..')
+    predictions = []
+    # Use no gradient backpropagations (as we are just testing)
+    with torch.no_grad():
+        # for every testing batch
+        for i_batch, sample_batched in enumerate(evaluate_loader):
+            # for every batch, extract data and label (16, 1)
+            data = sample_batched
+            # (16, 2, 120000), (16, 2, 1025, 431), (16, 10, 431), (16, 2, 10)
+            waveform, spectrogram, features, fmstd = data
+
+            # Map the variables to the current device (CPU or GPU)
+            waveform = waveform.to(device, dtype=torch.float)
+            spectrogram = spectrogram.to(device, dtype=torch.float)
+            features = features.to(device, dtype=torch.float)
+            fmstd = fmstd.to(device, dtype=torch.float)
+
+            # get the predictions
+            output = model(
+                x_audio=waveform,
+                x_spectrum=spectrogram,
+                x_features=features,
+                x_fmstd=fmstd
+            )
+
+            # get the predictions
+            predictions.append(np.reshape(output.argmax(dim=1, keepdim=True).data.numpy(), (-1)).tolist())
+
+            if i_batch % args.log_interval == 0:
+                print('Evaluation : [{}/{} ({:.0f}%)]'.format(
+                    i_batch * len(data), len(evaluate_loader.dataset),
+                           100. * i_batch / len(evaluate_loader)))
+
+    return predictions

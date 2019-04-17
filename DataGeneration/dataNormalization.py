@@ -3,7 +3,7 @@ import progressbar
 import numpy as np
 from torchvision import transforms
 
-from InputGeneration.DCASEDataset import DCASEDataset
+from DataGeneration.DCASEDataset import DCASEDataset
 
 
 # Creates a Tensor from the Numpy dataset, which is used by the GPU for processing
@@ -21,6 +21,18 @@ class ToTensor(object):
 
         return data_torch, torch.from_numpy(label)
 
+class ToTensorEvaluation(object):
+    def __call__(self, sample):
+        waveform, spectrogram, features, fmstd = sample
+
+        data_torch = (
+            torch.from_numpy(waveform),
+            torch.from_numpy(spectrogram),
+            torch.from_numpy(features),
+            torch.from_numpy(fmstd),
+        )
+
+        return data_torch
 
 # Code for Normalization of the data
 class Normalize(object):
@@ -48,6 +60,31 @@ class Normalize(object):
         data = waveform, spectrogram, features, fmstd
 
         return data, label
+
+class NormalizeEvaluation(object):
+    def __init__(
+            self,
+            mean_waveform, std_waveform,
+            mean_spectrogram, std_spectrogram,
+            mean_features, std_features,
+            mean_fmstd, std_fmstd
+    ):
+        self.mean_waveform, self.std_waveform = mean_waveform, std_waveform
+        self.mean_spectrogram, self.std_spectrogram = mean_spectrogram, std_spectrogram
+        self.mean_features, self.std_features = mean_features, std_features
+        self.mean_fmstd, self.std_fmstd = mean_fmstd, std_fmstd
+
+    def __call__(self, sample):
+        waveform, spectrogram, features, fmstd = sample
+
+        waveform = (waveform - self.mean_waveform) / self.std_waveform
+        spectrogram = (spectrogram - self.mean_spectrogram) / self.std_spectrogram
+        features = (features - self.mean_features) / self.std_features
+        fmstd = (fmstd - self.mean_fmstd) / self.std_fmstd
+
+        data = waveform, spectrogram, features, fmstd
+
+        return data
 
 
 def NormalizeData(train_labels_dir, root_dir, save_dir, light_data=False):
@@ -82,6 +119,7 @@ def NormalizeData(train_labels_dir, root_dir, save_dir, light_data=False):
             sample = dcase_dataset[i]
         else:
             sample = dcase_dataset[rand[i]]
+
 
         data_computed, label = sample
         waveform, spectrogram, features, fmstd = data_computed
@@ -135,7 +173,7 @@ def NormalizeData(train_labels_dir, root_dir, save_dir, light_data=False):
 
     return normalization_values
 
-def return_data_transform(normalization_values):
+def return_data_transform(normalization_values, evaluation=False):
     # Load of the values in the file
     waveform_mean, waveform_std = normalization_values['waveform']  # (1,), (1,)
     spectrogram_mean, spectrogram_std = normalization_values['spectrogram']  # (1025,), (1025,)
@@ -179,13 +217,23 @@ def return_data_transform(normalization_values):
     fmstd_mean, fmstd_std = torch.from_numpy(fmstd_mean), torch.from_numpy(fmstd_std)
 
     # init the data_transform
-    data_transform = transforms.Compose([
-        ToTensor(), Normalize(
-            waveform_mean, waveform_std,
-            spectrogram_mean, spectrogram_std,
-            features_mean, features_std,
-            fmstd_mean, fmstd_std
-        )
-    ])
+    if evaluation:
+        data_transform = transforms.Compose([
+            ToTensorEvaluation(), NormalizeEvaluation(
+                waveform_mean, waveform_std,
+                spectrogram_mean, spectrogram_std,
+                features_mean, features_std,
+                fmstd_mean, fmstd_std
+            )
+        ])
+    else:
+        data_transform = transforms.Compose([
+            ToTensor(), Normalize(
+                waveform_mean, waveform_std,
+                spectrogram_mean, spectrogram_std,
+                features_mean, features_std,
+                fmstd_mean, fmstd_std
+            )
+        ])
 
     return data_transform

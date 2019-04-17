@@ -16,9 +16,9 @@ import torch.optim as optim
 # import Librosa, tool for extracting features from audio data
 
 # Personal imports
-from InputGeneration import inputGeneration as ig
-import InputGeneration.dataNormalization as dn
-from InputGeneration.DCASEDataset import DCASEDataset
+from DataGeneration import inputGeneration as ig
+import DataGeneration.dataNormalization as dn
+from DataGeneration.DCASEDataset import DCASEDataset
 from Pytorch.DenseNet.DenseNetPerso import DenseNetPerso
 import Pytorch.DenseNet.denseNetParameters as DN_param
 import Pytorch.useModel as useModel
@@ -237,7 +237,7 @@ def main():
         'loss_test': loss_test,
         'acc_test': acc_test,
         'nb_epochs': args.epochs,
-        'input_used': args.inputs_used,
+        'inputs_used': args.inputs_used,
         'best_model': {     # Caracteristics of the saved model (with the best test accuracy)
             'epoch': best_epoch,
             'loss_train': b_l_train,
@@ -246,8 +246,8 @@ def main():
             'acc_test': best_acc_test
         },
         'dn_parameters': dn_parameters,
-        'input_parameters:': input_parameters,
-        'normalization_values': normalization_values
+        'input_parameters': input_parameters,
+        'normalization_values': normalization_values,
     }
     np.save(os.path.join(folder_path, all_name + '.npy'), summaryDict)  # Save the dictionnary
     ig.saveFigures(     # Save the plot of the evolution of the loss and accuracy for the test dans train

@@ -111,8 +111,11 @@ Dataset/
 GeneratedDataset/
 GeneratedLightDataset/
 evaluation_data/
+GeneratedLightEvaluateDataset/
+GeneratedEvaluateDataset/
 # Saved Models
 SavedModels/
+SavedEvaluations/
 # Tests
 TestsPerso/
 Pytorch/DenseNet_old/
