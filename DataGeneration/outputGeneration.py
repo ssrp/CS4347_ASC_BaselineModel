@@ -1,3 +1,8 @@
+"""
+    This file has the function used to predict and save the predictions during the evaluation task
+"""
+
+
 labels = ['airport', 'bus', 'metro', 'metro_station', 'park', 'public_square', 'shopping_mall',
           'street_pedestrian', 'street_traffic', 'tram']
 labelsDict = {
@@ -14,15 +19,12 @@ labelsDict = {
 }
 
 
-def idx2label(idx):
-    return labels[idx]
-
-
-def label2idx(label):
-    return labelsDict[label]
-
-
 def return_predicted_labels(predictions_list):
+    """
+
+    :param predictions_list: list of predictions (with the index in it)
+    :return: list of predictions (with the labels in it)
+    """
     predicted_labels = []
     for i in range(len(predictions_list)):
         predicted_labels.append(labels[i])
@@ -30,6 +32,16 @@ def return_predicted_labels(predictions_list):
 
 
 def create_csv(template_path, save_path, predictions_label, predictions, indexes):
+    """
+
+    :param template_path: the path to the .csv file of the evaluation_data (will be used as a template to create our .csv file)
+    :param save_path: The path where we want to save our .csv file
+    :param predictions_label: a list of prediction (with labels in it)
+    :param predictions: a list of prediction (with indexes in it)
+    :param indexes: The order of the labels in predictions_label and predictions (used to keep the order)
+
+        Create the .csv file which will be used for the evaluation of the project
+    """
     with open(template_path, 'r') as t:
         with open(save_path, 'w') as s:
             content = t.readlines()
@@ -47,6 +59,3 @@ def create_csv(template_path, save_path, predictions_label, predictions, indexes
                     i += 1
                 else:
                     i += 1
-
-
-
