@@ -5,9 +5,15 @@ from torchvision import transforms
 
 from DataGeneration.DCASEDataset import DCASEDataset
 
+"""
+    This file takes care of the normalization of the inputs before going in the neural network
+"""
 
 # Creates a Tensor from the Numpy dataset, which is used by the GPU for processing
 class ToTensor(object):
+    """
+    Used to return a tensor of the np arrays inputs
+    """
     def __call__(self, sample):
         data, label = sample
         waveform, spectrogram, features, fmstd = data
@@ -22,6 +28,9 @@ class ToTensor(object):
         return data_torch, torch.from_numpy(label)
 
 class ToTensorEvaluation(object):
+    """
+    Used to return a tensor of the np arrays inputs during the evaluation task
+    """
     def __call__(self, sample):
         waveform, spectrogram, features, fmstd = sample
 
@@ -36,6 +45,9 @@ class ToTensorEvaluation(object):
 
 # Code for Normalization of the data
 class Normalize(object):
+    """
+    Used to normalize the inputs
+    """
     def __init__(
             self,
             mean_waveform, std_waveform,
@@ -62,6 +74,9 @@ class Normalize(object):
         return data, label
 
 class NormalizeEvaluation(object):
+    """
+    Used to normalized the inputs during the evaluation task
+    """
     def __init__(
             self,
             mean_waveform, std_waveform,
@@ -88,6 +103,14 @@ class NormalizeEvaluation(object):
 
 
 def NormalizeData(train_labels_dir, root_dir, save_dir, light_data=False):
+    """
+
+    :param train_labels_dir: the path to the .csv file
+    :param root_dir: Directory with all the audios
+    :param save_dir: The path to the folder were the computed data will be saved in a .npy file
+    :param light_data: if we want to work on a small amont of data (for example on my computer and its poor little cpu)
+    :return: The values for the normalisation of the inputs
+    """
     # Load the dataset
     dcase_dataset = DCASEDataset(
         csv_file=train_labels_dir,
@@ -111,15 +134,13 @@ def NormalizeData(train_labels_dir, root_dir, save_dir, light_data=False):
     # for all the training samples
     nb_files = len(dcase_dataset)
     bar = progressbar.ProgressBar(maxval=nb_files, widgets=[progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage(), ' ', progressbar.ETA()])
-    bar.start()
+    bar.start()     # To see it working
     for i in range(nb_files):
-
         # extract the sample
         if light_data:
             sample = dcase_dataset[i]
         else:
             sample = dcase_dataset[rand[i]]
-
 
         data_computed, label = sample
         waveform, spectrogram, features, fmstd = data_computed
@@ -127,10 +148,10 @@ def NormalizeData(train_labels_dir, root_dir, save_dir, light_data=False):
             # get the data and init melConcat for the first time
             waveform_mean = np.mean(waveform)        # (2, 120000) -> (1,)
             waveform_mean2 = np.mean(np.square(waveform))        # (2, 120000) -> (1,)
-            spectrogram_mean = np.mean(spectrogram, axis=(0, 2))     # (2, 1025, 431) -> (1025,)
-            spectrogram_mean2 = np.mean(np.square(spectrogram), axis=(0, 2))     # (2, 1025, 431) -> (1025,)
-            features_mean = np.mean(np.reshape(features, (5, 2, -1)), axis=(1, 2))     # (10, 431) -> (5,)
-            features_mean2 = np.mean(np.reshape(np.square(features), (5, 2, -1)), axis=(1, 2))     # (10, 431) -> (5,)
+            spectrogram_mean = np.mean(spectrogram, axis=(0, 2))     # (2, 100, 469) -> (100,)
+            spectrogram_mean2 = np.mean(np.square(spectrogram), axis=(0, 2))     # (2, 100, 469) -> (100,)
+            features_mean = np.mean(np.reshape(features, (5, 2, -1)), axis=(1, 2))     # (10, 469) -> (5,)
+            features_mean2 = np.mean(np.reshape(np.square(features), (5, 2, -1)), axis=(1, 2))     # (10, 469) -> (5,)
             fmstd_mean = np.mean(fmstd, axis=0)     # (2, 10) -> (10,)
             fmstd_mean2 = np.mean(np.square(fmstd), axis=0)     # (2, 10) -> (10,)
             flag = 1
@@ -138,10 +159,10 @@ def NormalizeData(train_labels_dir, root_dir, save_dir, light_data=False):
             # concatenate the features :
             waveform_mean += np.mean(waveform)        # (2, 120000) -> (1,)
             waveform_mean2 += np.mean(np.square(waveform))        # (2, 120000) -> (1,)
-            spectrogram_mean += np.mean(spectrogram, axis=(0, 2))     # (2, 1025, 431) -> (1025,)
-            spectrogram_mean2 += np.mean(np.square(spectrogram), axis=(0, 2))     # (2, 1025, 431) -> (1025,)
-            features_mean += np.mean(np.reshape(features, (5, 2, -1)), axis=(1, 2))     # (10, 431) -> (5,)
-            features_mean2 += np.mean(np.reshape(np.square(features), (5, 2, -1)), axis=(1, 2))     # (10, 431) -> (5,)
+            spectrogram_mean += np.mean(spectrogram, axis=(0, 2))     # (2, 100, 469) -> (100,)
+            spectrogram_mean2 += np.mean(np.square(spectrogram), axis=(0, 2))     # (2, 100, 469) -> (100,)
+            features_mean += np.mean(np.reshape(features, (5, 2, -1)), axis=(1, 2))     # (10, 469) -> (5,)
+            features_mean2 += np.mean(np.reshape(np.square(features), (5, 2, -1)), axis=(1, 2))     # (10, 469) -> (5,)
             fmstd_mean += np.mean(fmstd, axis=0)     # (2, 10) -> (10,)
             fmstd_mean2 += np.mean(np.square(fmstd), axis=0)     # (2, 10) -> (10,)
 
@@ -174,9 +195,15 @@ def NormalizeData(train_labels_dir, root_dir, save_dir, light_data=False):
     return normalization_values
 
 def return_data_transform(normalization_values, evaluation=False):
+    """
+
+    :param normalization_values: the values for the normalization of the input
+    :param evaluation: if we are on the evaluation task
+    :return: a function which normalize the data and return the torch variables associated
+    """
     # Load of the values in the file
     waveform_mean, waveform_std = normalization_values['waveform']  # (1,), (1,)
-    spectrogram_mean, spectrogram_std = normalization_values['spectrogram']  # (1025,), (1025,)
+    spectrogram_mean, spectrogram_std = normalization_values['spectrogram']  # (100,), (100,)
     features_mean, features_std = normalization_values['features']  # (5,), (5,)
     fmstd_mean, fmstd_std = normalization_values['fmstd']       # (10,), (10,)
 
@@ -184,9 +211,9 @@ def return_data_transform(normalization_values, evaluation=False):
     waveform_mean = np.concatenate([waveform_mean, waveform_mean])[:, np.newaxis]  # (2, 1)
     waveform_std = np.concatenate([waveform_std, waveform_std])[:, np.newaxis]  # (2, 1)
     spectrogram_mean = np.concatenate([spectrogram_mean[:, np.newaxis], spectrogram_mean[:, np.newaxis]],
-                                      axis=1).T[:, :, np.newaxis]  # (2, 1025, 1)
+                                      axis=1).T[:, :, np.newaxis]  # (2, 100, 1)
     spectrogram_std = np.concatenate([spectrogram_std[:, np.newaxis], spectrogram_std[:, np.newaxis]],
-                                     axis=1).T[:, :, np.newaxis]  # (2, 1025, 1)
+                                     axis=1).T[:, :, np.newaxis]  # (2, 100, 1)
     features_mean = np.reshape(  # (10, 1)
         np.concatenate(
             [
