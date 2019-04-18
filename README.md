@@ -70,4 +70,24 @@ For this project we created 2 files : ```modelTrain.py``` and ```modelEvaluate.p
 - ```modelTrain.py``` is used to create/load and train a model.
 - ```modelEvaluate.py``` is used to load a model and use it to classify .wav files.
 
+## The architecture of the neural network
 
+### The inputs
+
+### DenseNet Model
+
+### Our DenseNetPerso
+
+## The architecture of the project
+
+## How to use ```modelTrain.py```
+
+### The commands line
+
+### The Description of the Arguments
+
+## How to use ```modelEvaluate.py```
+
+### The commands line
+
+### The Description of the Arguments
