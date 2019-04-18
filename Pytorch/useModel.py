@@ -162,7 +162,7 @@ def evaluate(args, model, device, evaluate_loader):
             )
 
             # get the predictions
-            predictions.extend(np.reshape(output.argmax(dim=1, keepdim=True).data.numpy(), (-1)).tolist())
+            predictions.extend(np.reshape(output.argmax(dim=1, keepdim=True).cpu().data.numpy(), (-1)).tolist())
             indexes.extend(idx.data.numpy().tolist())
 
             if i_batch % args.log_interval == 0:
