@@ -104,9 +104,44 @@ Between each "DenseNet Block" There is a transition block with a 2x2 Max Pooling
 
 ### Our DenseNetPerso
 
+Our Model is based on the DenseNet architecture as shown in the following figure :
+
 <p align = "center">
-<img src="images/Model Architecture.PNG" width=500" height="300">
+<img src="images/Model Architecture.png" width=600" height="300">
 </p>
+                                                                
+It is possible to choose between different model (with different parameters). The model with the best result has the parameters :
+```python
+{
+        'name': 'big',
+        'spectrum': {
+            'k': 32,  # The number of channel in the denseNet
+            'nb_blocks': 4,  # The number of dense block in the NN = len(nb_conv)
+            'nb_conv': [4, 4, 4, 4],  # The numbers of convolutional layers in a dense block
+            'size_fc': 100  # Size of the fully connected at the end
+        },
+        'audio': {
+            'k': 32,  # The number of channel in the denseNet
+            'nb_blocks': 4,  # The number of dense block in the NN = len(nb_conv)
+            'nb_conv': [4, 4, 4, 4],  # The numbers of convolutional layers in a dense block
+            'size_fc': 100  # Size of the fully connected at the end
+        },
+        'features': {
+            'k': 32,  # The number of channel in the denseNet
+            'nb_blocks': 4,  # The number of dense block in the NN = len(nb_conv)
+            'nb_conv': [4, 4, 4, 4],  # The numbers of convolutional layers in a dense block
+            'size_fc': 50,  # Size of the fully connected at the end
+        },
+        'fmstd': {
+            'nb_layers': 3,  # The number of fully connected layers in the NN = len(layers_size)
+            'layers_size': [80, 50, 20],  # The size of the layers in fully connected layers
+        },
+        'final': {  # The parameters for the fully connected layers at the end of the neural network
+            'nb_layers': 3,  # The number of fully connected layers in the NN = len(layers_size)
+            'layers_size': [80, 40, 10],  # The size of the layers in the fully connected layers
+        }
+    },      # Big
+```
 
 ## The architecture of the project
 
