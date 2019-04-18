@@ -145,6 +145,25 @@ It is possible to choose between different model (with different parameters). Th
 
 ## The architecture of the project
 
+The project structure with the usable code is this one : 
+
+```shell
+.CS4347_ASC_GroupProject
+|-- .DataGeneration   # This folder contains all the file for the input and output processing
+    |-- DCASEDataset.py   # Contains le loaders (classes which give the inputs to the neural network)
+    |-- dataNormalization.py  # Take care of the normalization of the inputs before they go in the neural network
+    |-- inputGeneration.py    # Functions to extract the waveform/spectrogram/features/fmstd from the .wav files.
+    |-- outputGeneration.py   # Functions to save the outputs of the neural network when we use it to make predictions
+|-- .Pytorch      # Folder with all the neural network in it
+    |-- .DenseNet   # This folder contains all the file to create a DenseNetPerso Model
+        |-- DenseNetPerso.py    # Class DenseNetPerso : create the architecture described before
+        |-- denseNetParameters.py     # The parameters of the differents models
+    |-- useModel.py     # Functions train/test/evaluate to use the neural network created
+|-- modelTrain.py   # The code to create/load a model and train it
+|-- modelEvaluate.py    # The code to load a model and use it to make predictions
+
+```
+
 ## How to use ```modelTrain.py```
 
 ### The commands line
