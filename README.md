@@ -89,6 +89,19 @@ The neural network takes 4 inputs :
 
 ### DenseNet Model
 
+The DenseNet model as been introduced by Gao Huang et al. as an ameloration of the ResNet architecture.
+It is composed with several blocks as followed (in a block, there is a skip connection next to each convolutional layers and a concatenation layer taking as input the skip connection and the outpout of the convolutional layer
+
+<p align = "center">
+<img src="images/DenseNet.PNG" width="375" height="300">
+</p>
+
+Between each "DenseNet Block" There is a transition block with a 2x2 Max Pooling :
+
+<p align = "center">
+<img src="images/DenseNetTransition.PNG" width=150" height="100">
+</p>
+
 ### Our DenseNetPerso
 
 ## The architecture of the project
