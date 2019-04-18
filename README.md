@@ -66,6 +66,8 @@ To be announced soon. (56.8%)
 
 # Our personnal model
 
-For this project we created 2 files : ```modelTrain.py``` and ```modelEvaluate.py```
+For this project we created 2 files : ```modelTrain.py``` and ```modelEvaluate.py```.
+- ```modelTrain.py``` is used to create/load and train a model.
+- ```modelEvaluate.py``` is used to load a model and use it to classify .wav files.
 
 
