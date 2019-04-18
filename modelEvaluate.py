@@ -65,8 +65,7 @@ def main():
     # The arguments 'light' are made to test the network on my poor little computer and its poor little CPU
     if args.light_all:
         args.model_id = 'small'
-    light_train = args.light_all or args.light_data or args.light_train  # Only 5 files in the train dataset
-    light_test = args.light_all or args.light_data or args.light_test  # Only 5 files in the test dataset
+    light_test = args.light_all or args.light_test  # Only 5 files in the test dataset
 
     if args.folder_id != '':  # folder-id win on the name of the model
         folder_id = args.folder_id.split('-')
@@ -96,7 +95,7 @@ def main():
     normalization_values = summaryDict['normalization_values']      # The values used to normalize the inputs
     inputs_used = summaryDict['inputs_used']        # The inputs used by our model
 
-    if light_train:
+    if light_test:
         # If we want to test on a little CPU
         g_data_dir = './GeneratedLightEvaluateDataset/'
         if not os.path.isdir(g_data_dir):

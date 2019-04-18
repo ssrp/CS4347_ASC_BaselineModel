@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="270ddb48-53b6-4ab8-a82f-417124ca7c15" name="Default" comment="" />
+    <list default="true" id="270ddb48-53b6-4ab8-a82f-417124ca7c15" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modelEvaluate.py" afterPath="$PROJECT_DIR$/modelEvaluate.py" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -10,7 +13,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.22937168">
+    <splitter split-orientation="horizontal" split-proportion="0.51849747">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
           <file leaf-file-name="modelTrain.py" pinned="false" current-in-tab="false">
@@ -29,8 +32,8 @@
           <file leaf-file-name="dataNormalization.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/DataGeneration/dataNormalization.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="66">
-                  <caret line="8" column="94" lean-forward="false" selection-start-line="8" selection-start-column="94" selection-end-line="8" selection-end-column="94" />
+                <state relative-caret-position="113">
+                  <caret line="246" column="7" lean-forward="false" selection-start-line="246" selection-start-column="7" selection-end-line="246" selection-end-column="7" />
                   <folding>
                     <element signature="e#0#12#0" expanded="true" />
                   </folding>
@@ -41,7 +44,7 @@
           <file leaf-file-name="inputGeneration.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/DataGeneration/inputGeneration.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="3850">
+                <state relative-caret-position="610">
                   <caret line="179" column="110" lean-forward="false" selection-start-line="179" selection-start-column="110" selection-end-line="179" selection-end-column="110" />
                   <folding>
                     <element signature="e#0#18#0" expanded="true" />
@@ -50,11 +53,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="modelEvaluate.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="modelEvaluate.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/modelEvaluate.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="3344">
-                  <caret line="160" column="24" lean-forward="false" selection-start-line="160" selection-start-column="24" selection-end-line="160" selection-end-column="24" />
+                <state relative-caret-position="2816">
+                  <caret line="128" column="0" lean-forward="false" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#47#0" expanded="true" />
                   </folding>
@@ -96,11 +99,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="DCASEDataset.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="DCASEDataset.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/DataGeneration/DCASEDataset.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="545">
-                  <caret line="143" column="0" lean-forward="false" selection-start-line="143" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
+                <state relative-caret-position="-987">
+                  <caret line="79" column="33" lean-forward="false" selection-start-line="79" selection-start-column="33" selection-end-line="79" selection-end-column="33" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
                   </folding>
@@ -127,10 +130,10 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-          <file leaf-file-name="modelTrain.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="modelTrain.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/modelTrain.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-381">
+                <state relative-caret-position="22">
                   <caret line="285" column="55" lean-forward="false" selection-start-line="285" selection-start-column="55" selection-end-line="285" selection-end-column="55" />
                   <folding>
                     <element signature="e#0#47#0" expanded="true" />
@@ -140,11 +143,21 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="outputGeneration.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="usegpu.sh" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/usegpu.sh">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="308">
+                  <caret line="14" column="1" lean-forward="false" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="outputGeneration.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/DataGeneration/outputGeneration.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1342">
-                  <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+                <state relative-caret-position="445">
+                  <caret line="56" column="102" lean-forward="false" selection-start-line="56" selection-start-column="102" selection-end-line="56" selection-end-column="102" />
                   <folding />
                 </state>
               </provider>
@@ -153,8 +166,8 @@
           <file leaf-file-name="useModel.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Pytorch/useModel.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="3762">
-                  <caret line="173" column="0" lean-forward="false" selection-start-line="173" selection-start-column="0" selection-end-line="173" selection-end-column="0" />
+                <state relative-caret-position="223">
+                  <caret line="153" column="38" lean-forward="true" selection-start-line="153" selection-start-column="38" selection-end-line="153" selection-end-column="38" />
                   <folding>
                     <element signature="e#0#12#0" expanded="true" />
                   </folding>
@@ -175,8 +188,8 @@
           <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/.gitignore">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2508">
-                  <caret line="114" column="25" lean-forward="false" selection-start-line="114" selection-start-column="25" selection-end-line="114" selection-end-column="25" />
+                <state relative-caret-position="619">
+                  <caret line="126" column="0" lean-forward="false" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -226,25 +239,25 @@
         <option value="$PROJECT_DIR$/InputGeneration/outputGeneration.py" />
         <option value="$PROJECT_DIR$/dataGeneration/outputGeneration.py" />
         <option value="$PROJECT_DIR$/dataGeneration/DCASEDataset.py" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/TestsPerso/test2.py" />
         <option value="$PROJECT_DIR$/Pytorch/DenseNet/DenseNetPerso.py" />
-        <option value="$PROJECT_DIR$/DataGeneration/dataNormalization.py" />
-        <option value="$PROJECT_DIR$/DataGeneration/DCASEDataset.py" />
-        <option value="$PROJECT_DIR$/DataGeneration/outputGeneration.py" />
         <option value="$PROJECT_DIR$/Pytorch/DenseNet/denseNetParameters.py" />
-        <option value="$PROJECT_DIR$/Pytorch/useModel.py" />
         <option value="$PROJECT_DIR$/DataGeneration/inputGeneration.py" />
-        <option value="$PROJECT_DIR$/modelEvaluate.py" />
         <option value="$PROJECT_DIR$/modelTrain.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/Pytorch/useModel.py" />
+        <option value="$PROJECT_DIR$/DataGeneration/DCASEDataset.py" />
+        <option value="$PROJECT_DIR$/DataGeneration/dataNormalization.py" />
+        <option value="$PROJECT_DIR$/modelEvaluate.py" />
+        <option value="$PROJECT_DIR$/DataGeneration/outputGeneration.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-11" />
-    <option name="y" value="-11" />
-    <option name="width" value="1942" />
-    <option name="height" value="1056" />
+    <option name="x" value="2870" />
+    <option name="y" value="1" />
+    <option name="width" value="980" />
+    <option name="height" value="1060" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -261,8 +274,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -278,38 +289,13 @@
             <path>
               <item name="CS4347_ASC_GroupProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="CS4347_ASC_GroupProject" type="462c0819:PsiDirectoryNode" />
-              <item name="Pytorch" type="462c0819:PsiDirectoryNode" />
+              <item name="Dataset" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CS4347_ASC_GroupProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="CS4347_ASC_GroupProject" type="462c0819:PsiDirectoryNode" />
-              <item name="Pytorch" type="462c0819:PsiDirectoryNode" />
-              <item name="DenseNet" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CS4347_ASC_GroupProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CS4347_ASC_GroupProject" type="462c0819:PsiDirectoryNode" />
-              <item name="SavedEvaluations" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CS4347_ASC_GroupProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CS4347_ASC_GroupProject" type="462c0819:PsiDirectoryNode" />
-              <item name="SavedEvaluations" type="462c0819:PsiDirectoryNode" />
-              <item name="small" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CS4347_ASC_GroupProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CS4347_ASC_GroupProject" type="462c0819:PsiDirectoryNode" />
-              <item name="SavedEvaluations" type="462c0819:PsiDirectoryNode" />
-              <item name="small" type="462c0819:PsiDirectoryNode" />
-              <item name="Model(small)_InputsUsed(1111)_NbEpochs(2)_(0)" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CS4347_ASC_GroupProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CS4347_ASC_GroupProject" type="462c0819:PsiDirectoryNode" />
-              <item name="SavedEvaluations" type="462c0819:PsiDirectoryNode" />
-              <item name="small" type="462c0819:PsiDirectoryNode" />
-              <item name="Model(small)_InputsUsed(1111)_NbEpochs(4)_(0)" type="462c0819:PsiDirectoryNode" />
+              <item name="Dataset" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CS4347_ASC_GroupProject" type="b2602c69:ProjectViewProjectNode" />
@@ -333,6 +319,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -480,13 +468,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1553414461849</updated>
-    </task>
-    <task id="LOCAL-00061" summary="Correction of baseline model">
-      <created>1555171801342</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1555171801342</updated>
     </task>
     <task id="LOCAL-00062" summary="Change of the default learning rate 0.01 -&gt; 0.001">
       <created>1555171861264</created>
@@ -824,20 +805,27 @@
       <option name="project" value="LOCAL" />
       <updated>1555521158960</updated>
     </task>
-    <option name="localTasksCounter" value="110" />
+    <task id="LOCAL-00110" summary="Add usegpu,sh to gitignore">
+      <created>1555586261814</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1555586261814</updated>
+    </task>
+    <option name="localTasksCounter" value="111" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-11" y="-11" width="1942" height="1056" extended-state="6" />
+    <frame x="1909" y="-10" width="1942" height="1072" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29027027" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.05027027" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2768166" sideWeight="0.16" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30795848" sideWeight="0.16324325" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.11303345" sideWeight="0.49783784" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22260669" sideWeight="0.49351352" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24972972" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23384254" sideWeight="0.84" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3160323" sideWeight="0.83675677" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -874,7 +862,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="move requirements.txt and delete baseline_PyTorch.py" />
     <MESSAGE value="Change the name : project_Pytorch.py -&gt; modelTrain.py" />
     <MESSAGE value="Add the file modelPredict.py" />
     <MESSAGE value="Print the best test accuracy at the end of the training" />
@@ -899,7 +886,8 @@
     <MESSAGE value="Add commentaries in modelEvaluate.py" />
     <MESSAGE value="Chnage number of --log-interval in modelTrain.py (10--&gt;20)" />
     <MESSAGE value="Change of the prints during the test" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change of the prints during the test" />
+    <MESSAGE value="Add usegpu,sh to gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add usegpu,sh to gitignore" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -908,7 +896,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(0011)_NbEpochs(1)_(0)/LossFigure_Model(small)_InputsUsed(0011)_NbEpochs(1)_(0).png" />
     <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(0011)_NbEpochs(1)_(0)/Summary_Model(small)_InputsUsed(0011)_NbEpochs(1)_(0).txt" />
     <entry file="file://$PROJECT_DIR$/TestsPerso/TestPerso2/test.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -961,14 +948,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(2)_(2)/LossFigure_Model(small)_InputsUsed(1111)_NbEpochs(2)_(2).png" />
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2508">
-          <caret line="114" column="25" lean-forward="false" selection-start-line="114" selection-start-column="25" selection-end-line="114" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Pytorch/baseline_PyTorch.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1056">
@@ -998,27 +977,9 @@
         <state relative-caret-position="264">
           <caret line="347" column="88" lean-forward="false" selection-start-line="347" selection-start-column="88" selection-end-line="347" selection-end-column="88" />
           <folding>
-            <element signature="e#0#47#0" expanded="true" />
+            <element signature="e#0#47#0" expanded="false" />
             <marker date="1555514195441" expanded="true" signature="17114:17689" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DataGeneration/dataNormalization.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="8" column="94" lean-forward="false" selection-start-line="8" selection-start-column="94" selection-end-line="8" selection-end-column="94" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DataGeneration/outputGeneration.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1342">
-          <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1042,31 +1003,6 @@
     <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(6)_(1)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(6)_(1).png" />
     <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(7)_(0)/LossFigure_Model(small)_InputsUsed(1111)_NbEpochs(7)_(0).png" />
     <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(7)_(0)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(7)_(0).png" />
-    <entry file="file://$PROJECT_DIR$/DataGeneration/inputGeneration.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3850">
-          <caret line="179" column="110" lean-forward="false" selection-start-line="179" selection-start-column="110" selection-end-line="179" selection-end-column="110" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modelEvaluate.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3344">
-          <caret line="160" column="24" lean-forward="false" selection-start-line="160" selection-start-column="24" selection-end-line="160" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#47#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(4)_(0)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(4)_(0).png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(4)_(0)/LossFigure_Model(small)_InputsUsed(1111)_NbEpochs(4)_(0).png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -1088,34 +1024,93 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DataGeneration/DCASEDataset.py">
+    <entry file="file://$PROJECT_DIR$/modelTrain.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="545">
-          <caret line="143" column="0" lean-forward="false" selection-start-line="143" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
+        <state relative-caret-position="22">
+          <caret line="285" column="55" lean-forward="false" selection-start-line="285" selection-start-column="55" selection-end-line="285" selection-end-column="55" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#47#0" expanded="true" />
+            <marker date="1555521135483" expanded="true" signature="240:258" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/usegpu.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="14" column="1" lean-forward="false" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="619">
+          <caret line="126" column="0" lean-forward="false" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(4)_(0)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(4)_(0).png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataGeneration/inputGeneration.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="610">
+          <caret line="179" column="110" lean-forward="false" selection-start-line="179" selection-start-column="110" selection-end-line="179" selection-end-column="110" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Pytorch/useModel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3762">
-          <caret line="173" column="0" lean-forward="false" selection-start-line="173" selection-start-column="0" selection-end-line="173" selection-end-column="0" />
+        <state relative-caret-position="223">
+          <caret line="153" column="38" lean-forward="true" selection-start-line="153" selection-start-column="38" selection-end-line="153" selection-end-column="38" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modelTrain.py">
+    <entry file="file://$PROJECT_DIR$/DataGeneration/DCASEDataset.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-381">
-          <caret line="285" column="55" lean-forward="false" selection-start-line="285" selection-start-column="55" selection-end-line="285" selection-end-column="55" />
+        <state relative-caret-position="-987">
+          <caret line="79" column="33" lean-forward="false" selection-start-line="79" selection-start-column="33" selection-end-line="79" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataGeneration/dataNormalization.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="246" column="7" lean-forward="false" selection-start-line="246" selection-start-column="7" selection-end-line="246" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modelEvaluate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2816">
+          <caret line="128" column="0" lean-forward="false" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
           <folding>
             <element signature="e#0#47#0" expanded="true" />
-            <marker date="1555521135483" expanded="true" signature="240:258" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataGeneration/outputGeneration.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="445">
+          <caret line="56" column="102" lean-forward="false" selection-start-line="56" selection-start-column="102" selection-end-line="56" selection-end-column="102" />
+          <folding />
         </state>
       </provider>
     </entry>
