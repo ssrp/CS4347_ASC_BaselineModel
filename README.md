@@ -104,6 +104,10 @@ Between each "DenseNet Block" There is a transition block with a 2x2 Max Pooling
 
 ### Our DenseNetPerso
 
+<p align = "center">
+<img src="images/Model Architecture.PNG" width=500" height="300">
+</p>
+
 ## The architecture of the project
 
 ## How to use ```modelTrain.py```
