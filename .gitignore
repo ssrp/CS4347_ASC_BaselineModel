@@ -122,5 +122,8 @@ Pytorch/DenseNet_old/
 Pytorch/DenseNet_old2/
 Pytorch/baseline_PyTorch.py
 
+# THe programme to run the code on GPU
+usegpu.sh
+
 # IDE
 .vscode
