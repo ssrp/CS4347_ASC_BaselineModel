@@ -164,6 +164,74 @@ The project structure with the usable code is this one :
 
 ```
 
+This is the structure of all the data saved or used : (all this folder are ignored in the git repository)
+
+```shell
+.CS4347_ASC_GroupProject
+|-- .Dataset*   # This folder contains the dataset to the train an test part
+    |-- .train
+        |-- .audio    # All the .wav file for the train part
+            |-- 0.wav
+                ..
+        |-- train_labels.csv
+    |-- .test
+        |-- .audio    # All the .wav file for the test part
+            |-- 4286.wav
+                ..
+        |-- test_labels.csv
+|-- .evaluation_data*      # The dataset for the evaluation part
+    |-- .audio
+        |-- 0.wav
+            ..
+    |-- evaluate_labels
+|-- .GeneratedDataset**     The saved files of the extracted inputs of the .wav files in Dataset
+    |-- .train
+        |-- 0.npy
+        ..
+     |-- .test
+        |-- 4286.npy
+        ..
+     |-- input_parameters.npy     # Caracteristic of the inputs for the neural network
+     |-- normalization_values.npy   # Values to normalize the data before going in the neural network
+|-- .GeneratedEvaluateDataset**     The saved files of the extracted inputs of the .wav files in evaluation_data
+    |-- 0.npy
+        ..
+|-- .GeneratedLightDataset**     The saved files of the extracted inputs of the .wav files in Dataset (for working with a small number of data)
+    |-- .train
+        |-- 0.npy
+        ..
+     |-- .test
+        |-- 4286.npy
+        ..
+     |-- input_parameters.npy     # Caracteristic of the inputs for the neural network
+     |-- normalization_values.npy   # Values to normalize the data before going in the neural network
+|-- .GeneratedLightEvaluateDataset**     The saved files of the extracted inputs of the .wav files in evaluation_data (for working with a small number of data)
+    |-- 0.npy
+        ..
+|-- .SavedEvaluations**    # Contains the saved outputs of the models for the evaluation task
+    |-- .big               # id of the model
+        |-- .Model(big)_InputsUsed(1111)_NbEpochs(200)_(0)   # The name of the model saved
+            |-- predict_labels.csv    # The .csv file with the prediction of the labels asked
+            |-- predictionsDict.npy   # The prediction of the labels in the .npy file
+        ..
+    ..
+|-- .SavedModels**         # Contains all the needed information of the model to load it and its training
+    |-- .big               # id of the model
+        |-- .Model(big)_InputsUsed(1111)_NbEpochs(200)_(0)   # The name of the model saved
+            |-- AccuracyFigure_Model(big)_InputsUsed(1111)_NbEpochs(200)_(0).png    # The plot of the evolution of the testing and training accuracy through the epochs
+            |-- LossFigure_Model(big)_InputsUsed(1111)_NbEpochs(200)_(0).png    # The plot of the evolution of the testing and training loss through the epochs
+            |-- Model(big)_InputsUsed(1111)_NbEpochs(200)_(0).npy   # All the information needed to load the model and the informations about its training
+            |-- Model(big)_InputsUsed(1111)_NbEpochs(200)_(0).npt   # The saved model
+            |-- Summary_Model(big)_InputsUsed(1111)_NbEpochs(200)_(0).txt   # Text file which summarize briefly the model saved
+        ..
+    ..
+
+```
+
+```folder*``` means that the folder has to be added to the project by hand
+
+```folder**``` means that the folder is automatically created by the project
+
 ## How to use ```modelTrain.py```
 
 ### The commands line
