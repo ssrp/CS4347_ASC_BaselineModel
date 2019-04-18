@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="270ddb48-53b6-4ab8-a82f-417124ca7c15" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataGeneration/outputGeneration.py" afterPath="$PROJECT_DIR$/DataGeneration/outputGeneration.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/baseline.png" afterPath="$PROJECT_DIR$/images/baseline.png" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -32,7 +32,7 @@
           <file leaf-file-name="dataNormalization.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/DataGeneration/dataNormalization.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="113">
+                <state relative-caret-position="5302">
                   <caret line="246" column="7" lean-forward="false" selection-start-line="246" selection-start-column="7" selection-end-line="246" selection-end-column="7" />
                   <folding>
                     <element signature="e#0#12#0" expanded="true" />
@@ -44,7 +44,7 @@
           <file leaf-file-name="inputGeneration.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/DataGeneration/inputGeneration.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="610">
+                <state relative-caret-position="3850">
                   <caret line="179" column="110" lean-forward="false" selection-start-line="179" selection-start-column="110" selection-end-line="179" selection-end-column="110" />
                   <folding>
                     <element signature="e#0#18#0" expanded="true" />
@@ -102,7 +102,7 @@
           <file leaf-file-name="DCASEDataset.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/DataGeneration/DCASEDataset.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-987">
+                <state relative-caret-position="1650">
                   <caret line="79" column="33" lean-forward="false" selection-start-line="79" selection-start-column="33" selection-end-line="79" selection-end-column="33" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
@@ -133,22 +133,12 @@
           <file leaf-file-name="modelTrain.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/modelTrain.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="22">
+                <state relative-caret-position="0">
                   <caret line="285" column="55" lean-forward="false" selection-start-line="285" selection-start-column="55" selection-end-line="285" selection-end-column="55" />
                   <folding>
                     <element signature="e#0#47#0" expanded="true" />
                     <marker date="1555521135483" expanded="true" signature="240:258" ph="..." />
                   </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="usegpu.sh" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/usegpu.sh">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="308">
-                  <caret line="14" column="1" lean-forward="false" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-                  <folding />
                 </state>
               </provider>
             </entry>
@@ -166,7 +156,7 @@
           <file leaf-file-name="useModel.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Pytorch/useModel.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="375">
+                <state relative-caret-position="3520">
                   <caret line="162" column="0" lean-forward="true" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#12#0" expanded="true" />
@@ -188,7 +178,7 @@
           <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/.gitignore">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="619">
+                <state relative-caret-position="2772">
                   <caret line="126" column="0" lean-forward="false" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
                   <folding />
                 </state>
@@ -284,36 +274,7 @@
             <path>
               <item name="CS4347_ASC_GroupProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="CS4347_ASC_GroupProject" type="462c0819:PsiDirectoryNode" />
-              <item name="DataGeneration" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CS4347_ASC_GroupProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CS4347_ASC_GroupProject" type="462c0819:PsiDirectoryNode" />
-              <item name="Dataset" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CS4347_ASC_GroupProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CS4347_ASC_GroupProject" type="462c0819:PsiDirectoryNode" />
-              <item name="Dataset" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CS4347_ASC_GroupProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CS4347_ASC_GroupProject" type="462c0819:PsiDirectoryNode" />
-              <item name="SavedModels" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CS4347_ASC_GroupProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CS4347_ASC_GroupProject" type="462c0819:PsiDirectoryNode" />
-              <item name="SavedModels" type="462c0819:PsiDirectoryNode" />
-              <item name="small" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CS4347_ASC_GroupProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CS4347_ASC_GroupProject" type="462c0819:PsiDirectoryNode" />
-              <item name="SavedModels" type="462c0819:PsiDirectoryNode" />
-              <item name="small" type="462c0819:PsiDirectoryNode" />
-              <item name="Model(small)_InputsUsed(1111)_NbEpochs(4)_(0)" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -329,18 +290,19 @@
     <property name="add_unversioned_files" value="$PROJECT_DIR$/TestsPerso/test.py&#10;D:/Utilisateurs/Valentin/Etudes/NUS/Semestre_Janvier_Mai/CS4347 Sound and Music Computing/Project/Code/CS4347_ASC_GroupProject/TestsPerso/externalFileClass.py&#10;D:/Utilisateurs/Valentin/Etudes/NUS/Semestre_Janvier_Mai/CS4347 Sound and Music Computing/Project/Code/CS4347_ASC_GroupProject/TestsPerso/testClass.py" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject" />
-      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\InputGeneration" />
-      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\Pytorch" />
-      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\TestsPerso\TestPerso2" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject" />
       <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\Pytorch" />
       <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\TestsPerso\TestPerso2" />
       <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\Pytorch\DenseNet" />
       <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\test" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\images" />
+      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject" />
+      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\InputGeneration" />
+      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\Pytorch" />
+      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\TestsPerso\TestPerso2" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -468,13 +430,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1553414461849</updated>
-    </task>
-    <task id="LOCAL-00064" summary="Can now saved the model in different folders with a specific name">
-      <created>1555174034526</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1555174034526</updated>
     </task>
     <task id="LOCAL-00065" summary="Save the output during the train of the model">
       <created>1555178287501</created>
@@ -812,21 +767,27 @@
       <option name="project" value="LOCAL" />
       <updated>1555596602058</updated>
     </task>
-    <option name="localTasksCounter" value="113" />
+    <task id="LOCAL-00113" summary="Correction of the function return_predicted_labels">
+      <created>1555597032016</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1555597032016</updated>
+    </task>
+    <option name="localTasksCounter" value="114" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="1909" y="-10" width="1942" height="1072" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.05027027" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3762162" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30795848" sideWeight="0.16324325" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.11303345" sideWeight="0.49783784" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11303345" sideWeight="0.49783784" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22260669" sideWeight="0.49351352" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24972972" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.035755478" sideWeight="0.83675677" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.035632186" sideWeight="0.83675677" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -863,7 +824,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Print the best test accuracy at the end of the training" />
     <MESSAGE value="Add the input_parameters in the saved summaryDict" />
     <MESSAGE value="Change the print when we save a model" />
     <MESSAGE value="Change the description modelTrain.py and modelPredict.py" />
@@ -888,7 +848,8 @@
     <MESSAGE value="Add usegpu,sh to gitignore" />
     <MESSAGE value="Make sure the order of the predictions is good" />
     <MESSAGE value="Import the prediction from GPU to CPU" />
-    <option name="LAST_COMMIT_MESSAGE" value="Import the prediction from GPU to CPU" />
+    <MESSAGE value="Correction of the function return_predicted_labels" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correction of the function return_predicted_labels" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -897,7 +858,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(0011)_NbEpochs(1)_(0)/Summary_Model(small)_InputsUsed(0011)_NbEpochs(1)_(0).txt" />
     <entry file="file://$PROJECT_DIR$/TestsPerso/TestPerso2/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="44">
@@ -936,7 +896,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/baseline.png">
+    <entry file="file://$PROJECT_DIR$/images/baseline.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
@@ -1027,7 +987,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/modelTrain.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
+        <state relative-caret-position="0">
           <caret line="285" column="55" lean-forward="false" selection-start-line="285" selection-start-column="55" selection-end-line="285" selection-end-column="55" />
           <folding>
             <element signature="e#0#47#0" expanded="true" />
@@ -1046,7 +1006,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="619">
+        <state relative-caret-position="2772">
           <caret line="126" column="0" lean-forward="false" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
           <folding />
         </state>
@@ -1059,7 +1019,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DataGeneration/inputGeneration.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="610">
+        <state relative-caret-position="3850">
           <caret line="179" column="110" lean-forward="false" selection-start-line="179" selection-start-column="110" selection-end-line="179" selection-end-column="110" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
@@ -1069,7 +1029,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DataGeneration/DCASEDataset.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-987">
+        <state relative-caret-position="1650">
           <caret line="79" column="33" lean-forward="false" selection-start-line="79" selection-start-column="33" selection-end-line="79" selection-end-column="33" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
@@ -1079,7 +1039,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DataGeneration/dataNormalization.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
+        <state relative-caret-position="5302">
           <caret line="246" column="7" lean-forward="false" selection-start-line="246" selection-start-column="7" selection-end-line="246" selection-end-column="7" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
@@ -1089,7 +1049,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Pytorch/useModel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
+        <state relative-caret-position="3520">
           <caret line="162" column="0" lean-forward="true" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
@@ -1104,6 +1064,14 @@
           <folding>
             <element signature="e#0#47#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/amazing_code2_console_output.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
