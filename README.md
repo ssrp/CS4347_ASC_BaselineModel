@@ -64,6 +64,8 @@ The baseline system implements a convolutional neural network (CNN) based approa
 ### Baseline Results
 To be announced soon. (56.8%)
 
+---
+
 # Our personnal model
 
 For this project we created 2 files : ```modelTrain.py``` and ```modelEvaluate.py```.
@@ -73,6 +75,18 @@ For this project we created 2 files : ```modelTrain.py``` and ```modelEvaluate.p
 ## The architecture of the neural network
 
 ### The inputs
+
+The neural network takes 4 inputs :
+- 1) The waveform of the audio (2 channels : right and left)
+- 2) The mel spectrogram (2 channels : right and left)
+- 3) An input called "features" : We first divide the the audios in buffers of length 2048 and 0.5 overlap. Then we extract 5 features on each buffers :
+  - The Root Mean Square (RMS)
+  - The Zero Crossing Rate (ZCR)
+  - The Spectral Centroid (SC)
+  - The Spectral Roll-Off (SRO)
+  - The Spectral Flatness Mesure (SFM)
+The result is the evolution of these features through the time in the audio file
+- 4) The mean and the variance of these features through all the buffers of the audio file
 
 ### DenseNet Model
 
