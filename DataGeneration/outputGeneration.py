@@ -27,7 +27,7 @@ def return_predicted_labels(predictions_list):
     """
     predicted_labels = []
     for i in range(len(predictions_list)):
-        predicted_labels.append(labels[i])
+        predicted_labels.append(labels[predictions_list[i]])
     return predicted_labels
 
 

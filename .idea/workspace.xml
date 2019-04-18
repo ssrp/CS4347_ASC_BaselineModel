@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="270ddb48-53b6-4ab8-a82f-417124ca7c15" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modelEvaluate.py" afterPath="$PROJECT_DIR$/modelEvaluate.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataGeneration/outputGeneration.py" afterPath="$PROJECT_DIR$/DataGeneration/outputGeneration.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -13,7 +13,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.51849747">
+    <splitter split-orientation="horizontal" split-proportion="0.3496583">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
           <file leaf-file-name="modelTrain.py" pinned="false" current-in-tab="false">
@@ -56,8 +56,8 @@
           <file leaf-file-name="modelEvaluate.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/modelEvaluate.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2816">
-                  <caret line="128" column="0" lean-forward="false" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+                <state relative-caret-position="495">
+                  <caret line="134" column="0" lean-forward="false" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#47#0" expanded="true" />
                   </folding>
@@ -156,8 +156,8 @@
           <file leaf-file-name="outputGeneration.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/DataGeneration/outputGeneration.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="445">
-                  <caret line="56" column="102" lean-forward="false" selection-start-line="56" selection-start-column="102" selection-end-line="56" selection-end-column="102" />
+                <state relative-caret-position="286">
+                  <caret line="25" column="34" lean-forward="true" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
                   <folding />
                 </state>
               </provider>
@@ -166,8 +166,8 @@
           <file leaf-file-name="useModel.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Pytorch/useModel.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="223">
-                  <caret line="153" column="38" lean-forward="true" selection-start-line="153" selection-start-column="38" selection-end-line="153" selection-end-column="38" />
+                <state relative-caret-position="375">
+                  <caret line="162" column="0" lean-forward="true" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#12#0" expanded="true" />
                   </folding>
@@ -245,10 +245,10 @@
         <option value="$PROJECT_DIR$/DataGeneration/inputGeneration.py" />
         <option value="$PROJECT_DIR$/modelTrain.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/Pytorch/useModel.py" />
         <option value="$PROJECT_DIR$/DataGeneration/DCASEDataset.py" />
         <option value="$PROJECT_DIR$/DataGeneration/dataNormalization.py" />
         <option value="$PROJECT_DIR$/modelEvaluate.py" />
+        <option value="$PROJECT_DIR$/Pytorch/useModel.py" />
         <option value="$PROJECT_DIR$/DataGeneration/outputGeneration.py" />
       </list>
     </option>
@@ -468,20 +468,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1553414461849</updated>
-    </task>
-    <task id="LOCAL-00062" summary="Change of the default learning rate 0.01 -&gt; 0.001">
-      <created>1555171861264</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1555171861264</updated>
-    </task>
-    <task id="LOCAL-00063" summary="Can now saved the model in different folders with a specific name">
-      <created>1555173848122</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1555173848122</updated>
     </task>
     <task id="LOCAL-00064" summary="Can now saved the model in different folders with a specific name">
       <created>1555174034526</created>
@@ -812,11 +798,26 @@
       <option name="project" value="LOCAL" />
       <updated>1555586261814</updated>
     </task>
-    <option name="localTasksCounter" value="111" />
+    <task id="LOCAL-00111" summary="Make sure the order of the predictions is good">
+      <created>1555595848030</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1555595848030</updated>
+    </task>
+    <task id="LOCAL-00112" summary="Import the prediction from GPU to CPU">
+      <created>1555596602057</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1555596602058</updated>
+    </task>
+    <option name="localTasksCounter" value="113" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="1909" y="-10" width="1942" height="1072" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.05027027" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -825,7 +826,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22260669" sideWeight="0.49351352" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24972972" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3160323" sideWeight="0.83675677" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.035755478" sideWeight="0.83675677" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -862,8 +863,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Change the name : project_Pytorch.py -&gt; modelTrain.py" />
-    <MESSAGE value="Add the file modelPredict.py" />
     <MESSAGE value="Print the best test accuracy at the end of the training" />
     <MESSAGE value="Add the input_parameters in the saved summaryDict" />
     <MESSAGE value="Change the print when we save a model" />
@@ -887,7 +886,9 @@
     <MESSAGE value="Chnage number of --log-interval in modelTrain.py (10--&gt;20)" />
     <MESSAGE value="Change of the prints during the test" />
     <MESSAGE value="Add usegpu,sh to gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add usegpu,sh to gitignore" />
+    <MESSAGE value="Make sure the order of the predictions is good" />
+    <MESSAGE value="Import the prediction from GPU to CPU" />
+    <option name="LAST_COMMIT_MESSAGE" value="Import the prediction from GPU to CPU" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1066,16 +1067,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Pytorch/useModel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="153" column="38" lean-forward="true" selection-start-line="153" selection-start-column="38" selection-end-line="153" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DataGeneration/DCASEDataset.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-987">
@@ -1096,10 +1087,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Pytorch/useModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="162" column="0" lean-forward="true" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/modelEvaluate.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2816">
-          <caret line="128" column="0" lean-forward="false" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+        <state relative-caret-position="495">
+          <caret line="134" column="0" lean-forward="false" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
           <folding>
             <element signature="e#0#47#0" expanded="true" />
           </folding>
@@ -1108,8 +1109,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DataGeneration/outputGeneration.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="56" column="102" lean-forward="false" selection-start-line="56" selection-start-column="102" selection-end-line="56" selection-end-column="102" />
+        <state relative-caret-position="286">
+          <caret line="25" column="34" lean-forward="true" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
           <folding />
         </state>
       </provider>
