@@ -85,7 +85,7 @@ The neural network takes 4 inputs :
   - The Spectral Centroid (SC)
   - The Spectral Roll-Off (SRO)
   - The Spectral Flatness Mesure (SFM)
-- 4) The mean and the variance of these features through all the buffers of the audio file
+- 4) The mean and the standard deviation of these features through all the buffers of the audio file (input called "fmsdt" : "features-mean-standard-deviation)
 
 ### DenseNet Model
 
