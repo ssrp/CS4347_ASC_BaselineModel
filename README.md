@@ -62,8 +62,10 @@ The baseline system implements a convolutional neural network (CNN) based approa
     - Model performance after each epoch is evaluated on the test set, and best performing model is selected.
 
 ### Baseline Results
-To be announced soon. (58%)
+To be announced soon. (56.8%)
 
 # Our personnal model
+
+For this project we created 2 files : ```modelTrain.py``` and ```modelEvaluate.py```
 
 
