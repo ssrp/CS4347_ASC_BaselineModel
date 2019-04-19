@@ -170,7 +170,7 @@ def saveFigures(folder, name, summaryDict):
     plt.figure()
     plt.plot(x, loss_train, 'b', label='Training Loss')
     plt.plot(x, loss_test, 'r', label='Testing Loss')
-    plt.title('Variation of the Loss through the buffers\n' + name)
+    plt.title('Variation of the Loss through the epochs\n' + name)
     plt.xlabel('Epoch')
     plt.ylabel('Loss value')
     plt.plot([1, nb_epochs], [best_loss_train, best_loss_train], 'b--',
@@ -186,7 +186,7 @@ def saveFigures(folder, name, summaryDict):
     plt.figure()
     plt.plot(x, acc_train, 'b', label='Training Accuracy')
     plt.plot(x, acc_test, 'r', label='Testing Accuracy')
-    plt.title('Variation of the Accuracy through the buffers\n' + name)
+    plt.title('Variation of the Accuracy through the epochs\n' + name)
     plt.xlabel('Epoch')
     plt.ylabel('Accuracy value (%)')
     plt.plot([1, nb_epochs], [best_acc_train, best_acc_train], 'b--',
