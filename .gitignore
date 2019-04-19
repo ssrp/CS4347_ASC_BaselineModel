@@ -108,21 +108,22 @@ venv.bak/
 
 # Dataset
 Dataset/
+evaluation_data
+# Generated Datasets
 GeneratedDataset/
 GeneratedLightDataset/
-evaluation_data/
-GeneratedLightEvaluateDataset/
 GeneratedEvaluateDataset/
-# Saved Models
+GeneratedLightEvaluateDataset/
+
+# Saved Models and Outputs
 SavedModels/
 SavedEvaluations/
-# Tests
+
+# Tests (personnal folder)
 TestsPerso/
-Pytorch/DenseNet_old/
-Pytorch/DenseNet_old2/
 Pytorch/baseline_PyTorch.py
 
-# THe programme to run the code on GPU
+# The programme to run the code on GPU
 usegpu.sh
 
 # IDE
