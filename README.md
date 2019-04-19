@@ -236,7 +236,52 @@ This is the structure of all the data saved or used : (all this folder are ignor
 
 ### The commands line
 
+To train a model, the command line is : (ou have to be in the folder CS4347_ASC_GroupProject)
+```shell
+python modelTrain.py
+```
+
 ### The Description of the Arguments
+
+You can add multiple arguments :
+#### Arguments from the baselign
+- ```--batch-size=16``` : The size of the batches for the training and testing
+- ```--epochs=50```: the number of epochs for the train part
+- ```--lr=0.001```: the value of the learning rate for the training part
+- ```--no-cuda=False```: disable CUDA training
+- ```--seed=1```: random seed
+- ```--log-interval=20```: how many batch to wait before logging training status
+- ```--no-saved-model=False```: For saving the model at the end of the training
+#### Personal arguments
+
+- ```--name=''```: If we want to give a name to our model (will appear in the name of the folder where it is saved)
+- ```--model-id=big```: The id of our model : the dn_parameters['name'] in the file. It can be :
+  - ```small```
+  - ```medium```
+  - ```mediumTest```
+  - ```big```
+- ```--inputs-used=1111```: Booleans saying if the input is used : ```1``` means "used" and ```0``` means "not used". And the order is : waveform, spectrum, features, fmstd. For example ```1111``` means that we want to use all the inputs. `1001` means that we want to use only the waveform and the fmstd.
+- ```--load-model=''``` : if we want to load a model. There is 2 cases :
+  - 1) The model has no name and then it is stored in a folder like this : "Model(```big```)_InputUsed(```1111```)_NbEpochs(```300```)_(```0```). Then to load this model, you have to write :
+  ```shell
+  python modelTrain.py --load-model big-1111-300-0
+  ```
+  - 2) The model has name and then it is stored in a folder like this : "Model(```big```)_InputUsed(```1111```)_(```myName```)_NbEpochs(```300```)_(```0```). Then to load this model, you have to write :
+  ```shell
+  python modelTrain.py --load-model big-1111-myName-300-0
+  ```
+ 
+##### To test if it works on CPU
+- ```--light-train=False```: Set to True if you want to train on a small number of data (to test on CPU for example)
+- ```--light-test=False```: Set to True if you want to test on a small number of data (to test on CPU for example)
+- ```--light-data=False```: If True, set ```--light-train``` and ```--light-test``` to True
+- ```--light-all=False```: If True, set ```--light-data``` to true and ```--model-id``` to 'small'
+
+### What it does
+
+If asked, it will load the model ```--load-model```.
+It will train the model ```--model-id``` through ```--epochs``` epochs.
+And save the everything in the folder : "./SavedModel/```--model-id```/Model(```--model-id```)\_(```--inputs-used```)\_NbEpochs(```-epochs```)\_(```id```)" if it has no name, if it has a name it will save everything in the folder : "./SavedModel/```--model-id```/Model(```--model-id```)\_(```--inputs-used```)\_(```myName```)\_NbEpochs(```-epochs```)\_(```id```)". ```id``` is just a number created by the code to differentiate several saving of the same training.
 
 ## How to use ```modelEvaluate.py```
 
