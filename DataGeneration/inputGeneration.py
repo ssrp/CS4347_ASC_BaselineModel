@@ -168,32 +168,34 @@ def saveFigures(folder, name, summaryDict):
     x = np.arange(1, nb_epochs + 1)
     # Save of the loss
     plt.figure()
-    plt.plot(x, loss_train, 'b', label='Training Loss')
-    plt.plot(x, loss_test, 'r', label='Testing Loss')
+    plt.plot(x, loss_train, 'steelblue', label='Training Loss')
+    plt.plot(x, loss_test, 'darkorange', label='Testing Loss')
     plt.title('Variation of the Loss through the epochs\n' + name)
     plt.xlabel('Epoch')
     plt.ylabel('Loss value')
-    plt.plot([1, nb_epochs], [best_loss_train, best_loss_train], 'b--',
+    plt.plot([1, nb_epochs], [best_loss_train, best_loss_train], 'steelblue', linestyle='--',
              label='Model training loss : {0}'.format(round(best_loss_train, 4)))
-    plt.plot([1, nb_epochs], [best_loss_test, best_loss_test], 'r--',
+    plt.plot([1, nb_epochs], [best_loss_test, best_loss_test], color='darkorange', linestyle='--',
              label='Model testing loss : {0}'.format(round(best_loss_test, 4)))
-    plt.plot([best_epoch, best_epoch], [min_loss, max_loss], 'k--', label='Best Epoch : {0}'.format(best_epoch))
+    plt.plot([best_epoch, best_epoch], [min_loss, max_loss], color='dimgray', linestyle='--',
+             label='Best Epoch : {0}'.format(best_epoch))
     plt.legend()
     plt.grid()
     plt.savefig(os.path.join(folder, 'LossFigure_' + name + '.png'))
 
     # Save the accuracy
     plt.figure()
-    plt.plot(x, acc_train, 'b', label='Training Accuracy')
-    plt.plot(x, acc_test, 'r', label='Testing Accuracy')
+    plt.plot(x, acc_train, 'steelblue', label='Training Accuracy')
+    plt.plot(x, acc_test, 'darkorange', label='Testing Accuracy')
     plt.title('Variation of the Accuracy through the epochs\n' + name)
     plt.xlabel('Epoch')
     plt.ylabel('Accuracy value (%)')
-    plt.plot([1, nb_epochs], [best_acc_train, best_acc_train], 'b--',
+    plt.plot([1, nb_epochs], [best_acc_train, best_acc_train], color='steelblue', linestyle='--',
              label='Model train accuracy : {0}'.format(round(best_acc_train, 2)))
-    plt.plot([1, nb_epochs], [best_acc_test, best_acc_test], 'r--',
+    plt.plot([1, nb_epochs], [best_acc_test, best_acc_test], color='darkorange', linestyle='--',
              label='Model test accuracy : {0}'.format(round(best_acc_test, 2)))
-    plt.plot([best_epoch, best_epoch], [min_acc, max_acc], 'k--', label='Best Epoch : {0}'.format(best_epoch))
+    plt.plot([best_epoch, best_epoch], [min_acc, max_acc], color='dimgray', linestyle='--',
+             label='Best Epoch : {0}'.format(best_epoch))
     plt.legend()
     plt.grid()
     plt.savefig(os.path.join(folder, 'AccuracyFigure_' + name + '.png'))

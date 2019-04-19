@@ -13,13 +13,13 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.9">
+    <splitter split-orientation="horizontal" split-proportion="0.8947791">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
           <file leaf-file-name="modelTrain.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/modelTrain.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="5016">
+                <state relative-caret-position="0">
                   <caret line="236" column="0" lean-forward="false" selection-start-line="236" selection-start-column="0" selection-end-line="236" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#47#0" expanded="true" />
@@ -29,23 +29,23 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="dataNormalization.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/DataGeneration/dataNormalization.py">
+          <file leaf-file-name="newPlot.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/TestsPerso/help/newPlot.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="5302">
-                  <caret line="246" column="7" lean-forward="false" selection-start-line="246" selection-start-column="7" selection-end-line="246" selection-end-column="7" />
+                <state relative-caret-position="88">
+                  <caret line="4" column="14" lean-forward="false" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
                   <folding>
-                    <element signature="e#0#12#0" expanded="true" />
+                    <element signature="e#0#31#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="inputGeneration.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="inputGeneration.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/DataGeneration/inputGeneration.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="412">
-                  <caret line="188" column="58" lean-forward="false" selection-start-line="188" selection-start-column="58" selection-end-line="188" selection-end-column="58" />
+                <state relative-caret-position="242">
+                  <caret line="179" column="93" lean-forward="false" selection-start-line="179" selection-start-column="93" selection-end-line="179" selection-end-column="93" />
                   <folding>
                     <element signature="e#0#18#0" expanded="true" />
                   </folding>
@@ -53,10 +53,48 @@
               </provider>
             </entry>
           </file>
+          <file leaf-file-name="AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(2)_(1).png" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(2)_(1)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(2)_(1).png">
+              <provider selected="true" editor-type-id="images">
+                <state />
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="LossFigure_Model(small)_InputsUsed(1111)_NbEpochs(2)_(1).png" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(2)_(1)/LossFigure_Model(small)_InputsUsed(1111)_NbEpochs(2)_(1).png">
+              <provider selected="true" editor-type-id="images">
+                <state />
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="AccuracyFigure_Model(big)_InputsUsed(1100)_NbEpochs(300)_(1).png" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/SavedModels/big/Model(big)_InputsUsed(1100)_NbEpochs(300)_(1)/AccuracyFigure_Model(big)_InputsUsed(1100)_NbEpochs(300)_(1).png">
+              <provider selected="true" editor-type-id="images">
+                <state />
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="LossFigure_Model(big)_InputsUsed(1100)_NbEpochs(300)_(1).png" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/SavedModels/big/Model(big)_InputsUsed(1100)_NbEpochs(300)_(1)/LossFigure_Model(big)_InputsUsed(1100)_NbEpochs(300)_(1).png">
+              <provider selected="true" editor-type-id="images">
+                <state />
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="UpdateNpy.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/TestsPerso/help/UpdateNpy.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="462">
+                  <caret line="21" column="30" lean-forward="false" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
           <file leaf-file-name="modelEvaluate.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/modelEvaluate.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="726">
+                <state relative-caret-position="-1354">
                   <caret line="41" column="56" lean-forward="false" selection-start-line="41" selection-start-column="56" selection-end-line="41" selection-end-column="56" />
                   <folding>
                     <element signature="e#0#47#0" expanded="true" />
@@ -65,57 +103,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(4)_(0).png" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(4)_(0)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(4)_(0).png">
-              <provider selected="true" editor-type-id="images">
-                <state />
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="LossFigure_Model(small)_InputsUsed(1111)_NbEpochs(4)_(0).png" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(4)_(0)/LossFigure_Model(small)_InputsUsed(1111)_NbEpochs(4)_(0).png">
-              <provider selected="true" editor-type-id="images">
-                <state />
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="predictionsDict.npy" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/SavedEvaluations/small/Model(small)_InputsUsed(1111)_NbEpochs(4)_(0)/predictionsDict.npy">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="predicted_labels.csv" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/SavedEvaluations/small/Model(small)_InputsUsed(1111)_NbEpochs(4)_(0)/predicted_labels.csv">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="DCASEDataset.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/DataGeneration/DCASEDataset.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1650">
-                  <caret line="79" column="33" lean-forward="false" selection-start-line="79" selection-start-column="33" selection-end-line="79" selection-end-column="33" />
-                  <folding>
-                    <element signature="e#0#9#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="denseNetParameters.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Pytorch/DenseNet/denseNetParameters.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="547">
-                  <caret line="212" column="29" lean-forward="false" selection-start-line="212" selection-start-column="29" selection-end-line="212" selection-end-column="29" />
+                <state relative-caret-position="494">
+                  <caret line="214" column="26" lean-forward="false" selection-start-line="214" selection-start-column="26" selection-end-line="214" selection-end-column="26" />
                   <folding>
                     <element signature="e#222#1762#0" expanded="false" />
                     <element signature="e#1781#3342#0" expanded="false" />
@@ -128,11 +120,11 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-          <file leaf-file-name="modelTrain.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="modelTrain.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/modelTrain.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="547">
-                  <caret line="285" column="55" lean-forward="false" selection-start-line="285" selection-start-column="55" selection-end-line="285" selection-end-column="55" />
+                <state relative-caret-position="469">
+                  <caret line="303" column="38" lean-forward="false" selection-start-line="303" selection-start-column="38" selection-end-line="303" selection-end-column="38" />
                   <folding>
                     <element signature="e#0#47#0" expanded="true" />
                     <marker date="1555521135483" expanded="true" signature="240:258" ph="..." />
@@ -141,11 +133,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="outputGeneration.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="outputGeneration.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/DataGeneration/outputGeneration.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="1342">
-                  <caret line="61" column="0" lean-forward="true" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+                  <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -237,13 +229,17 @@
         <option value="$PROJECT_DIR$/DataGeneration/outputGeneration.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/modelEvaluate.py" />
+        <option value="$PROJECT_DIR$/TestsPerso/help/UpdateNpy.py" />
+        <option value="$PROJECT_DIR$/TestsPerso/help/Summary_Model(big)_InputsUsed(1111)_NbEpochs(200)_(0).txt" />
+        <option value="$PROJECT_DIR$/TestsPerso/help/newPlot.py" />
         <option value="$PROJECT_DIR$/DataGeneration/inputGeneration.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1107" />
-    <option name="width" value="823" />
+    <option name="x" value="652" />
+    <option name="y" value="-29" />
+    <option name="width" value="824" />
     <option name="height" value="1044" />
   </component>
   <component name="ProjectView">
@@ -277,11 +273,6 @@
             <path>
               <item name="CS4347_ASC_GroupProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="CS4347_ASC_GroupProject" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CS4347_ASC_GroupProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CS4347_ASC_GroupProject" type="462c0819:PsiDirectoryNode" />
               <item name="Pytorch" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -298,19 +289,6 @@
             <path>
               <item name="CS4347_ASC_GroupProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="CS4347_ASC_GroupProject" type="462c0819:PsiDirectoryNode" />
-              <item name="SavedEvaluations" type="462c0819:PsiDirectoryNode" />
-              <item name="small" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CS4347_ASC_GroupProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CS4347_ASC_GroupProject" type="462c0819:PsiDirectoryNode" />
-              <item name="SavedEvaluations" type="462c0819:PsiDirectoryNode" />
-              <item name="small" type="462c0819:PsiDirectoryNode" />
-              <item name="Model(small)_InputsUsed(1111)_NbEpochs(2)_(0)" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CS4347_ASC_GroupProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CS4347_ASC_GroupProject" type="462c0819:PsiDirectoryNode" />
               <item name="SavedModels" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -318,6 +296,24 @@
               <item name="CS4347_ASC_GroupProject" type="462c0819:PsiDirectoryNode" />
               <item name="SavedModels" type="462c0819:PsiDirectoryNode" />
               <item name="small" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CS4347_ASC_GroupProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CS4347_ASC_GroupProject" type="462c0819:PsiDirectoryNode" />
+              <item name="SavedModels" type="462c0819:PsiDirectoryNode" />
+              <item name="small" type="462c0819:PsiDirectoryNode" />
+              <item name="Model(small)_InputsUsed(1111)_NbEpochs(2)_(1)" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CS4347_ASC_GroupProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CS4347_ASC_GroupProject" type="462c0819:PsiDirectoryNode" />
+              <item name="TestsPerso" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CS4347_ASC_GroupProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CS4347_ASC_GroupProject" type="462c0819:PsiDirectoryNode" />
+              <item name="TestsPerso" type="462c0819:PsiDirectoryNode" />
+              <item name="help" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -332,19 +328,19 @@
     <property name="add_unversioned_files" value="$PROJECT_DIR$/TestsPerso/test.py&#10;D:/Utilisateurs/Valentin/Etudes/NUS/Semestre_Janvier_Mai/CS4347 Sound and Music Computing/Project/Code/CS4347_ASC_GroupProject/TestsPerso/externalFileClass.py&#10;D:/Utilisateurs/Valentin/Etudes/NUS/Semestre_Janvier_Mai/CS4347 Sound and Music Computing/Project/Code/CS4347_ASC_GroupProject/TestsPerso/testClass.py" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject" />
-      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\Pytorch" />
-      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\TestsPerso\TestPerso2" />
-      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\Pytorch\DenseNet" />
-      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\test" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\images" />
       <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject" />
       <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\InputGeneration" />
       <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\Pytorch" />
       <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\TestsPerso\TestPerso2" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\SavedModels\big\Model(big)_InputsUsed(0011)_NbEpochs(300)_(0)" />
+      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\TestsPerso\help" />
+      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\SavedModels\big\Model(big)_InputsUsed(0100)_NbEpochs(300)_(0)" />
+      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\SavedModels\big\Model(big)_InputsUsed(1100)_NbEpochs(300)_(1)" />
+      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\SavedModels\big\Model(big)_InputsUsed(1111)_NbEpochs(200)_(0)" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -359,37 +355,37 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.test2">
-    <configuration name="DenseNetPerso" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.newPlot">
+    <configuration name="UpdateNpy" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Pytorch/DenseNet" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/TestsPerso/help" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="CS4347_ASC_GroupProject" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Pytorch/DenseNet/DenseNetPerso.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TestsPerso/help/UpdateNpy.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="baseline_PyTorch" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="newPlot" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Pytorch" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/TestsPerso/help" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="CS4347_ASC_GroupProject" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Pytorch/baseline_PyTorch.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TestsPerso/help/newPlot.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -448,17 +444,17 @@
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.test (1)" />
       <item index="1" class="java.lang.String" itemvalue="Python.project_PyTorch (1)" />
-      <item index="2" class="java.lang.String" itemvalue="Python.baseline_PyTorch" />
-      <item index="3" class="java.lang.String" itemvalue="Python.DenseNetPerso" />
-      <item index="4" class="java.lang.String" itemvalue="Python.test2" />
+      <item index="2" class="java.lang.String" itemvalue="Python.test2" />
+      <item index="3" class="java.lang.String" itemvalue="Python.newPlot" />
+      <item index="4" class="java.lang.String" itemvalue="Python.UpdateNpy" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.test2" />
-        <item index="1" class="java.lang.String" itemvalue="Python.test (1)" />
-        <item index="2" class="java.lang.String" itemvalue="Python.project_PyTorch (1)" />
-        <item index="3" class="java.lang.String" itemvalue="Python.DenseNetPerso" />
-        <item index="4" class="java.lang.String" itemvalue="Python.baseline_PyTorch" />
+        <item index="0" class="java.lang.String" itemvalue="Python.newPlot" />
+        <item index="1" class="java.lang.String" itemvalue="Python.UpdateNpy" />
+        <item index="2" class="java.lang.String" itemvalue="Python.test2" />
+        <item index="3" class="java.lang.String" itemvalue="Python.test (1)" />
+        <item index="4" class="java.lang.String" itemvalue="Python.project_PyTorch (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -472,13 +468,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1553414461849</updated>
-    </task>
-    <task id="LOCAL-00068" summary="Possibility to choose the optimizer">
-      <created>1555252315775</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1555252315776</updated>
     </task>
     <task id="LOCAL-00069" summary="correction of possibility to choose the inputs">
       <created>1555255430895</created>
@@ -816,19 +805,26 @@
       <option name="project" value="LOCAL" />
       <updated>1555658508494</updated>
     </task>
-    <option name="localTasksCounter" value="117" />
+    <task id="LOCAL-00117" summary="Change the title of the plot">
+      <created>1555682119708</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1555682119714</updated>
+    </task>
+    <option name="localTasksCounter" value="118" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="1942" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18216217" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3264865" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30795848" sideWeight="0.16324325" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.8707403" sideWeight="0.49783784" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.08813161" sideWeight="0.49783784" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22260669" sideWeight="0.49351352" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.266745" sideWeight="0.49351352" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24972972" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23149236" sideWeight="0.83675677" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -867,7 +863,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Exclusion of the folder evaluation_data" />
     <MESSAGE value="Add the normalizations values to the saved summaryDict" />
     <MESSAGE value="Can return the list of predictions" />
     <MESSAGE value="Can do a prediction" />
@@ -892,7 +887,8 @@
     <MESSAGE value="Creation of the folder &quot;images&quot;" />
     <MESSAGE value="Update gitignore" />
     <MESSAGE value="Delete of not used arguments" />
-    <option name="LAST_COMMIT_MESSAGE" value="Delete of not used arguments" />
+    <MESSAGE value="Change the title of the plot" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change the title of the plot" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -901,56 +897,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/TestsPerso/TestPerso2/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="2" column="11" lean-forward="false" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(0011)_NbEpochs(50)_(0)/AccuracyFigure_Model(small)_InputsUsed(0011)_NbEpochs(50)_(0).png" />
-    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(0011)_NbEpochs(1)_(0)/AccuracyFigure_Model(small)_InputsUsed(0011)_NbEpochs(1)_(0).png" />
-    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(10)_(3)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(10)_(3).png" />
-    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(10)_(3)/LossFigure_Model(small)_InputsUsed(1111)_NbEpochs(10)_(3).png" />
-    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(10)_(3)/Summary_Model(small)_InputsUsed(1111)_NbEpochs(10)_(3).txt" />
-    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(10)_(4)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(10)_(4).png" />
-    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(5)_(0)/LossFigure_Model(small)_InputsUsed(1111)_NbEpochs(5)_(0).png" />
-    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(5)_(0)/Model(small)_InputsUsed(1111)_NbEpochs(5)_(0).npy" />
-    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(5)_(0)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(5)_(0).png" />
-    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(5)_(0)/Summary_Model(small)_InputsUsed(1111)_NbEpochs(5)_(0).txt" />
-    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(3)_(1)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(3)_(1).png" />
-    <entry file="file://$PROJECT_DIR$/Pytorch/DCASEDataset.py" />
-    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(2)_(2)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(2)_(2).png" />
-    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(2)_(1)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(2)_(1).png" />
-    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(2)_(2)/Summary_Model(small)_InputsUsed(1111)_NbEpochs(2)_(2).txt" />
-    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(2)_(3)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(2)_(3).png" />
-    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(2)_(5)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(2)_(5).png" />
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LICENSE">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/images/baseline.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Dataset/train/train_labels.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(2)_(2)/LossFigure_Model(small)_InputsUsed(1111)_NbEpochs(2)_(2).png" />
     <entry file="file://$PROJECT_DIR$/Pytorch/baseline_PyTorch.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -1026,7 +972,7 @@
         <state relative-caret-position="1650">
           <caret line="79" column="33" lean-forward="false" selection-start-line="79" selection-start-column="33" selection-end-line="79" selection-end-column="33" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1036,7 +982,7 @@
         <state relative-caret-position="5302">
           <caret line="246" column="7" lean-forward="false" selection-start-line="246" selection-start-column="7" selection-end-line="246" selection-end-column="7" />
           <folding>
-            <element signature="e#0#12#0" expanded="true" />
+            <element signature="e#0#12#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1060,9 +1006,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/DataGeneration/outputGeneration.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1342">
+          <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/modelTrain.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5016">
+        <state relative-caret-position="0">
           <caret line="236" column="0" lean-forward="false" selection-start-line="236" selection-start-column="0" selection-end-line="236" selection-end-column="0" />
           <folding>
             <element signature="e#0#47#0" expanded="true" />
@@ -1071,28 +1025,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modelEvaluate.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="726">
-          <caret line="41" column="56" lean-forward="false" selection-start-line="41" selection-start-column="56" selection-end-line="41" selection-end-column="56" />
-          <folding>
-            <element signature="e#0#47#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DataGeneration/outputGeneration.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1342">
-          <caret line="61" column="0" lean-forward="true" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Pytorch/DenseNet/denseNetParameters.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="547">
-          <caret line="212" column="29" lean-forward="false" selection-start-line="212" selection-start-column="29" selection-end-line="212" selection-end-column="29" />
+        <state relative-caret-position="494">
+          <caret line="214" column="26" lean-forward="false" selection-start-line="214" selection-start-column="26" selection-end-line="214" selection-end-column="26" />
           <folding>
             <element signature="e#222#1762#0" expanded="false" />
             <element signature="e#1781#3342#0" expanded="false" />
@@ -1100,14 +1036,163 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/modelEvaluate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1354">
+          <caret line="41" column="56" lean-forward="false" selection-start-line="41" selection-start-column="56" selection-end-line="41" selection-end-column="56" />
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SavedModels/big/Model(big)_InputsUsed(1111)_NbEpochs(200)_(0)/Model(big)_InputsUsed(1100)_NbEpochs(300)_(1).npy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SavedModels/big/Model(big)_InputsUsed(1111)_NbEpochs(200)_(0)/Model(big)_InputsUsed(1111)_NbEpochs(200)_(0).npy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestsPerso/help/UpdateNpy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="21" column="30" lean-forward="false" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestsPerso/help/AccuracyFigure_Model(big)_InputsUsed(1111)_NbEpochs(200)_(0).png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestsPerso/help/LossFigure_Model(big)_InputsUsed(1111)_NbEpochs(200)_(0).png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestsPerso/help/Summary_Model(big)_InputsUsed(1111)_NbEpochs(200)_(0).txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestsPerso/help/Model(big)_InputsUsed(1111)_NbEpochs(200)_(0).npy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SavedModels/big/Model(big)_InputsUsed(1111)_NbEpochs(200)_(0)/AccuracyFigure_Model(big)_InputsUsed(1111)_NbEpochs(200)_(0).png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestsPerso/help/Model(big)_InputsUsed(1100)_NbEpochs(300)_(1).npy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestsPerso/help/AccuracyFigure_Model(big)_InputsUsed(1100)_NbEpochs(300)_(1).png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestsPerso/help/LossFigure_Model(big)_InputsUsed(1100)_NbEpochs(300)_(1).png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SavedModels/big/Model(big)_InputsUsed(1100)_NbEpochs(300)_(1)/AccuracyFigure_Model(big)_InputsUsed(1100)_NbEpochs(300)_(1).png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SavedModels/big/Model(big)_InputsUsed(1100)_NbEpochs(300)_(1)/LossFigure_Model(big)_InputsUsed(1100)_NbEpochs(300)_(1).png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestsPerso/help/Model(big)_InputsUsed(0100)_NbEpochs(300)_(0).npy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestsPerso/help/LossFigure_Model(big)_InputsUsed(0100)_NbEpochs(300)_(0).png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestsPerso/help/AccuracyFigure_Model(big)_InputsUsed(0100)_NbEpochs(300)_(0).png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestsPerso/help/Model(big)_InputsUsed(0011)_NbEpochs(300)_(0).npy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestsPerso/help/newPlot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" column="14" lean-forward="false" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestsPerso/help/LossFigure_Model(big)_InputsUsed(0011)_NbEpochs(300)_(0).png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestsPerso/help/AccuracyFigure_Model(big)_InputsUsed(0011)_NbEpochs(300)_(0).png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/DataGeneration/inputGeneration.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="188" column="58" lean-forward="false" selection-start-line="188" selection-start-column="58" selection-end-line="188" selection-end-column="58" />
+        <state relative-caret-position="242">
+          <caret line="179" column="93" lean-forward="false" selection-start-line="179" selection-start-column="93" selection-end-line="179" selection-end-column="93" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(2)_(1)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(2)_(1).png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(2)_(1)/LossFigure_Model(small)_InputsUsed(1111)_NbEpochs(2)_(1).png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
   </component>
