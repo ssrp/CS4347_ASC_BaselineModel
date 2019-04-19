@@ -1,7 +1,7 @@
-# CS4347_ASC_BaselineModel
+# :one: CS4347_ASC_BaselineModel
 This repo is dedicated to CS4347 Group Project on Acoustic Scene Classification. The goal of acoustic scene classification is to classify a test recording into one of the provided predefined classes that characterizes the environment in which it was recorded.
 
-## Dataset
+## Dataset :page_facing_up:
 
 You can access the training dataset on [this Google Drive Link](https://drive.google.com/drive/u/1/folders/1HaMgbk2Heszdj71b_6H20-J01Xh8M3u8). It is already divided into train and test sets. You can start downloading the dataset as it is about 10GB+.
 
@@ -61,12 +61,12 @@ The baseline system implements a convolutional neural network (CNN) based approa
   - Model selection:
     - Model performance after each epoch is evaluated on the test set, and best performing model is selected.
 
-### Baseline Results
+### Baseline Results :chart_with_downwards_trend:
 To be announced soon. (56.8%)
 
 ---
 
-# Our personnal model
+# :two: Our personnal model
 
 For this project we created 2 files : ```modelTrain.py``` and ```modelEvaluate.py```.
 - ```modelTrain.py``` is used to create/load and train a model.
@@ -143,7 +143,7 @@ It is possible to choose between different model (with different parameters). Th
     },      # Big
 ```
 
-## The architecture of the project
+## The architecture of the project :open_file_folder:
 
 The project structure with the usable code is this one : 
 
@@ -232,20 +232,21 @@ This is the structure of all the data saved or used : (all this folder are ignor
 
 ```folder**``` means that the folder is automatically created by the project
 
-## How to use ```modelTrain.py```
+## How to use ```modelTrain.py``` :clock130:
 
-### The commands line
+### The commands line :computer:
 
 To train a model, the command line is : (ou have to be in the folder CS4347_ASC_GroupProject)
 ```shell
 python modelTrain.py
 ```
 
-### The Description of the Arguments
+### The Description of the Arguments :clipboard:
 
 You can add multiple arguments :
 #### Arguments from the baselign
-- ```--batch-size=16``` : The size of the batches for the training and testing
+- ```--batch-size=16``` : The size of the batches for the training
+- ```--test-batch-size=16``` : The size of the batches for the testing
 - ```--epochs=50```: the number of epochs for the train part
 - ```--lr=0.001```: the value of the learning rate for the training part
 - ```--no-cuda=False```: disable CUDA training
@@ -262,11 +263,11 @@ You can add multiple arguments :
   - ```big```
 - ```--inputs-used=1111```: Booleans saying if the input is used : ```1``` means "used" and ```0``` means "not used". And the order is : waveform, spectrum, features, fmstd. For example ```1111``` means that we want to use all the inputs. `1001` means that we want to use only the waveform and the fmstd.
 - ```--load-model=''``` : if we want to load a model. There is 2 cases :
-  - 1) The model has no name and then it is stored in a folder like this : "Model(```big```)_InputUsed(```1111```)_NbEpochs(```300```)_(```0```). Then to load this model, you have to write :
+  - 1) The model has no name and then it is stored in a folder like this : "Model(```big```)_InputUsed(```1111```)_NbEpochs(```300```)_(```0```)". Then to load this model, you have to write :
   ```shell
   python modelTrain.py --load-model big-1111-300-0
   ```
-  - 2) The model has name and then it is stored in a folder like this : "Model(```big```)_InputUsed(```1111```)_(```myName```)_NbEpochs(```300```)_(```0```). Then to load this model, you have to write :
+  - 2) The model has name and then it is stored in a folder like this : "Model(```big```)_InputUsed(```1111```)_(```myName```)_NbEpochs(```300```)_(```0```)". Then to load this model, you have to write :
   ```shell
   python modelTrain.py --load-model big-1111-myName-300-0
   ```
@@ -277,14 +278,73 @@ You can add multiple arguments :
 - ```--light-data=False```: If True, set ```--light-train``` and ```--light-test``` to True
 - ```--light-all=False```: If True, set ```--light-data``` to true and ```--model-id``` to 'small'
 
-### What it does
+### What it does :bulb:
 
 If asked, it will load the model ```--load-model```.
 It will train the model ```--model-id``` through ```--epochs``` epochs.
-And save the everything in the folder : "./SavedModel/```--model-id```/Model(```--model-id```)\_(```--inputs-used```)\_NbEpochs(```-epochs```)\_(```id```)" if it has no name, if it has a name it will save everything in the folder : "./SavedModel/```--model-id```/Model(```--model-id```)\_(```--inputs-used```)\_(```myName```)\_NbEpochs(```-epochs```)\_(```id```)". ```id``` is just a number created by the code to differentiate several saving of the same training.
+And save everything in the folder :
+"./SavedModel/```--model-id```/Model(```--model-id```)\_(```--inputs-used```)\_NbEpochs(```-epochs```)\_(```id```)"
+if it has no name, if it has a name it will save everything in the folder :
+"./SavedModel/```--model-id```/Model(```--model-id```)\_(```--inputs-used```)\_(```myName```)\_NbEpochs(```-epochs```)\_(```id```)".
+```id``` is just a number created by the code to differentiate several saving of the same training.
 
-## How to use ```modelEvaluate.py```
+## How to use ```modelEvaluate.py``` :heavy_check_mark:
 
-### The commands line
+### The commands line :computer:
 
-### The Description of the Arguments
+To train a model, the command line is : (ou have to be in the folder CS4347_ASC_GroupProject)
+```shell
+python modelEvalutation.py --folder-id big-1111-300-0
+```
+
+### The Description of the Arguments :clipboard:
+
+You can add multiple arguments :
+#### Arguments from the baselign
+- ```--batch-size=16``` : The size of the batches for the testing
+- ```--no-cuda=False```: disable CUDA training
+- ```--log-interval=10```: how many batch to wait before logging evaluating status
+- ```--no-saved-model=False```: For saving the model at the end of the training
+#### Personal arguments
+
+- ```--name=''```: If we want to give a name to our evaluation
+- ```--folder-name=''``` is the name of the folder where everything of the model we want to load is stored. For example :
+  ```shell
+  python modelEvaluate.py --folder-name Model(big)_InputUsed(1111)_NbEpochs(300)_(0)
+  ```
+- ```--folder-id=''``` : is the name of the folder where everything of the model we want to load is stored. The id of the folder is construct has followed :
+  ```shell
+  --folder-id big-1111-300-0
+  ```
+  will do the save action as the option
+  ```shell
+  --folder-name Model(big)_InputUsed(1111)_NbEpochs(300)_(0)
+  ```
+  or the option
+  ```shell
+  --folder-id big-1111-myName-300-0
+  ```
+  will do the save action as the option
+  ```shell
+  --folder-name Model(big)_InputUsed(1111)_(myName)_NbEpochs(300)_(0)
+  ```
+  If ```--folder-name``` and ```--folder-id``` is specified, ```--folder-id``` win and we don't look at the argument ```--folder-name```
+
+ 
+##### To test if it works on CPU
+- ```--light-test=False```: Set to True if you want to test on a small number of data (to test on CPU for example)
+
+
+### What it does :bulb:
+
+It will load the model ```--load-model```.
+It will evaluate the data in the folder "evaluation_data" and save everything in the folder :
+"./SavedEvaluation/```id of the model```/```name of the folder loaded```"
+It will save in it the prediction in the file ```predicted_labels.csv``` and ```predictionsDict.npy```
+:warning:
+If the folder already exists, it delete the old files and creates the new ones with the new predictions.
+:warning:
+
+
+## Our Results :chart_with_upwards_trend:
+We managed to get a test accuracy of ***82%***
