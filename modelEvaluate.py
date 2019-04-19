@@ -30,22 +30,16 @@ def main():
     parser = argparse.ArgumentParser(description='Can be use to do a evaluation for the ASC project (CS4347)')
     parser.add_argument('--batch-size', type=int, default=16, metavar='N',
                         help='input batch size for training (default: 16)')
-    parser.add_argument('--test-batch-size', type=int, default=16, metavar='N',
-                        help='input batch size for testing (default: 16)')
     parser.add_argument('--no-cuda', action='store_true', default=False,
                         help='disables CUDA training')
     parser.add_argument('--log-interval', type=int, default=10, metavar='N',
-                        help='how many batches to wait before logging training status')
+                        help='how many batches to wait before logging evaluating status')
     # Personal arguments
     parser.add_argument('--light-test', action='store_true', default=False,
                         # If we want to work on a small number of testing data (for test on CPU)
                         help='For testing on a small number of data')
-    parser.add_argument('--light-all', action='store_true', default=False,
-                        # If we want to work on a small number of testing data and a small NN model
-                        # (for test on CPU)
-                        help='--light-test & small model')
     parser.add_argument('--name', default='',  # Optional, if we want ot name our model
-                        help='The name of the model')
+                        help='The name of the evaluation')
     parser.add_argument('--folder-name', default='',  # If we want to load a model in a folder
                         help='The name of the folder with the saved model')
     parser.add_argument('--folder-id', default='',
@@ -63,9 +57,7 @@ def main():
     ##### Creation of the folders for the Generated Dataset #####
 
     # The arguments 'light' are made to test the network on my poor little computer and its poor little CPU
-    if args.light_all:
-        args.model_id = 'small'
-    light_test = args.light_all or args.light_test  # Only 5 files in the test dataset
+    light_test = args.light_test  # Only 5 files in the test dataset
 
     if args.folder_id != '':  # folder-id win on the name of the model
         folder_id = args.folder_id.split('-')
