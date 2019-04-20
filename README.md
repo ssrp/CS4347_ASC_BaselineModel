@@ -66,7 +66,7 @@ To be announced soon. (56.8%)
 
 ---
 
-# :two: Our personnal model
+# :two: Our personal model
 
 For this project we created 2 files : ```modelTrain.py``` and ```modelEvaluate.py```.
 - ```modelTrain.py``` is used to create/load and train a model.
@@ -89,7 +89,7 @@ The neural network takes 4 inputs :
 
 ### DenseNet Model
 
-The DenseNet model as been introduced by Gao Huang et al. as an ameloration of the ResNet architecture.
+The DenseNet model as been introduced by Gao Huang et al. as an ameloration of the ResNet architecture. (Paper : https://arxiv.org/pdf/1608.06993.pdf)
 It is composed with several blocks as followed (in a block, there is a skip connection next to each convolutional layers and a concatenation layer taking as input the skip connection and the outpout of the convolutional layer
 
 <p align = "center">
@@ -347,4 +347,4 @@ If the folder already exists, it delete the old files and creates the new ones w
 
 
 ## Our Results :chart_with_upwards_trend:
-We managed to get a test accuracy of ***82%***
+We managed to get a test accuracy of ***82%*** 
