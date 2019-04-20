@@ -87,6 +87,11 @@ The neural network takes 4 inputs :
   - The Spectral Flatness Mesure (SFM)
 - 4) The mean and the standard deviation of these features through all the buffers of the audio file (input called "fmsdt" : "features-mean-standard-deviation)
 
+
+<p align = "center">
+<img src="images/FeaturesConstruction.png" width="500" height="300">
+</p>
+
 ### DenseNet Model
 
 The DenseNet model as been introduced by Gao Huang et al. as an ameloration of the ResNet architecture.
