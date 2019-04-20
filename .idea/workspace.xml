@@ -1,0 +1,1087 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="270ddb48-53b6-4ab8-a82f-417124ca7c15" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/baseline.png" afterPath="$PROJECT_DIR$/images/baseline.png" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <splitter split-orientation="horizontal" split-proportion="0.3496583">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
+          <file leaf-file-name="modelTrain.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/modelTrain.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="5016">
+                  <caret line="236" column="0" lean-forward="false" selection-start-line="236" selection-start-column="0" selection-end-line="236" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#0#47#0" expanded="true" />
+                    <marker date="1555521135483" expanded="true" signature="240:258" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="dataNormalization.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/DataGeneration/dataNormalization.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="5302">
+                  <caret line="246" column="7" lean-forward="false" selection-start-line="246" selection-start-column="7" selection-end-line="246" selection-end-column="7" />
+                  <folding>
+                    <element signature="e#0#12#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="inputGeneration.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/DataGeneration/inputGeneration.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="3850">
+                  <caret line="179" column="110" lean-forward="false" selection-start-line="179" selection-start-column="110" selection-end-line="179" selection-end-column="110" />
+                  <folding>
+                    <element signature="e#0#18#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="modelEvaluate.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/modelEvaluate.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="495">
+                  <caret line="134" column="0" lean-forward="false" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#0#47#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(4)_(0).png" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(4)_(0)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(4)_(0).png">
+              <provider selected="true" editor-type-id="images">
+                <state />
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="LossFigure_Model(small)_InputsUsed(1111)_NbEpochs(4)_(0).png" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(4)_(0)/LossFigure_Model(small)_InputsUsed(1111)_NbEpochs(4)_(0).png">
+              <provider selected="true" editor-type-id="images">
+                <state />
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="predictionsDict.npy" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/SavedEvaluations/small/Model(small)_InputsUsed(1111)_NbEpochs(4)_(0)/predictionsDict.npy">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
+                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="predicted_labels.csv" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/SavedEvaluations/small/Model(small)_InputsUsed(1111)_NbEpochs(4)_(0)/predicted_labels.csv">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
+                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="DCASEDataset.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/DataGeneration/DCASEDataset.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="1650">
+                  <caret line="79" column="33" lean-forward="false" selection-start-line="79" selection-start-column="33" selection-end-line="79" selection-end-column="33" />
+                  <folding>
+                    <element signature="e#0#9#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="denseNetParameters.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Pytorch/DenseNet/denseNetParameters.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="2200">
+                  <caret line="212" column="29" lean-forward="false" selection-start-line="212" selection-start-column="29" selection-end-line="212" selection-end-column="29" />
+                  <folding>
+                    <element signature="e#222#1762#0" expanded="false" />
+                    <element signature="e#1781#3342#0" expanded="false" />
+                    <element signature="e#3362#4931#0" expanded="false" />
+                    <element signature="e#4948#6510#0" expanded="false" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
+          <file leaf-file-name="modelTrain.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/modelTrain.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
+                  <caret line="285" column="55" lean-forward="false" selection-start-line="285" selection-start-column="55" selection-end-line="285" selection-end-column="55" />
+                  <folding>
+                    <element signature="e#0#47#0" expanded="true" />
+                    <marker date="1555521135483" expanded="true" signature="240:258" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="outputGeneration.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/DataGeneration/outputGeneration.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="286">
+                  <caret line="25" column="34" lean-forward="true" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="useModel.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Pytorch/useModel.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="3520">
+                  <caret line="162" column="0" lean-forward="true" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#0#12#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="test2.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/TestsPerso/test2.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="242">
+                  <caret line="11" column="11" lean-forward="false" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/.gitignore">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="2772">
+                  <caret line="126" column="0" lean-forward="false" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Pytorch/DenseNet/DN_Spectrum.py" />
+        <option value="$PROJECT_DIR$/TestsPerso/externalFileClass.py" />
+        <option value="$PROJECT_DIR$/TestsPerso/testClass.py" />
+        <option value="$PROJECT_DIR$/TestsPerso/DenseNetPerso_v1 avant d avoir creer des sous classes.py" />
+        <option value="$PROJECT_DIR$/Pytorch/DenseNet/denseNetParmaters.txt" />
+        <option value="$PROJECT_DIR$/TestsPerso/test.py" />
+        <option value="$PROJECT_DIR$/Pytorch/project_PyTorch.py" />
+        <option value="$PROJECT_DIR$/InputGeneration/wavfile.py" />
+        <option value="$PROJECT_DIR$/inputGeneration.py" />
+        <option value="$PROJECT_DIR$/Dataset/train/audio/4.npy" />
+        <option value="$PROJECT_DIR$/Pytorch/DenseNet/DenseNetPerso_audio.py" />
+        <option value="$PROJECT_DIR$/Pytorch/DenseNet/DenseNetPerso_features.py" />
+        <option value="$PROJECT_DIR$/Pytorch/DenseNet/DenseNetPerso_fmstd.py" />
+        <option value="$PROJECT_DIR$/Pytorch/DenseNet/DenseNetPerso_final.py" />
+        <option value="$PROJECT_DIR$/Pytorch/DenseNet/DenseNetPerso_spectrum.py" />
+        <option value="$PROJECT_DIR$/Pytorch/requirements.txt" />
+        <option value="$PROJECT_DIR$/Pytorch/baseline_PyTorch.py" />
+        <option value="$PROJECT_DIR$/TestsPerso/TestPerso2/test.py" />
+        <option value="$PROJECT_DIR$/Pytorch/DCASEDataset.py" />
+        <option value="$PROJECT_DIR$/InputGeneration/inputGeneration.py" />
+        <option value="$PROJECT_DIR$/InputGeneration/dataNormalization.py" />
+        <option value="$PROJECT_DIR$/project_PyTorch.py" />
+        <option value="$PROJECT_DIR$/modelPredict.py" />
+        <option value="$PROJECT_DIR$/InputGeneration/DCASEDataset.py" />
+        <option value="$PROJECT_DIR$/InputGeneration/outputGeneration.py" />
+        <option value="$PROJECT_DIR$/dataGeneration/outputGeneration.py" />
+        <option value="$PROJECT_DIR$/dataGeneration/DCASEDataset.py" />
+        <option value="$PROJECT_DIR$/TestsPerso/test2.py" />
+        <option value="$PROJECT_DIR$/Pytorch/DenseNet/DenseNetPerso.py" />
+        <option value="$PROJECT_DIR$/Pytorch/DenseNet/denseNetParameters.py" />
+        <option value="$PROJECT_DIR$/DataGeneration/inputGeneration.py" />
+        <option value="$PROJECT_DIR$/modelTrain.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/DataGeneration/DCASEDataset.py" />
+        <option value="$PROJECT_DIR$/DataGeneration/dataNormalization.py" />
+        <option value="$PROJECT_DIR$/modelEvaluate.py" />
+        <option value="$PROJECT_DIR$/Pytorch/useModel.py" />
+        <option value="$PROJECT_DIR$/DataGeneration/outputGeneration.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="2870" />
+    <option name="y" value="1" />
+    <option name="width" value="980" />
+    <option name="height" value="1060" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="CS4347_ASC_GroupProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CS4347_ASC_GroupProject" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CS4347_ASC_GroupProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CS4347_ASC_GroupProject" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../CS5340 Uncertainly Modelling in AI/Assignments/Assignment_2" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/TestsPerso/test.py&#10;D:/Utilisateurs/Valentin/Etudes/NUS/Semestre_Janvier_Mai/CS4347 Sound and Music Computing/Project/Code/CS4347_ASC_GroupProject/TestsPerso/externalFileClass.py&#10;D:/Utilisateurs/Valentin/Etudes/NUS/Semestre_Janvier_Mai/CS4347 Sound and Music Computing/Project/Code/CS4347_ASC_GroupProject/TestsPerso/testClass.py" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject" />
+      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\Pytorch" />
+      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\TestsPerso\TestPerso2" />
+      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\Pytorch\DenseNet" />
+      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\test" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\images" />
+      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject" />
+      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\InputGeneration" />
+      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\Pytorch" />
+      <recent name="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\TestsPerso\TestPerso2" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.test2">
+    <configuration name="DenseNetPerso" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Pytorch/DenseNet" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="CS4347_ASC_GroupProject" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Pytorch/DenseNet/DenseNetPerso.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <configuration name="baseline_PyTorch" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Pytorch" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="CS4347_ASC_GroupProject" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Pytorch/baseline_PyTorch.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <configuration name="project_PyTorch (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="CS4347_ASC_GroupProject" />
+      <option name="SCRIPT_NAME" value="D:\Utilisateurs\Valentin\Etudes\NUS\Semestre_Janvier_Mai\CS4347 Sound and Music Computing\Project\Code\CS4347_ASC_GroupProject\modelTrain.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <configuration name="test (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/TestsPerso/TestPerso2" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="CS4347_ASC_GroupProject" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TestsPerso/TestPerso2/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <configuration name="test2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/TestsPerso" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="CS4347_ASC_GroupProject" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TestsPerso/test2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <list size="5">
+      <item index="0" class="java.lang.String" itemvalue="Python.test (1)" />
+      <item index="1" class="java.lang.String" itemvalue="Python.project_PyTorch (1)" />
+      <item index="2" class="java.lang.String" itemvalue="Python.baseline_PyTorch" />
+      <item index="3" class="java.lang.String" itemvalue="Python.DenseNetPerso" />
+      <item index="4" class="java.lang.String" itemvalue="Python.test2" />
+    </list>
+    <recent_temporary>
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Python.test2" />
+        <item index="1" class="java.lang.String" itemvalue="Python.test (1)" />
+        <item index="2" class="java.lang.String" itemvalue="Python.project_PyTorch (1)" />
+        <item index="3" class="java.lang.String" itemvalue="Python.DenseNetPerso" />
+        <item index="4" class="java.lang.String" itemvalue="Python.baseline_PyTorch" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="270ddb48-53b6-4ab8-a82f-417124ca7c15" name="Default" comment="" />
+      <created>1553414461849</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1553414461849</updated>
+    </task>
+    <task id="LOCAL-00065" summary="Save the output during the train of the model">
+      <created>1555178287501</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1555178287501</updated>
+    </task>
+    <task id="LOCAL-00066" summary="change default args.save_model = False -&gt; default args.no_save_model = False">
+      <created>1555178421766</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1555178421766</updated>
+    </task>
+    <task id="LOCAL-00067" summary="Possibility to choose which input the neural network uses">
+      <created>1555218201635</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1555218201636</updated>
+    </task>
+    <task id="LOCAL-00068" summary="Possibility to choose the optimizer">
+      <created>1555252315775</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1555252315776</updated>
+    </task>
+    <task id="LOCAL-00069" summary="correction of possibility to choose the inputs">
+      <created>1555255430895</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1555255430895</updated>
+    </task>
+    <task id="LOCAL-00070" summary="verification data">
+      <created>1555260869306</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1555260869306</updated>
+    </task>
+    <task id="LOCAL-00071" summary="verification data">
+      <created>1555260951549</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1555260951549</updated>
+    </task>
+    <task id="LOCAL-00072" summary="verification data">
+      <created>1555261026863</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1555261026864</updated>
+    </task>
+    <task id="LOCAL-00073" summary="Add the log to the mel spectrogram and change the number of mel channel : 50 -&gt; 100">
+      <created>1555261995804</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1555261995805</updated>
+    </task>
+    <task id="LOCAL-00074" summary="Add the log to the mel spectrogram and change the number of mel channel : 50 -&gt; 100">
+      <created>1555300143452</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1555300143453</updated>
+    </task>
+    <task id="LOCAL-00075" summary="Correction print when initializing the model (0001 : &quot;features&quot; -&gt; &quot;fmstd&quot;)">
+      <created>1555338461998</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1555338461998</updated>
+    </task>
+    <task id="LOCAL-00076" summary="Correction of the function sizeLastLayer in DenseNetPerso">
+      <created>1555341211999</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1555341212015</updated>
+    </task>
+    <task id="LOCAL-00077" summary="Modification of the saving to keep the best model">
+      <created>1555421979349</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1555421979351</updated>
+    </task>
+    <task id="LOCAL-00078" summary="Change the medium model parameters">
+      <created>1555426861961</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1555426861961</updated>
+    </task>
+    <task id="LOCAL-00079" summary="Change the medium model parameters">
+      <created>1555427239111</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1555427239114</updated>
+    </task>
+    <task id="LOCAL-00080" summary="Put the function train and test in another folder">
+      <created>1555486072792</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1555486072794</updated>
+    </task>
+    <task id="LOCAL-00081" summary="Creation of the file dataNormalization (with the functions ToTensor, Normalize, NormalizeData)">
+      <created>1555486953153</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1555486953171</updated>
+    </task>
+    <task id="LOCAL-00082" summary="Creation of the file DCASEDataset">
+      <created>1555488633721</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1555488633721</updated>
+    </task>
+    <task id="LOCAL-00083" summary="creation of the function return_data_transform in the file dataNormalization">
+      <created>1555489026254</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1555489026254</updated>
+    </task>
+    <task id="LOCAL-00084" summary="Add comments in the file with the main function">
+      <created>1555490466525</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1555490466525</updated>
+    </task>
+    <task id="LOCAL-00085" summary="move requirements.txt and delete baseline_PyTorch.py">
+      <created>1555491417934</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1555491417935</updated>
+    </task>
+    <task id="LOCAL-00086" summary="Change the name : project_Pytorch.py -&gt; modelTrain.py">
+      <created>1555491653038</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1555491653038</updated>
+    </task>
+    <task id="LOCAL-00087" summary="Add the file modelPredict.py">
+      <created>1555491695625</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1555491695625</updated>
+    </task>
+    <task id="LOCAL-00088" summary="Print the best test accuracy at the end of the training">
+      <created>1555492098243</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1555492098243</updated>
+    </task>
+    <task id="LOCAL-00089" summary="Add the input_parameters in the saved summaryDict">
+      <created>1555492504039</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1555492504040</updated>
+    </task>
+    <task id="LOCAL-00090" summary="Change the print when we save a model">
+      <created>1555492588298</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1555492588298</updated>
+    </task>
+    <task id="LOCAL-00091" summary="Change the description modelTrain.py and modelPredict.py">
+      <created>1555492860857</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1555492860857</updated>
+    </task>
+    <task id="LOCAL-00092" summary="Exclusion of the folder evaluation_data">
+      <created>1555493364010</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1555493364010</updated>
+    </task>
+    <task id="LOCAL-00093" summary="Add the normalizations values to the saved summaryDict">
+      <created>1555494121738</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1555494121738</updated>
+    </task>
+    <task id="LOCAL-00094" summary="Can return the list of predictions">
+      <created>1555502870810</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1555502870810</updated>
+    </task>
+    <task id="LOCAL-00095" summary="Can do a prediction">
+      <created>1555510483053</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1555510483053</updated>
+    </task>
+    <task id="LOCAL-00096" summary="Add the argument --folder-id">
+      <created>1555511824014</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1555511824015</updated>
+    </task>
+    <task id="LOCAL-00097" summary="Possibility to load a model before training it">
+      <created>1555514311459</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1555514311459</updated>
+    </task>
+    <task id="LOCAL-00098" summary="Add commentaries in the file dataNormalization.py">
+      <created>1555515095652</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1555515095652</updated>
+    </task>
+    <task id="LOCAL-00099" summary="Add commentaries in the file DCASEDataset.py">
+      <created>1555515497422</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1555515497423</updated>
+    </task>
+    <task id="LOCAL-00100" summary="Add commentaries in the file inputGeneration.py">
+      <created>1555516244665</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1555516244665</updated>
+    </task>
+    <task id="LOCAL-00101" summary="Add commentaries in the file outputGeneration.py">
+      <created>1555516601701</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1555516601701</updated>
+    </task>
+    <task id="LOCAL-00102" summary="Add commentaries in the file denseNetParameters.py">
+      <created>1555517002995</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1555517002995</updated>
+    </task>
+    <task id="LOCAL-00103" summary="Add commentaries in the file usedModel.py">
+      <created>1555517464659</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1555517464659</updated>
+    </task>
+    <task id="LOCAL-00104" summary="Add commentaries in the file modelTrain.py">
+      <created>1555518844339</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1555518844339</updated>
+    </task>
+    <task id="LOCAL-00105" summary="Amelioration of the plot">
+      <created>1555519595640</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1555519595640</updated>
+    </task>
+    <task id="LOCAL-00106" summary="Add commentaries in modelTrain.py">
+      <created>1555519823526</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1555519823526</updated>
+    </task>
+    <task id="LOCAL-00107" summary="Add commentaries in modelEvaluate.py">
+      <created>1555520229961</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1555520229961</updated>
+    </task>
+    <task id="LOCAL-00108" summary="Chnage number of --log-interval in modelTrain.py (10--&gt;20)">
+      <created>1555520684444</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1555520684444</updated>
+    </task>
+    <task id="LOCAL-00109" summary="Change of the prints during the test">
+      <created>1555521158960</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1555521158960</updated>
+    </task>
+    <task id="LOCAL-00110" summary="Add usegpu,sh to gitignore">
+      <created>1555586261814</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1555586261814</updated>
+    </task>
+    <task id="LOCAL-00111" summary="Make sure the order of the predictions is good">
+      <created>1555595848030</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1555595848030</updated>
+    </task>
+    <task id="LOCAL-00112" summary="Import the prediction from GPU to CPU">
+      <created>1555596602057</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1555596602058</updated>
+    </task>
+    <task id="LOCAL-00113" summary="Correction of the function return_predicted_labels">
+      <created>1555597032016</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1555597032016</updated>
+    </task>
+    <option name="localTasksCounter" value="114" />
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="1909" y="-10" width="1942" height="1072" extended-state="6" />
+    <layout>
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3762162" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30795848" sideWeight="0.16324325" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11303345" sideWeight="0.49783784" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22260669" sideWeight="0.49351352" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24972972" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.035632186" sideWeight="0.83675677" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32902467" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2768166" sideWeight="0.16" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.11303345" sideWeight="0.49783784" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33794695" sideWeight="0.49351352" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2768166" sideWeight="0.84" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.07621621" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32902467" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24972972" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add the input_parameters in the saved summaryDict" />
+    <MESSAGE value="Change the print when we save a model" />
+    <MESSAGE value="Change the description modelTrain.py and modelPredict.py" />
+    <MESSAGE value="Exclusion of the folder evaluation_data" />
+    <MESSAGE value="Add the normalizations values to the saved summaryDict" />
+    <MESSAGE value="Can return the list of predictions" />
+    <MESSAGE value="Can do a prediction" />
+    <MESSAGE value="Add the argument --folder-id" />
+    <MESSAGE value="Possibility to load a model before training it" />
+    <MESSAGE value="Add commentaries in the file dataNormalization.py" />
+    <MESSAGE value="Add commentaries in the file DCASEDataset.py" />
+    <MESSAGE value="Add commentaries in the file inputGeneration.py" />
+    <MESSAGE value="Add commentaries in the file outputGeneration.py" />
+    <MESSAGE value="Add commentaries in the file denseNetParameters.py" />
+    <MESSAGE value="Add commentaries in the file usedModel.py" />
+    <MESSAGE value="Add commentaries in the file modelTrain.py" />
+    <MESSAGE value="Amelioration of the plot" />
+    <MESSAGE value="Add commentaries in modelTrain.py" />
+    <MESSAGE value="Add commentaries in modelEvaluate.py" />
+    <MESSAGE value="Chnage number of --log-interval in modelTrain.py (10--&gt;20)" />
+    <MESSAGE value="Change of the prints during the test" />
+    <MESSAGE value="Add usegpu,sh to gitignore" />
+    <MESSAGE value="Make sure the order of the predictions is good" />
+    <MESSAGE value="Import the prediction from GPU to CPU" />
+    <MESSAGE value="Correction of the function return_predicted_labels" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correction of the function return_predicted_labels" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="6" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/TestsPerso/TestPerso2/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="11" lean-forward="false" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(0011)_NbEpochs(50)_(0)/AccuracyFigure_Model(small)_InputsUsed(0011)_NbEpochs(50)_(0).png" />
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(0011)_NbEpochs(1)_(0)/AccuracyFigure_Model(small)_InputsUsed(0011)_NbEpochs(1)_(0).png" />
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(10)_(3)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(10)_(3).png" />
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(10)_(3)/LossFigure_Model(small)_InputsUsed(1111)_NbEpochs(10)_(3).png" />
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(10)_(3)/Summary_Model(small)_InputsUsed(1111)_NbEpochs(10)_(3).txt" />
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(10)_(4)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(10)_(4).png" />
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(5)_(0)/LossFigure_Model(small)_InputsUsed(1111)_NbEpochs(5)_(0).png" />
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(5)_(0)/Model(small)_InputsUsed(1111)_NbEpochs(5)_(0).npy" />
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(5)_(0)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(5)_(0).png" />
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(5)_(0)/Summary_Model(small)_InputsUsed(1111)_NbEpochs(5)_(0).txt" />
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(3)_(1)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(3)_(1).png" />
+    <entry file="file://$PROJECT_DIR$/Pytorch/DCASEDataset.py" />
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(2)_(2)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(2)_(2).png" />
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(2)_(1)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(2)_(1).png" />
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(2)_(2)/Summary_Model(small)_InputsUsed(1111)_NbEpochs(2)_(2).txt" />
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(2)_(3)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(2)_(3).png" />
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(2)_(5)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(2)_(5).png" />
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LICENSE">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/baseline.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dataset/train/train_labels.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(2)_(2)/LossFigure_Model(small)_InputsUsed(1111)_NbEpochs(2)_(2).png" />
+    <entry file="file://$PROJECT_DIR$/Pytorch/baseline_PyTorch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1056">
+          <caret line="98" column="20" lean-forward="false" selection-start-line="98" selection-start-column="20" selection-end-line="98" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestsPerso/file.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestsPerso/test2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="11" column="11" lean-forward="false" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(6)_(0)/LossFigure_Model(small)_InputsUsed(1111)_NbEpochs(6)_(0).png" />
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(6)_(0)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(6)_(0).png" />
+    <entry file="file://$PROJECT_DIR$/Pytorch/DenseNet/DenseNetPerso.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="347" column="88" lean-forward="false" selection-start-line="347" selection-start-column="88" selection-end-line="347" selection-end-column="88" />
+          <folding>
+            <element signature="e#0#47#0" expanded="false" />
+            <marker date="1555514195441" expanded="true" signature="17114:17689" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(4)_(1)/LossFigure_Model(small)_InputsUsed(1111)_NbEpochs(4)_(1).png" />
+    <entry file="file://$PROJECT_DIR$/Pytorch/DenseNet/denseNetParameters.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2200">
+          <caret line="212" column="29" lean-forward="false" selection-start-line="212" selection-start-column="29" selection-end-line="212" selection-end-column="29" />
+          <folding>
+            <element signature="e#222#1762#0" expanded="false" />
+            <element signature="e#1781#3342#0" expanded="false" />
+            <element signature="e#3362#4931#0" expanded="false" />
+            <element signature="e#4948#6510#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(4)_(1)/Summary_Model(small)_InputsUsed(1111)_NbEpochs(4)_(1).txt" />
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(4)_(1)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(4)_(1).png" />
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(6)_(1)/LossFigure_Model(small)_InputsUsed(1111)_NbEpochs(6)_(1).png" />
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(6)_(1)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(6)_(1).png" />
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(7)_(0)/LossFigure_Model(small)_InputsUsed(1111)_NbEpochs(7)_(0).png" />
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(7)_(0)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(7)_(0).png" />
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(4)_(0)/LossFigure_Model(small)_InputsUsed(1111)_NbEpochs(4)_(0).png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SavedEvaluations/small/Model(small)_InputsUsed(1111)_NbEpochs(4)_(0)/predictionsDict.npy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SavedEvaluations/small/Model(small)_InputsUsed(1111)_NbEpochs(4)_(0)/predicted_labels.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modelTrain.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="285" column="55" lean-forward="false" selection-start-line="285" selection-start-column="55" selection-end-line="285" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
+            <marker date="1555521135483" expanded="true" signature="240:258" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/usegpu.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="14" column="1" lean-forward="false" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2772">
+          <caret line="126" column="0" lean-forward="false" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SavedModels/small/Model(small)_InputsUsed(1111)_NbEpochs(4)_(0)/AccuracyFigure_Model(small)_InputsUsed(1111)_NbEpochs(4)_(0).png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataGeneration/inputGeneration.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3850">
+          <caret line="179" column="110" lean-forward="false" selection-start-line="179" selection-start-column="110" selection-end-line="179" selection-end-column="110" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataGeneration/DCASEDataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1650">
+          <caret line="79" column="33" lean-forward="false" selection-start-line="79" selection-start-column="33" selection-end-line="79" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataGeneration/dataNormalization.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5302">
+          <caret line="246" column="7" lean-forward="false" selection-start-line="246" selection-start-column="7" selection-end-line="246" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pytorch/useModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3520">
+          <caret line="162" column="0" lean-forward="true" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modelEvaluate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="134" column="0" lean-forward="false" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/amazing_code2_console_output.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataGeneration/outputGeneration.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="25" column="34" lean-forward="true" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
